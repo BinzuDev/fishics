@@ -1,0 +1,210 @@
+[gd_scene load_steps=31 format=3 uid="uid://bwb5dddkenrbh"]
+
+[ext_resource type="Script" uid="uid://d08pu76ylr3bv" path="res://Player/Fish_script.gd" id="1_8ijwk"]
+[ext_resource type="Texture2D" uid="uid://duorbjf10kokv" path="res://Sprites/tuna.png" id="2_j2ykt"]
+[ext_resource type="Script" uid="uid://b2xm7bmoq3hcv" path="res://Player/Fish_camera.gd" id="3_8ijwk"]
+[ext_resource type="AudioStream" uid="uid://divrkdsaujxsd" path="res://Sounds/poof.ogg" id="5_t0nqp"]
+[ext_resource type="AudioStream" uid="uid://qpt3nmj24kdx" path="res://Sounds/impact_soft/soft1.ogg" id="6_h8qkj"]
+[ext_resource type="AudioStream" uid="uid://c6au0422c773r" path="res://Sounds/FISH.ogg" id="6_t0nqp"]
+[ext_resource type="AudioStream" uid="uid://6pi0oi8jx8by" path="res://Sounds/impact_soft/soft2.ogg" id="7_quwx5"]
+[ext_resource type="AudioStream" uid="uid://7fhfltsgpuss" path="res://Sounds/impact_soft/soft3.ogg" id="8_mf1i0"]
+[ext_resource type="AudioStream" uid="uid://bmhyvq1ucstr0" path="res://Sounds/impact_soft/soft4.ogg" id="9_quwx5"]
+[ext_resource type="AudioStream" uid="uid://bnhyl7xy6k15i" path="res://Sounds/impact_soft/soft5.ogg" id="10_mf1i0"]
+[ext_resource type="AudioStream" uid="uid://drrw7ys5t8wyt" path="res://Sounds/impact_medium/medium1.ogg" id="11_uucyj"]
+[ext_resource type="AudioStream" uid="uid://cwilbc1payrwb" path="res://Sounds/impact_medium/medium2.ogg" id="12_5m7cr"]
+[ext_resource type="AudioStream" uid="uid://c267enlul74gu" path="res://Sounds/impact_medium/medium3.ogg" id="13_l2vbt"]
+[ext_resource type="AudioStream" uid="uid://hjy4niapmm7d" path="res://Sounds/impact_medium/medium4.ogg" id="14_17eip"]
+[ext_resource type="AudioStream" uid="uid://bjpjbd4agn1eq" path="res://Sounds/impact_bloody/bloody1.ogg" id="15_5m7cr"]
+[ext_resource type="AudioStream" uid="uid://b2uje1y503456" path="res://Sounds/impact_bloody/bloody2.ogg" id="16_l2vbt"]
+[ext_resource type="AudioStream" uid="uid://bnaji0clr1j6c" path="res://Sounds/impact_bloody/bloody3.ogg" id="17_17eip"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j2ykt"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_j2ykt"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_uucyj"]
+height = 0.5
+radius = 0.65
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ijwk"]
+blend_mode = 3
+
+[sub_resource type="TorusMesh" id="TorusMesh_8ijwk"]
+material = SubResource("StandardMaterial3D_8ijwk")
+
+[sub_resource type="Curve" id="Curve_8ijwk"]
+_data = [Vector2(0.02589, 0.728459), 0.0, 0.0, 0, 0, Vector2(0.860841, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="SphereMesh" id="SphereMesh_8ijwk"]
+
+[sub_resource type="Curve" id="Curve_j6575"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.223301, 0.0156658), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_v25j4"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("5_t0nqp")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_kufgg"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("6_t0nqp")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_j6575"]
+random_pitch = 1.15
+streams_count = 5
+stream_0/stream = ExtResource("6_h8qkj")
+stream_1/stream = ExtResource("7_quwx5")
+stream_2/stream = ExtResource("8_mf1i0")
+stream_3/stream = ExtResource("9_quwx5")
+stream_4/stream = ExtResource("10_mf1i0")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ox1d5"]
+random_pitch = 1.15
+streams_count = 4
+stream_0/stream = ExtResource("11_uucyj")
+stream_1/stream = ExtResource("12_5m7cr")
+stream_2/stream = ExtResource("13_l2vbt")
+stream_3/stream = ExtResource("14_17eip")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mce56"]
+random_pitch = 1.1
+streams_count = 3
+stream_0/stream = ExtResource("15_5m7cr")
+stream_1/stream = ExtResource("16_l2vbt")
+stream_2/stream = ExtResource("17_17eip")
+
+[node name="fish" type="RigidBody3D"]
+collision_layer = 2
+mass = 1.5
+contact_monitor = true
+max_contacts_reported = 4
+linear_damp = 0.6
+angular_damp = 0.09
+script = ExtResource("1_8ijwk")
+
+[node name="collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.22623, 0, 0, 0, 0.140935, 0, 0, 0, 0.5, 0, 0, 0)
+shape = SubResource("BoxShape3D_j2ykt")
+
+[node name="pivotUpper" type="Node3D" parent="."]
+
+[node name="upperBody" type="Sprite3D" parent="pivotUpper"]
+transform = Transform3D(0.18, 0, 0, 0, -8.30516e-09, -1, 0, 0.19, -4.37114e-08, 0, 0, 0)
+offset = Vector2(-74.98, 0)
+texture = ExtResource("2_j2ykt")
+region_enabled = true
+region_rect = Rect2(225.27, 0, 149.79, 495)
+
+[node name="pivotHead" type="Node3D" parent="pivotUpper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27, 0, 0)
+
+[node name="head" type="Sprite3D" parent="pivotUpper/pivotHead"]
+transform = Transform3D(0.18, 0, 0, 0, -8.30516e-09, -1, 0, 0.19, -4.37114e-08, 0, 0, 0)
+offset = Vector2(-112.28, 0)
+texture = ExtResource("2_j2ykt")
+region_enabled = true
+region_rect = Rect2(0, 0, 225.14, 495)
+
+[node name="pivotLower" type="Node3D" parent="."]
+
+[node name="lowerBody" type="Sprite3D" parent="pivotLower"]
+transform = Transform3D(0.180958, 0, 0, 0, -8.3202e-09, -1, 0, 0.190344, -4.37114e-08, 0, 0, 0)
+offset = Vector2(72.32, 0)
+texture = ExtResource("2_j2ykt")
+region_enabled = true
+region_rect = Rect2(375, 0, 144.9, 495)
+
+[node name="pivotTail" type="Node3D" parent="pivotLower"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.262142, 0, 0)
+
+[node name="tail" type="Sprite3D" parent="pivotLower/pivotTail"]
+transform = Transform3D(0.180958, 0, 0, 0, -8.32019e-09, -1, 0, 0.190344, -4.37114e-08, 0, 0, 0)
+rotation_order = 0
+offset = Vector2(105.88, 0)
+texture = ExtResource("2_j2ykt")
+region_enabled = true
+region_rect = Rect2(519.96, 0, 212, 495)
+
+[node name="shadowMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.985198, 0, 0, 0, 0.165934, 0, 0, 0, 0.38402, 0, 0, -0.0637502)
+cast_shadow = 3
+mesh = SubResource("SphereMesh_j2ykt")
+
+[node name="RemoteTransformJump" type="RemoteTransform3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.72529e-09, -0.0354262)
+remote_path = NodePath("../floorDetection")
+update_rotation = false
+
+[node name="floorDetection" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.72529e-09, -0.0354262)
+top_level = true
+shape = SubResource("CylinderShape3D_uucyj")
+target_position = Vector3(0, -0.6, 0)
+
+[node name="RemoteTransformCamera" type="RemoteTransform3D" parent="."]
+remote_path = NodePath("../cameraAnchor")
+update_rotation = false
+update_scale = false
+
+[node name="cameraAnchor" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+top_level = true
+
+[node name="Camera3D" type="Camera3D" parent="cameraAnchor"]
+transform = Transform3D(-1, -3.55271e-15, -8.74228e-08, -4.03403e-08, 0.887172, 0.461439, 7.7559e-08, 0.461439, -0.887172, -2.38419e-07, 2.53416, -3.8833)
+script = ExtResource("3_8ijwk")
+
+[node name="BubbleRing" type="CPUParticles3D" parent="."]
+cast_shadow = 0
+emitting = false
+speed_scale = 0.5
+mesh = SubResource("TorusMesh_8ijwk")
+gravity = Vector3(0, 9.8, 0)
+linear_accel_max = 17.2
+scale_amount_min = 0.2
+scale_amount_max = 0.3
+scale_amount_curve = SubResource("Curve_8ijwk")
+color = Color(0.262781, 0.636606, 0.932661, 0.67451)
+
+[node name="JumpPuff" type="CPUParticles3D" parent="."]
+emitting = false
+amount = 4
+lifetime = 0.6
+one_shot = true
+speed_scale = 0.1
+explosiveness = 1.0
+mesh = SubResource("SphereMesh_8ijwk")
+emission_shape = 1
+emission_sphere_radius = 0.2
+direction = Vector3(1, 0, 1)
+spread = 145.09
+gravity = Vector3(1, 9.8, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 25.0
+scale_amount_min = 0.1
+scale_amount_max = 0.2
+scale_amount_curve = SubResource("Curve_j6575")
+
+[node name="Jumps" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_v25j4")
+
+[node name="FIsh" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_kufgg")
+max_polyphony = 5
+
+[node name="Soft_Impact" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_j6575")
+max_polyphony = 3
+
+[node name="Medium_Impact" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_ox1d5")
+max_polyphony = 3
+
+[node name="Hard_Impact" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_mce56")
+max_polyphony = 3
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

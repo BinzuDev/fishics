@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cdvuwu8252rsc"]
+
+[ext_resource type="Texture2D" uid="uid://com5tskr7puq8" path="res://Textures/water_reflection.png" id="1_i3cb7"]
+
+[resource]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 1, 1, 0.568627)
+albedo_texture = ExtResource("1_i3cb7")
+uv1_scale = Vector3(0.1, 0.1, 0.1)
+uv1_offset = Vector3(0.7, 0, 0)
+uv1_triplanar = true
+uv1_world_triplanar = true

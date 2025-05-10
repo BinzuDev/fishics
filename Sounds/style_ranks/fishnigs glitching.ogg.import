@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bc5rm5c2xjvji"
+path="res://.godot/imported/fishnigs glitching.ogg-50feaa2f8f1d81e73341ee8c14c4da82.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sounds/style_ranks/fishnigs glitching.ogg"
+dest_files=["res://.godot/imported/fishnigs glitching.ogg-50feaa2f8f1d81e73341ee8c14c4da82.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

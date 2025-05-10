@@ -1,0 +1,131 @@
+[gd_scene load_steps=18 format=3 uid="uid://cu87u6588tm6x"]
+
+[ext_resource type="Script" uid="uid://1b1lupixtjff" path="res://Objects/boost_ring.gd" id="1_5o6kl"]
+[ext_resource type="Shader" uid="uid://cm0a5kd1avm50" path="res://Shaders/bubble.gdshader" id="2_rd0gv"]
+[ext_resource type="Material" uid="uid://c1y6pcmembpvq" path="res://Particles/bubble_particle.tres" id="4_75vsp"]
+[ext_resource type="AudioStream" uid="uid://ced3chei8hbe3" path="res://Sounds/ringboost.ogg" id="4_rd0gv"]
+[ext_resource type="AudioStream" uid="uid://cfpescstk1e0g" path="res://Sounds/bubbling_loop.ogg" id="5_75vsp"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jhcq3"]
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_75vsp"]
+render_priority = 0
+shader = ExtResource("2_rd0gv")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_jhcq3")
+shader_parameter/bubble_color = Color(0.670667, 0.24, 1, 1)
+shader_parameter/height_multiplier = 0.3
+shader_parameter/noise_sample_size = 0.5
+shader_parameter/animation_speed = 0.1
+
+[sub_resource type="TorusMesh" id="TorusMesh_3ffwv"]
+inner_radius = 1.0
+outer_radius = 1.8
+rings = 16
+ring_segments = 8
+
+[sub_resource type="SphereMesh" id="SphereMesh_o4k7s"]
+material = ExtResource("4_75vsp")
+
+[sub_resource type="Curve" id="Curve_5o6kl"]
+_data = [Vector2(0.159363, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.55341, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_iqjpu"]
+height = 0.1
+radius = 0.7
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5o6kl"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ky5x1"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rd0gv"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5o6kl"]
+top_radius = 0.0
+height = 0.3
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_75vsp"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("4_rd0gv")
+
+[sub_resource type="TorusMesh" id="TorusMesh_rd0gv"]
+inner_radius = 1.0
+outer_radius = 1.8
+
+[node name="BoostRing" type="Area3D"]
+process_priority = 5
+process_physics_priority = 5
+rotation_order = 3
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_5o6kl")
+
+[node name="ring" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.2103e-07, -1.7, 2.56587e-07, 1.6993, -1.28294e-07, -0.0484492, 0.0484492, 2.53035e-07, 1.6993, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_75vsp")
+mesh = SubResource("TorusMesh_3ffwv")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="ring"]
+transform = Transform3D(-0.00294706, 0.321486, -0.492603, -0.588225, -0.00301931, 0.00154864, -0.00168209, 0.492603, 0.321495, -3.43878e-08, -0.342819, -5.36837e-08)
+amount = 10
+lifetime = 1.6
+mesh = SubResource("SphereMesh_o4k7s")
+emission_shape = 1
+emission_sphere_radius = 3.0
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 14.0
+initial_velocity_max = 16.0
+linear_accel_min = -11.0
+linear_accel_max = -9.0
+scale_amount_min = 0.3
+scale_amount_max = 0.4
+scale_amount_curve = SubResource("Curve_5o6kl")
+
+[node name="area" type="CollisionShape3D" parent="."]
+transform = Transform3D(-1.74846e-07, -4, 0, 4, -1.74846e-07, 0, 0, 0, 4, 0, 0, 0)
+shape = SubResource("CylinderShape3D_iqjpu")
+
+[node name="direction" type="Node3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="arrow" type="MeshInstance3D" parent="direction"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.5, 0, 0)
+material_override = SubResource("StandardMaterial3D_5o6kl")
+transparency = 0.75
+mesh = SubResource("CylinderMesh_ky5x1")
+skeleton = NodePath("../..")
+
+[node name="tip" type="MeshInstance3D" parent="direction/arrow"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.20417e-17, 0.649985, 0)
+material_override = SubResource("StandardMaterial3D_rd0gv")
+transparency = 0.6
+mesh = SubResource("CylinderMesh_5o6kl")
+skeleton = NodePath("goal")
+
+[node name="goal" type="Node3D" parent="direction/arrow/tip"]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="BoostSound" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_75vsp")
+
+[node name="shadow" type="MeshInstance3D" parent="."]
+transform = Transform3D(-7.43094e-08, -1.7, 0, 1.7, -7.43094e-08, 0, 0, 0, 1.7, 0, 0, 0)
+cast_shadow = 3
+mesh = SubResource("TorusMesh_rd0gv")
+
+[node name="bubbling" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_75vsp")
+autoplay = true
+max_distance = 35.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

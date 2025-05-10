@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://djw4ew1544rh1"]
+
+[ext_resource type="Script" uid="uid://budr7hv3mbcbu" path="res://Objects/camera_controller.gd" id="1_wukrg"]
+
+[node name="cameraController" type="Area3D"]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_wukrg")

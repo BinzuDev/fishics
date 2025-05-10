@@ -13,13 +13,13 @@
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_wc5p8"]
 panorama = ExtResource("1_5wcuw")
 
-[sub_resource type="Sky" id="Sky_jsk3o"]
+[sub_resource type="Sky" id="Sky_5wcuw"]
 sky_material = SubResource("PanoramaSkyMaterial_wc5p8")
 
 [sub_resource type="Environment" id="Environment_jsk3o"]
 background_mode = 2
 background_energy_multiplier = 1.6
-sky = SubResource("Sky_jsk3o")
+sky = SubResource("Sky_5wcuw")
 fog_mode = 1
 fog_light_color = Color(0.5225, 0.5795, 0.95, 1)
 fog_density = 1.0
@@ -119,7 +119,7 @@ mesh = SubResource("PlaneMesh_4xowi")
 shape = SubResource("ConcavePolygonShape3D_4xowi")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.7481, 0, 0, 0, 1.38457, 0, 0, 0, 2.02184, -2.7149, 0.18094, -0.956574)
+transform = Transform3D(1.7481, 0, 0, 0, 1.38457, 0, 0, 0, 2.02184, -2.72253, 0.193652, -0.959636)
 material_override = SubResource("StandardMaterial3D_a0tk4")
 mesh = SubResource("BoxMesh_a0tk4")
 

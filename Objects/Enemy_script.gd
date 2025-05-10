@@ -1,0 +1,143 @@
+extends RigidBody3D
+
+var og_position
+var target = 0
+#var fishplayer : player
+var agro : bool = false
+var speed = 2
+var hp = 2
+
+
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	og_position = position #stores it's position so it can return to it if it moves
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _physics_process(delta: float) -> void:
+	 
+	#var direction = (player.global_transform.origin - global_transform.origin).normalized()
+	if agro and get_contact_count() >= 0:
+		apply_central_impulse(target * 0.5)
+		#get_parent().apply_central_impulse(direction * 5 * delta)
+		
+		
+		
+		#Checking if on floor and eneabling area 3d/disabling it
+	if $FloorCast.is_colliding() and hp > 0:
+		#print("enemy floored")
+		$Area3D.monitoring = true
+		$CrabSprite.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	else:
+		$Area3D.monitoring = false
+		#$CrabSprite.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	
+	
+	#dead sprite
+	
+	
+	#change sprite to dead
+		if hp < 1: $CrabSprite.modulate = Color(0.5, 0.5, 0.5, 1)
+	
+	
+
+
+
+
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	if body is player:
+		
+		#fishplayer == player
+		
+		#print("detected")
+		agro = true
+		
+		var direction = global_transform.origin.direction_to(body.global_transform.origin)
+		target = direction
+		#apply_central_impulse(direction * 2)
+		apply_central_impulse(Vector3(0, 7, 0)) #jump
+		#
+		#
+		var torque_axis = direction.cross(Vector3.UP)  # Calculate a perpendicular axis
+		apply_torque(torque_axis * 10)
+		
+		
+	#if $FloorCast.is_colliding():
+		#$JumpPuff.emitting = true
+		
+		
+		
+		
+	
+	
+
+func _on_area_3d_body_exited(body: Node3D) -> void:
+	if body is player:
+		#print("left detection")
+		
+		var direction = global_transform.origin.direction_to(body.global_transform.origin)
+		target = direction
+		agro = false
+		apply_central_impulse(direction * 3)
+		
+		#fishplayer == null
+		
+		
+
+
+func _on_bump_body_entered(body: Node3D) -> void:
+	if body.linear_velocity.length() < 2 and hp > 0:
+		print("WEAK")
+		
+		#Push opposite side
+		var push_direction = -body.linear_velocity.normalized()
+		var push_force = 30.0
+		#
+		body.apply_central_impulse(push_direction * push_force)
+		
+		#Upwards force
+		body.apply_central_impulse((-body.linear_velocity.normalized() + Vector3.UP * 0.5) * push_force)
+		#
+		
+	if body.linear_velocity.length() > 2:
+		#player pushing
+		var push_force = 30.0
+		#
+		var push_direction = body.linear_velocity.normalized()
+		self.apply_central_impulse(push_direction * push_force)
+		
+		#"ragdoll"
+		$CrabSprite.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+		apply_torque(Vector3(0, 10, 0))
+		
+		
+		if hp > 0:
+			#trick
+			ScoreManager.give_points(1000, 1, true, "CRAB TOSS")
+			$AudioStreamPlayer3D.play()
+			#body.body.func_set_fov()
+			
+		else:
+			ScoreManager.give_points(100, 0, false, "DISRESPECT")
+			
+			
+			#body.play_trick_sfx("rare")
+		
+		hp -= 1 #minus hp
+		
+		
+		
+		
+		
+		
+		
+		
+	#make sure crabs get launched up when diving
+	#DOES NOT WORK RN...
+	#if body.diving:
+		#apply_central_impulse(-global_transform.basis.z * 10)
+		#apply_central_impulse(Vector3.UP * 20)
+		#apply_central_impulse(Vector3(randf_range(-1, 1), randf_range(0.5, 1.5), randf_range(-1, 1)).normalized() * 10)

@@ -1,0 +1,56 @@
+[gd_scene load_steps=10 format=3 uid="uid://dekjyfsmafh8k"]
+
+[ext_resource type="Shader" uid="uid://cm0a5kd1avm50" path="res://Shaders/bubble.gdshader" id="1_14tpb"]
+[ext_resource type="Texture2D" uid="uid://qmeykmwuuucb" path="res://Sprites/worm.png" id="2_affe2"]
+[ext_resource type="Script" uid="uid://bdmescwjq652r" path="res://Objects/worm.gd" id="2_rs7oq"]
+[ext_resource type="AudioStream" uid="uid://eu7r75ryhiel" path="res://Sounds/wormsfx.ogg" id="4_77qcx"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jhcq3"]
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rs7oq"]
+render_priority = 0
+shader = ExtResource("1_14tpb")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_jhcq3")
+shader_parameter/bubble_color = Color(0.0470588, 0.52549, 0.4, 1)
+shader_parameter/height_multiplier = 0.3
+shader_parameter/noise_sample_size = 0.5
+shader_parameter/animation_speed = 0.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_jxdlp"]
+material = SubResource("ShaderMaterial_rs7oq")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_affe2"]
+radius = 1.11926
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_j5b4d"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("4_77qcx")
+
+[node name="worm" type="MeshInstance3D"]
+layers = 3
+mesh = SubResource("SphereMesh_jxdlp")
+script = ExtResource("2_rs7oq")
+
+[node name="wormsprite" type="Sprite3D" parent="."]
+transform = Transform3D(0.723063, 0, 0, 0, 0.817194, 0, 0, 0, 1, 0, 0, 0)
+layers = 3
+texture = ExtResource("2_affe2")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+layers = 3
+light_color = Color(0.286275, 0.698039, 0.262745, 1)
+light_energy = 4.146
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_affe2")
+
+[node name="WormSFX" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_j5b4d")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

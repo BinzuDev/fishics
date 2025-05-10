@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://74jyijqvlwom"
+path="res://.godot/imported/ringboost - Copy.ogg-3eedc0cc3ff2e48d308cd3472c8aeaa5.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sounds/ringboost - Copy.ogg"
+dest_files=["res://.godot/imported/ringboost - Copy.ogg-3eedc0cc3ff2e48d308cd3472c8aeaa5.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

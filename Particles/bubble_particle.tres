@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://c1y6pcmembpvq"]
+
+[ext_resource type="Shader" uid="uid://cm0a5kd1avm50" path="res://Shaders/bubble.gdshader" id="1_boqc0"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jhcq3"]
+seamless = true
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_boqc0")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_jhcq3")
+shader_parameter/bubble_color = Color(0.048, 0.323733, 0.4, 1)
+shader_parameter/height_multiplier = 0.3
+shader_parameter/noise_sample_size = 0.5
+shader_parameter/animation_speed = 0.1

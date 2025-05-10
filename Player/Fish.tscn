@@ -1,8 +1,10 @@
-[gd_scene load_steps=31 format=3 uid="uid://bwb5dddkenrbh"]
+[gd_scene load_steps=43 format=3 uid="uid://bwb5dddkenrbh"]
 
 [ext_resource type="Script" uid="uid://d08pu76ylr3bv" path="res://Player/Fish_script.gd" id="1_8ijwk"]
-[ext_resource type="Texture2D" uid="uid://duorbjf10kokv" path="res://Sprites/tuna.png" id="2_j2ykt"]
+[ext_resource type="Texture2D" uid="uid://cgy362847wh6a" path="res://Sprites/fish.png" id="2_dhdhv"]
+[ext_resource type="Texture2D" uid="uid://duorbjf10kokv" path="res://Skins/tuna.png" id="2_j2ykt"]
 [ext_resource type="Script" uid="uid://b2xm7bmoq3hcv" path="res://Player/Fish_camera.gd" id="3_8ijwk"]
+[ext_resource type="Shader" uid="uid://cm0a5kd1avm50" path="res://Shaders/bubble.gdshader" id="4_ie0qp"]
 [ext_resource type="AudioStream" uid="uid://divrkdsaujxsd" path="res://Sounds/poof.ogg" id="5_t0nqp"]
 [ext_resource type="AudioStream" uid="uid://qpt3nmj24kdx" path="res://Sounds/impact_soft/soft1.ogg" id="6_h8qkj"]
 [ext_resource type="AudioStream" uid="uid://c6au0422c773r" path="res://Sounds/FISH.ogg" id="6_t0nqp"]
@@ -17,6 +19,10 @@
 [ext_resource type="AudioStream" uid="uid://bjpjbd4agn1eq" path="res://Sounds/impact_bloody/bloody1.ogg" id="15_5m7cr"]
 [ext_resource type="AudioStream" uid="uid://b2uje1y503456" path="res://Sounds/impact_bloody/bloody2.ogg" id="16_l2vbt"]
 [ext_resource type="AudioStream" uid="uid://bnaji0clr1j6c" path="res://Sounds/impact_bloody/bloody3.ogg" id="17_17eip"]
+[ext_resource type="Texture2D" uid="uid://drbikn5ifimak" path="res://Sprites/UI/image.png" id="18_qaf4p"]
+[ext_resource type="AudioStream" uid="uid://cogiepb65bymm" path="res://Sounds/tricks/uncommon/peppino_taunt.ogg" id="25_dhdhv"]
+[ext_resource type="Texture2D" uid="uid://bj8oc56krqj3b" path="res://Sprites/peppino_taunt_flash.png" id="26_pqkfo"]
+[ext_resource type="Texture2D" uid="uid://ba5khi7i2ku46" path="res://Skins/pose.png" id="82_jv0xx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j2ykt"]
 
@@ -26,11 +32,24 @@
 height = 0.5
 radius = 0.65
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ijwk"]
-blend_mode = 3
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jhcq3"]
+seamless = true
 
-[sub_resource type="TorusMesh" id="TorusMesh_8ijwk"]
-material = SubResource("StandardMaterial3D_8ijwk")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ie0qp"]
+render_priority = 0
+shader = ExtResource("4_ie0qp")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_jhcq3")
+shader_parameter/bubble_color = Color(0.0948, 0.65096, 0.79, 1)
+shader_parameter/height_multiplier = 0.1
+shader_parameter/noise_sample_size = 0.3
+shader_parameter/animation_speed = 0.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_dhdhv"]
+material = SubResource("ShaderMaterial_ie0qp")
+radius = 1.0
+height = 2.0
+radial_segments = 16
+rings = 8
 
 [sub_resource type="Curve" id="Curve_8ijwk"]
 _data = [Vector2(0.02589, 0.728459), 0.0, 0.0, 0, 0, Vector2(0.860841, 0), 0.0, 0.0, 0, 0]
@@ -42,15 +61,127 @@ point_count = 2
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.223301, 0.0156658), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_dhdhv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nmgcd"]
+font_size = 30
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_40mal"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../flash:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../flash:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.5, 1.5, 1.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.25, 0.25, 0.25)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_mdn8s"]
+resource_name = "taunt"
+length = 0.333335
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../flash:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../flash:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.1, 0.133333, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1.5, 1.5, 1.5), Vector3(1.5, 1.5, 1.5), Vector3(1.7, 1.7, 1.7), Vector3(1.7, 1.7, 1.7), Vector3(1.5, 1.5, 1.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.15),
+"transitions": PackedFloat32Array(2, 0.5, 1),
+"update": 0,
+"values": [Vector3(0.16, 0.16, 0.16), Vector3(0.4, 0.4, 0.4), Vector3(0.25, 0.25, 0.25)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_40mal"]
+_data = {
+&"RESET": SubResource("Animation_40mal"),
+&"taunt": SubResource("Animation_mdn8s")
+}
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_v25j4"]
-random_pitch = 1.1
+random_pitch = 1.2
 streams_count = 1
 stream_0/stream = ExtResource("5_t0nqp")
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_kufgg"]
-random_pitch = 1.1
-streams_count = 1
-stream_0/stream = ExtResource("6_t0nqp")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_j6575"]
 random_pitch = 1.15
@@ -76,23 +207,29 @@ stream_0/stream = ExtResource("15_5m7cr")
 stream_1/stream = ExtResource("16_l2vbt")
 stream_2/stream = ExtResource("17_17eip")
 
-[node name="fish" type="RigidBody3D"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_kufgg"]
+streams_count = 1
+stream_0/stream = ExtResource("6_t0nqp")
+
+[node name="fish" type="RigidBody3D" groups=["player"]]
 collision_layer = 2
+collision_mask = 21
 mass = 1.5
+continuous_cd = true
 contact_monitor = true
 max_contacts_reported = 4
 linear_damp = 0.6
 angular_damp = 0.09
 script = ExtResource("1_8ijwk")
 
-[node name="collision" type="CollisionShape3D" parent="."]
-transform = Transform3D(1.22623, 0, 0, 0, 0.140935, 0, 0, 0, 0.5, 0, 0, 0)
+[node name="collision" type="CollisionShape3D" parent="." groups=["player"]]
+transform = Transform3D(1.23, 0, 0, 0, 0.16, 0, 0, 0, 0.5, 0, 0, 0)
 shape = SubResource("BoxShape3D_j2ykt")
 
 [node name="pivotUpper" type="Node3D" parent="."]
 
 [node name="upperBody" type="Sprite3D" parent="pivotUpper"]
-transform = Transform3D(0.18, 0, 0, 0, -8.30516e-09, -1, 0, 0.19, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(0.18, 0, 0, 0, -8.30516e-09, 1, 0, -0.19, -4.37114e-08, 0, 0, 0)
 offset = Vector2(-74.98, 0)
 texture = ExtResource("2_j2ykt")
 region_enabled = true
@@ -102,16 +239,20 @@ region_rect = Rect2(225.27, 0, 149.79, 495)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27, 0, 0)
 
 [node name="head" type="Sprite3D" parent="pivotUpper/pivotHead"]
-transform = Transform3D(0.18, 0, 0, 0, -8.30516e-09, -1, 0, 0.19, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(0.18, 0, 0, 0, -8.30516e-09, 1, 0, -0.19, -4.37114e-08, 0, 0, 0)
 offset = Vector2(-112.28, 0)
 texture = ExtResource("2_j2ykt")
 region_enabled = true
 region_rect = Rect2(0, 0, 225.14, 495)
 
+[node name="POVcam" type="Camera3D" parent="pivotUpper/pivotHead/head"]
+transform = Transform3D(-2.42841e-07, 0, 5.55556, -5.68434e-14, 5.26316, -3.38813e-21, -1, 2.13163e-14, -4.37114e-08, -1.51222, 0, 0)
+visible = false
+
 [node name="pivotLower" type="Node3D" parent="."]
 
 [node name="lowerBody" type="Sprite3D" parent="pivotLower"]
-transform = Transform3D(0.180958, 0, 0, 0, -8.3202e-09, -1, 0, 0.190344, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(0.180958, 0, 0, 0, -8.3202e-09, 1, 0, -0.190344, -4.37114e-08, 0, 0, 0)
 offset = Vector2(72.32, 0)
 texture = ExtResource("2_j2ykt")
 region_enabled = true
@@ -121,7 +262,7 @@ region_rect = Rect2(375, 0, 144.9, 495)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.262142, 0, 0)
 
 [node name="tail" type="Sprite3D" parent="pivotLower/pivotTail"]
-transform = Transform3D(0.180958, 0, 0, 0, -8.32019e-09, -1, 0, 0.190344, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(0.180958, 0, 0, 0, -8.3202e-09, 1, 0, -0.190344, -4.37114e-08, 0, 0, 0)
 rotation_order = 0
 offset = Vector2(105.88, 0)
 texture = ExtResource("2_j2ykt")
@@ -142,7 +283,7 @@ update_rotation = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.72529e-09, -0.0354262)
 top_level = true
 shape = SubResource("CylinderShape3D_uucyj")
-target_position = Vector3(0, -0.6, 0)
+target_position = Vector3(0, -0.7, 0)
 
 [node name="RemoteTransformCamera" type="RemoteTransform3D" parent="."]
 remote_path = NodePath("../cameraAnchor")
@@ -150,24 +291,44 @@ update_rotation = false
 update_scale = false
 
 [node name="cameraAnchor" type="Node3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+unique_name_in_owner = true
 top_level = true
 
-[node name="Camera3D" type="Camera3D" parent="cameraAnchor"]
-transform = Transform3D(-1, -3.55271e-15, -8.74228e-08, -4.03403e-08, 0.887172, 0.461439, 7.7559e-08, 0.461439, -0.887172, -2.38419e-07, 2.53416, -3.8833)
+[node name="camMove" type="Node3D" parent="cameraAnchor"]
+unique_name_in_owner = true
+
+[node name="cam" type="Camera3D" parent="cameraAnchor/camMove" groups=["camera"]]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.866026, 0.5, 0, -0.5, 0.866026, 0, 3.16666, 4.51962)
+current = true
+fov = 80.0
 script = ExtResource("3_8ijwk")
 
+[node name="RemoteTransformWallJump" type="RemoteTransform3D" parent="."]
+remote_path = NodePath("../nearFloor")
+update_rotation = false
+
+[node name="nearFloor" type="RayCast3D" parent="."]
+top_level = true
+target_position = Vector3(0, -1.5, 0)
+
+[node name="RemoteTransformHeight" type="RemoteTransform3D" parent="."]
+remote_path = NodePath("../heightDetect")
+update_rotation = false
+
+[node name="heightDetect" type="RayCast3D" parent="."]
+top_level = true
+target_position = Vector3(0, -150, 0)
+
 [node name="BubbleRing" type="CPUParticles3D" parent="."]
-cast_shadow = 0
 emitting = false
 speed_scale = 0.5
-mesh = SubResource("TorusMesh_8ijwk")
+mesh = SubResource("SphereMesh_dhdhv")
 gravity = Vector3(0, 9.8, 0)
 linear_accel_max = 17.2
 scale_amount_min = 0.2
 scale_amount_max = 0.3
 scale_amount_curve = SubResource("Curve_8ijwk")
-color = Color(0.262781, 0.636606, 0.932661, 0.67451)
 
 [node name="JumpPuff" type="CPUParticles3D" parent="."]
 emitting = false
@@ -188,23 +349,129 @@ scale_amount_min = 0.1
 scale_amount_max = 0.2
 scale_amount_curve = SubResource("Curve_j6575")
 
+[node name="trickRC" type="Node3D" parent="."]
+
+[node name="left" type="RayCast3D" parent="trickRC"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.06, 0)
+target_position = Vector3(0, -0.4, 0)
+
+[node name="right" type="RayCast3D" parent="trickRC"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 0)
+target_position = Vector3(0, 0.4, 0)
+
+[node name="head" type="RayCast3D" parent="trickRC"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0, 0)
+target_position = Vector3(-0.3, 0, 0)
+
+[node name="tail" type="RayCast3D" parent="trickRC"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, 0)
+target_position = Vector3(0.3, 0, 0)
+
+[node name="top" type="RayCast3D" parent="trickRC"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.243617)
+target_position = Vector3(0, 0, 0.3)
+
+[node name="under" type="RayCast3D" parent="trickRC"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.24)
+target_position = Vector3(0, 0, -0.3)
+
+[node name="dead_fish" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(963, 515)
+texture = ExtResource("2_dhdhv")
+
+[node name="detectCamSwitch" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="detectCamSwitch"]
+shape = SubResource("SphereShape3D_dhdhv")
+
+[node name="debugLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 8.0
+offset_top = 106.0
+offset_right = 274.0
+offset_bottom = 353.0
+text = "debug info"
+label_settings = SubResource("LabelSettings_nmgcd")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="splashScreen" type="TextureRect" parent="UI"]
+visible = false
+z_index = 10
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("18_qaf4p")
+
+[node name="tauntAnimation" type="AnimationPlayer" parent="."]
+process_mode = 3
+root_node = NodePath("../posing")
+libraries = {
+&"": SubResource("AnimationLibrary_40mal")
+}
+
+[node name="posing" type="Sprite3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+visible = false
+billboard = 1
+texture_filter = 0
+render_priority = 1
+texture = ExtResource("82_jv0xx")
+region_rect = Rect2(0, 0, 618.96, 361.666)
+
+[node name="flash" type="Sprite3D" parent="."]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+visible = false
+offset = Vector2(0, 13)
+billboard = 1
+texture_filter = 0
+texture = ExtResource("26_pqkfo")
+hframes = 4
+frame = 3
+
 [node name="Jumps" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_v25j4")
-
-[node name="FIsh" type="AudioStreamPlayer3D" parent="."]
-stream = SubResource("AudioStreamRandomizer_kufgg")
-max_polyphony = 5
+bus = &"fishsfx"
 
 [node name="Soft_Impact" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_j6575")
 max_polyphony = 3
+bus = &"fishsfx"
 
 [node name="Medium_Impact" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_ox1d5")
 max_polyphony = 3
+bus = &"fishsfx"
 
 [node name="Hard_Impact" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_mce56")
 max_polyphony = 3
+bus = &"fishsfx"
+
+[node name="FIsh" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = SubResource("AudioStreamRandomizer_kufgg")
+max_polyphony = 5
+bus = &"fishsfx"
+
+[node name="taunt" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("25_dhdhv")
+max_polyphony = 5
+bus = &"fishsfx"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="." to="." method="checkpoint"]

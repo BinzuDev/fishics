@@ -296,7 +296,6 @@ top_level = true
 
 [node name="camMove" type="Node3D" parent="cameraAnchor"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="cam" type="Camera3D" parent="cameraAnchor/camMove" groups=["camera"]]
 unique_name_in_owner = true

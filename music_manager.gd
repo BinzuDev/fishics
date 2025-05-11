@@ -30,11 +30,12 @@ func play_track(trackIndex : int, clipIndex : int, randomize : bool = false):
 	
 	if trackIndex == 4:  
 		var track3 = $music3.get_stream_playback().get_current_clip_index()
-		if track3 == 1:   #if melody is playing, play melody2
+		if track3 <= 1: 
 			$music4.get_stream_playback().switch_to_clip(1)
 			$music4.get_stream().set_clip_auto_advance_next_clip(1, randi_range(2,3))
 		else:
 			$music4.get_stream_playback().switch_to_clip(randi_range(2,3))
+	
 	
 
 func _process(_delta):

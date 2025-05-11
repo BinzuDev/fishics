@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://c7ygdu4mhaem4"]
+[gd_scene load_steps=62 format=3 uid="uid://c7ygdu4mhaem4"]
 
 [ext_resource type="Texture2D" uid="uid://drw6uhypyo4ey" path="res://Textures/skyrender.png" id="1_hmvop"]
 [ext_resource type="Texture2D" uid="uid://d0lx7l3a52xjm" path="res://Textures/wood.png" id="2_j5go0"]
@@ -176,6 +176,9 @@ size = Vector3(1, 66.934, 43.8544)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dcke8"]
 size = Vector3(34.3876, 16.195, 16.4041)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_myu2g"]
+size = Vector3(4.65201, 16.195, 16.4041)
 
 [sub_resource type="PrismMesh" id="PrismMesh_h7041"]
 left_to_right = 0.0
@@ -904,7 +907,7 @@ transform = Transform3D(0.663414, -0.383022, 0.642788, 0.5, 0.866025, 0, -0.5566
 strength = 20.0
 centerPlayer = true
 
-[node name="CameraController" type="Area3D" parent="intro/frickingAwesomeTube"]
+[node name="look_right" type="Area3D" parent="intro/frickingAwesomeTube"]
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("22_dcke8")
@@ -912,9 +915,21 @@ newCameraAngle = Vector3(30, -90, 0)
 rate = 1.0
 metadata/_custom_type_script = "uid://budr7hv3mbcbu"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="intro/frickingAwesomeTube/CameraController"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="intro/frickingAwesomeTube/look_right"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.31013, 7.59748, 6.83566)
 shape = SubResource("BoxShape3D_dcke8")
+
+[node name="force_reset_cam" type="Area3D" parent="intro/frickingAwesomeTube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.1863, 0, 2.86102e-06)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("22_dcke8")
+rate = 1.0
+metadata/_custom_type_script = "uid://budr7hv3mbcbu"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="intro/frickingAwesomeTube/force_reset_cam"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.1068, 7.59748, 6.83566)
+shape = SubResource("BoxShape3D_myu2g")
 
 [node name="Platform20" type="MeshInstance3D" parent="intro"]
 transform = Transform3D(3.91258e-06, 0, 16.9114, 0, 11.7704, 0, -29.8365, 0, 2.21766e-06, 40.6421, 16.2073, 153.115)
@@ -1101,7 +1116,7 @@ transform = Transform3D(0.287665, -0.879139, -0.379951, 0.93709, 0.34029, -0.077
 transform = Transform3D(-4.37114e-08, 0.999998, 0, -1, -4.37113e-08, 0, 0, 0, 0.999998, 2.68961, 7.51986, -25.3029)
 
 [node name="BoostRing25" parent="group1" instance=ExtResource("9_2uuim")]
-transform = Transform3D(-0.264584, 0.839311, -0.474918, -0.873577, -3.11358e-07, 0.486681, 0.408478, 0.543647, 0.733205, 26.0747, 0.843775, -25.3029)
+transform = Transform3D(0.210504, 0.901618, 0.377848, -0.873577, -4.85409e-07, 0.486681, 0.438802, -0.432528, 0.787634, 26.0747, 0.843775, -25.3029)
 strength = 12.0
 rotating = true
 
@@ -1893,6 +1908,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.343, 6.34424, -9.75048)
 
 [node name="Enemy2" parent="." instance=ExtResource("21_46o8p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.97714, 6.30592, -7.98318)
+
+[node name="Enemy11" parent="." instance=ExtResource("21_46o8p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.95832, 41.1428, -5.79097)
 
 [node name="Enemy3" parent="." instance=ExtResource("21_46o8p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.1896, 6.30592, -5.15182)

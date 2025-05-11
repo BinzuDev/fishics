@@ -1,3 +1,4 @@
+class_name enemy
 extends RigidBody3D
 
 var og_position

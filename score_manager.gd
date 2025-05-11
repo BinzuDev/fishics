@@ -26,11 +26,13 @@ const comboReset : int = 120 #amount that the comboTimer gets set to when the co
 ## Air spin variables
 var airSpinAmount : float = 0.0
 var airSpinRank : int = 0
+var airSpinHighestRank : int = 0
 #All of the required spin amounts to rank up the air spin meter
 var ASrequirements = [320*2, 360*4, 360*7, 360*11, 360*16, 360*24, 360*34, 360*55, 360*55, 360*89, 9999999*9999999]
 #var ASrankColor = ["ff00ff", "bb00ff", "0000ff", "0080ff", "00ffff", "00ff40", "f2ff00", "ff9900", "ff9900", "ff0000", "ff0000", "ffffff"]
 var ASrankColor = ["00d8ff", "ff00e8", "00d8ff", "ff00e8", "00d8ff", "ff00e8", "00d8ff", "ff00e8", "ff00e8", "00d8ff", "00d8ff", "000000"]
 
+@onready var fish = get_tree().get_first_node_in_group("player")
 
 func _physics_process(_delta: float) -> void:
 	
@@ -44,28 +46,30 @@ func _physics_process(_delta: float) -> void:
 			$specialTrick2.play()
 	
 	if doAirSpin:
-		var playSfx = true ##THIS CODE CAN BE OPTIMIZED
-		if airSpinRank == 0 and styleRank >= A:
-			playSfx = false
-		if airSpinRank == 1 and styleRank >= S:
-			playSfx = false
-		#if airSpinRank == 2 and styleRank >= P:
-		#	playSfx = false
+		var newHigh = false
+		airSpinRank += 1
 		
-		if playSfx:
+		if airSpinRank >= airSpinHighestRank:
+			newHigh = true
+			#clamp to 7 so you can still here the last 3 notes
+			#even if its not the first time you've done it this combo
+			airSpinHighestRank = clamp(airSpinRank, 0, 7)
+		
+		
+		if newHigh:
 			$airSpin.pitch_scale = 1 + airSpinRank*0.1
 			$airSpin.play()
-			ScoreManager.airSpinUIgrow()
-		airSpinRank += 1
-		if airSpinRank == 10:
-			ScoreManager.give_points(5000, 10, true, "MAX AIRSPIN")
-		elif airSpinRank == 9:
-			ScoreManager.give_points(200, 5, true, "AIRSPIN")
-		elif airSpinRank >= 5 and airSpinRank <= 7:
-			ScoreManager.give_points(200, 1, false, "AIRSPIN")
-		elif airSpinRank >= 1 and airSpinRank <= 4:
-			ScoreManager.give_points(200, 0.5, false, "AIRSPIN")
-	
+			airSpinUIgrow()
+			if airSpinRank == 10:
+				give_points(5000, 10, true, "MAX AIRSPIN")
+				if fish.height <= 15:
+					give_points(0, 15, true, "CLOSE CALL")
+					comboTimer += 100
+			elif airSpinRank == 9:
+				give_points(500, 5, true, "AIRSPIN")
+			elif airSpinRank >= 1 and airSpinRank <= 7:
+				give_points(200, 1, true, "AIRSPIN")
+		
 	
 	## Airspin UI
 	if airSpinRank == 0:   #set min value to 0 on first rank
@@ -78,10 +82,11 @@ func _physics_process(_delta: float) -> void:
 	%spinMeter.value = airSpinAmount
 	$UI/airSpin.scale.x = move_toward($UI/airSpin.scale.x, 1.0, 0.01)
 	$UI/airSpin.scale.y = move_toward($UI/airSpin.scale.y, 1.0, 0.01)
-	if airSpinAmount == 0:
-		$UI/airSpin.modulate.a -= 0.05
+	if airSpinRank < airSpinHighestRank-1 or airSpinAmount < 100:
+		$UI/airSpin.modulate.a -= 0.2
 	else:
-		$UI/airSpin.modulate.a = 1
+		$UI/airSpin.modulate.a += 0.2
+	$UI/airSpin.modulate.a = clamp($UI/airSpin.modulate.a, 0, 1)
 	
 	## COMBO METER ##
 	comboTimer -= 1   #How fast the combo timer ticks down
@@ -150,7 +155,7 @@ func _physics_process(_delta: float) -> void:
 	
 	
 	## Score and style meter UI
-	%score.text = str("%010d" % finalScore) #Display score
+	%score.text = str("%010d" % clamp(finalScore, 0, 9999999999)) #Display score
 	var diff = rankRequirements[styleRank+1] - rankRequirements[styleRank]
 	var progress = float(styleMeter) - rankRequirements[styleRank]
 	%StyleBarProgress.scale.x = progress / diff * 208
@@ -168,6 +173,10 @@ func _physics_process(_delta: float) -> void:
 	%rank.position.x = -283 + cos(rankAnimTimer*styleRank)*strenght
 	%rank.position.y = 142 + sin(rankAnimTimer*styleRank)*strenght
 	
+	#Instant rank up for testing
+	if Input.is_action_just_pressed("debug_button"):
+		give_points(100000000, 1, true, "debug")
+	
 	#DEBUG_INFO
 	%debugLabel.text = str(
 	"styleScore: ", styleScore, "\n",
@@ -176,7 +185,9 @@ func _physics_process(_delta: float) -> void:
 	"prev rank: ", rankRequirements[styleRank], "\n",
 	"next rank: ", rankRequirements[styleRank+1], "\n",
 	"styleDecreaseRate: ", styleDecreaseRate, "%","\n",
-	"airSpinRank: ", airSpinRank
+	"airSpinAmount: ", airSpinAmount, "\n",
+	"airSpinRank: ", airSpinRank, "\n",
+	"airSpinHighestRank: ", airSpinHighestRank
 	)
 
 
@@ -217,10 +228,9 @@ func give_points(addPoints: int, addMult: float, resetTimer: bool = false, trick
 		if combo_dict[trick][0] != 0: #show points unless its 0
 			%comboText.append_text(str(combo_dict[trick][0]))
 		if combo_dict[trick][1] != 0: #show mult unless its 0
-			%comboText.append_text(str("x", combo_dict[trick][1]))
+			%comboText.append_text(str("x", format_decimal(combo_dict[trick][1]) ))
 			
-
-
+			
 
 
 func end_combo():
@@ -228,6 +238,7 @@ func end_combo():
 	styleScore += points * mult
 	points = 0
 	mult = 0
+	airSpinHighestRank = 0
 	%comboText.text = ""
 	combo_dict.clear()
 

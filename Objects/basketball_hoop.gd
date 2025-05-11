@@ -41,10 +41,12 @@ func _physics_process(_delta: float) -> void:
 
 ## On successful dunking
 func _on_body_entered(body: Node3D) -> void:
+	if body is enemy:
+		ScoreManager.give_points(99999, 0, true, "CRAB DUNK")
 	
-	if body is player and coolDown > 60:
+	if body is player: #and coolDown > 60:
 		if body.linear_velocity.y < 0: 
-			coolDown = 0
+			#coolDown = 0
 			
 			#Diffrenciates between dunks
 			if body.linear_velocity.y < -15:
@@ -70,9 +72,9 @@ func _on_body_entered(body: Node3D) -> void:
 			
 		else: #anti cheat lol
 			print("CHEATER")
-		
-		body.apply_central_impulse(Vector3(0, -10, 0))
-		
+	
+	body.apply_central_impulse(Vector3(0, -10, 0))
+	
 
 
 func _on_slowmo_body_entered(body: Node3D) -> void:

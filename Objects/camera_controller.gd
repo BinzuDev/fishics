@@ -8,6 +8,7 @@ extends Area3D
 ##Use a value of 1.0 for instant transitions
 @export_range(0, 1, 0.01) var rate = 0.2
 
+
 func _ready():
 	collision_layer = 8 #layer 4
 	collision_mask = 0

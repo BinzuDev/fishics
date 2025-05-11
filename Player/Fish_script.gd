@@ -4,9 +4,11 @@ extends RigidBody3D
 
 var checkpoint_pos: Vector3
 
+#camera
 var targetCamAngle: Vector3
 var targetCamPos: Vector3
 var camSpeed: float = 0.2
+var cameraOverride: bool = false
 
 #other trick variables
 var tiplanding : bool = false
@@ -194,26 +196,38 @@ func _physics_process(_delta: float) -> void:
 		var area = $detectCamSwitch.get_overlapping_areas()[0]
 		targetCamAngle = area.newCameraAngle
 		camSpeed = area.rate
-	else:
-		targetCamAngle = Vector3(0,0,0)
+		cameraOverride = true #so you cant move the cam manually in switch areas
+	elif cameraOverride == false:
+		targetCamAngle = Vector3(0,0,0) #default camera settings
 		targetCamPos  = Vector3(0,0,0)
 		camSpeed = 0.2
-	#look ahead
-	if Input.is_action_pressed("camRight"): 
-		targetCamAngle.y -= 25
-		targetCamPos.x += 1.5
-	if Input.is_action_pressed("camLeft"):
-		targetCamAngle.y += 25
-		targetCamPos.x -= 1.5
-	if Input.is_action_pressed("camUp"):
-		targetCamAngle.x -= 30
-	if Input.is_action_pressed("camDown"):
-		targetCamAngle.x -= 10
-		targetCamPos = Vector3(0,-0.7,2.5)
-		
+	
+	#Manual camera control
+	if Input.is_action_pressed("camera") and !cameraOverride:
+		if Input.is_action_pressed("right"): 
+			targetCamAngle.y -= 30
+			targetCamPos = Vector3(2.5, 0, 0.6)
+			cameraOverride = true
+		elif Input.is_action_pressed("left"):
+			targetCamAngle.y += 30
+			targetCamPos = Vector3(-2.5, 0, 0.6)
+			cameraOverride = true
+		elif Input.is_action_pressed("forward"):
+			targetCamAngle.x += 40
+			targetCamPos = Vector3(0, 2.3, -1.5)
+			cameraOverride = true
+		elif Input.is_action_pressed("back"):
+			targetCamAngle.x -= 15
+			targetCamPos = Vector3(0,-0.7,3.5)
+			cameraOverride = true
+	
+	if !Input.is_action_pressed("camera"): #reset camera when you let go of C
+		cameraOverride = false
 	
 	%camMove.rotation_degrees = %camMove.rotation_degrees.lerp(targetCamAngle, camSpeed) 
 	%camMove.position = %camMove.position.lerp(targetCamPos, camSpeed)
+	
+	
 	
 	## Audio (flopping sfx) ##
 	#the cooldown gets shorter the faster you are

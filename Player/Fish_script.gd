@@ -2,7 +2,7 @@ class_name player
 extends RigidBody3D
 
 
-var checkpoint_pos: Vector3 # i like men
+var checkpoint_pos: Vector3 # i like men too teeheehee
 
 #camera
 var targetCamAngle: Vector3

@@ -12,6 +12,7 @@ var cameraOverride: bool = false
 
 #other trick variables
 var tiplanding : bool = false
+var isTipSpinning : bool = false
 var superJumpTimer : int = -1
 var height : float = 0 ##stores how for away you are to the nearest floor
 var fishCooldown : int = 0
@@ -270,9 +271,10 @@ func _physics_process(_delta: float) -> void:
 	
 	
 	## Tipspin
+	isTipSpinning = false
 	if get_side_count() == 1 and ($trickRC/tail.is_colliding() or $trickRC/head.is_colliding()):
 		if linear_velocity.length() > 0.5 and angular_velocity.length() > 10:
-			#print("ang vel: ", angular_velocity.length(), " lin: ", linear_velocity.length())
+			isTipSpinning = true
 			ScoreManager.give_points(500/linear_velocity.length()*2, 0, true, "TIPSPIN")
 			if ScoreManager.mult == 0: #in case you do a tipspin without a combo first
 				ScoreManager.give_points(0, 1, true, "")
@@ -339,7 +341,8 @@ func _physics_process(_delta: float) -> void:
 	%debugLabel.text = str(
 	"fov: ", %cam.fov, "\n",
 	"height: ", height, "\n",
-	"linear velocity: ", linear_velocity.length(), "\n"
+	"linear velocity: ", linear_velocity.length(), "\n",
+	"angular velocity: ", angular_velocity.length(), "\n"
 	)
 	
 

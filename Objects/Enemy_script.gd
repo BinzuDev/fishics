@@ -90,7 +90,7 @@ func _on_area_3d_body_exited(body: Node3D) -> void:
 
 
 func _on_bump_body_entered(body: Node3D) -> void:
-	if body.linear_velocity.length() < 2 and hp > 0:
+	if body.linear_velocity.length() < 2 and hp > 0 or body.angular_velocity.length() < 2 and hp > 0:
 		print("WEAK")
 		
 		#Push opposite side
@@ -103,7 +103,7 @@ func _on_bump_body_entered(body: Node3D) -> void:
 		body.apply_central_impulse((-body.linear_velocity.normalized() + Vector3.UP * 0.5) * push_force)
 		#
 		
-	if body.linear_velocity.length() > 2:
+	if body.linear_velocity.length() > 2 or body.angular_velocity.length() > 2:
 		#player pushing
 		var push_force = 30.0
 		#

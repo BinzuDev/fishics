@@ -41,7 +41,7 @@ func _physics_process(delta: float) -> void:
 	
 	#change sprite to dead
 		if hp < 1: $CrabSprite.modulate = Color(0.5, 0.5, 0.5, 1)
-	
+		if hp == 1: $CrabSprite.texture = load("res://Sprites/crabcracked.png")
 	
 
 
@@ -90,20 +90,21 @@ func _on_area_3d_body_exited(body: Node3D) -> void:
 
 
 func _on_bump_body_entered(body: Node3D) -> void:
-	if body.linear_velocity.length() < 2 and hp > 0 or body.angular_velocity.length() < 2 and hp > 0:
-		print("WEAK")
+	if body.linear_velocity.length() < 2 and not body.isTipSpinning:
+		if hp > 0:
+			print("WEAK")
+			
+			#Push opposite side
+			var push_direction = -body.linear_velocity.normalized()
+			var push_force = 30.0
+			#
+			body.apply_central_impulse(push_direction * push_force)
+			
+			#Upwards force
+			body.apply_central_impulse((-body.linear_velocity.normalized() + Vector3.UP * 0.5) * push_force)
+			#
 		
-		#Push opposite side
-		var push_direction = -body.linear_velocity.normalized()
-		var push_force = 30.0
-		#
-		body.apply_central_impulse(push_direction * push_force)
-		
-		#Upwards force
-		body.apply_central_impulse((-body.linear_velocity.normalized() + Vector3.UP * 0.5) * push_force)
-		#
-		
-	if body.linear_velocity.length() > 2 or body.angular_velocity.length() > 2:
+	if body.linear_velocity.length() > 2 or body.isTipSpinning:
 		#player pushing
 		var push_force = 30.0
 		#

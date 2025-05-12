@@ -253,7 +253,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.8617, 30.3045, 66.7068)
 gravity_scale = 1.5
 
 [node name="invisible wall" type="StaticBody3D" parent="."]
+<<<<<<< Updated upstream
 transform = Transform3D(-4.37114e-08, 0, -5.07478, 0, 1, 0, 1, 0, -2.21826e-07, 207.7, 28.12, 29.38)
+=======
+transform = Transform3D(-4.37114e-08, 0, -5.07478, 0, 1, 0, 1, 0, -2.21826e-07, 202.22, 28.12, 29.39)
+>>>>>>> Stashed changes
 collision_layer = 4
 collision_mask = 0
 
@@ -1132,7 +1136,11 @@ transform = Transform3D(0.287665, -0.879139, -0.379951, 0.93709, 0.34029, -0.077
 transform = Transform3D(-4.37114e-08, 0.999998, 0, -1, -4.37113e-08, 0, 0, 0, 0.999998, 2.68961, 7.51986, -25.3029)
 
 [node name="BoostRing25" parent="group1" instance=ExtResource("9_2uuim")]
+<<<<<<< Updated upstream
 transform = Transform3D(-0.426048, -0.483372, -0.76474, -0.873577, -1.37307e-07, 0.486681, -0.235249, 0.875412, -0.422263, 26.0747, 0.843775, -25.3029)
+=======
+transform = Transform3D(0.350716, 0.69332, 0.629523, -0.873577, -3.11358e-07, 0.486681, 0.337428, -0.720625, 0.60567, 26.0747, 0.843775, -25.3029)
+>>>>>>> Stashed changes
 strength = 12.0
 rotating = true
 

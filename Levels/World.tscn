@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://c7ygdu4mhaem4"]
+[gd_scene load_steps=66 format=3 uid="uid://c7ygdu4mhaem4"]
 
 [ext_resource type="Texture2D" uid="uid://drw6uhypyo4ey" path="res://Textures/skyrender.png" id="1_hmvop"]
 [ext_resource type="Texture2D" uid="uid://d0lx7l3a52xjm" path="res://Textures/wood.png" id="2_j5go0"]
@@ -172,7 +172,10 @@ size = Vector3(1, 66.934, 21.612)
 size = Vector3(1, 66.934, 39.2722)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vbdqq"]
-size = Vector3(1, 66.934, 43.8544)
+size = Vector3(1, 66.934, 39.2816)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_exl13"]
+size = Vector3(1, 66.934, 7.88418)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dcke8"]
 size = Vector3(34.3876, 16.195, 16.4041)
@@ -250,7 +253,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.8617, 30.3045, 66.7068)
 gravity_scale = 1.5
 
 [node name="invisible wall" type="StaticBody3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -5.07478, 0, 1, 0, 1, 0, -2.21826e-07, 195.87, 28.12, 29.28)
+transform = Transform3D(-4.37114e-08, 0, -5.07478, 0, 1, 0, 1, 0, -2.21826e-07, 207.7, 28.12, 29.38)
 collision_layer = 4
 collision_mask = 0
 
@@ -706,8 +709,13 @@ shape = SubResource("BoxShape3D_piqde")
 debug_color = Color(0.792157, 0, 0, 1)
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="intro/CSGCombiner3D2/invisible wall2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.16, 0, 12.661)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.16, 0, 10.3746)
 shape = SubResource("BoxShape3D_vbdqq")
+debug_color = Color(1, 0, 0, 1)
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="intro/CSGCombiner3D2/invisible wall2"]
+transform = Transform3D(-0.573576, 0, 0.819152, 0, 1, 0, -0.819152, 0, -0.573576, -24.1788, 0, 31.8379)
+shape = SubResource("BoxShape3D_exl13")
 debug_color = Color(1, 0, 0, 1)
 
 [node name="half pipe" type="CSGCombiner3D" parent="intro"]
@@ -1124,7 +1132,7 @@ transform = Transform3D(0.287665, -0.879139, -0.379951, 0.93709, 0.34029, -0.077
 transform = Transform3D(-4.37114e-08, 0.999998, 0, -1, -4.37113e-08, 0, 0, 0, 0.999998, 2.68961, 7.51986, -25.3029)
 
 [node name="BoostRing25" parent="group1" instance=ExtResource("9_2uuim")]
-transform = Transform3D(-0.0251492, -0.998661, -0.0451421, -0.873577, -1.37307e-07, 0.486682, -0.486032, 0.0516749, -0.872408, 26.0747, 0.843775, -25.3029)
+transform = Transform3D(-0.426048, -0.483372, -0.76474, -0.873577, -1.37307e-07, 0.486681, -0.235249, 0.875412, -0.422263, 26.0747, 0.843775, -25.3029)
 strength = 12.0
 rotating = true
 

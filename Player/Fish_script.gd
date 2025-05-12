@@ -33,6 +33,7 @@ var sfxCoolDown : int = 0
 func _ready() -> void:
 	checkpoint_pos = position
 	$UI/splashScreen.visible = true
+	ScoreManager.fish = self
 
 func _physics_process(_delta: float) -> void:
 	#splash screen fadeout
@@ -101,11 +102,11 @@ func _physics_process(_delta: float) -> void:
 			superJumpTimer = 5 #check your speed 5 frames after jumping
 			
 			if is_in_air() and $nearFloor.is_colliding():
-				ScoreManager.give_points(1000,0, true, "POGO JUMP")
+				ScoreManager.give_points(1000,0, true, "POGO JUMP", "uncommon")
 				#play_trick_sfx("uncommon")
 			
 			if !$nearFloor.is_colliding():
-				ScoreManager.give_points(800,1, true, "WALL JUMP")
+				ScoreManager.give_points(800,1, true, "WALL JUMP", "uncommon")
 				ScoreManager.reset_airspin()
 				#play_trick_sfx("uncommon")
 			
@@ -116,7 +117,7 @@ func _physics_process(_delta: float) -> void:
 				print("HIGH JUMP, speed: ", linear_velocity.length())
 				
 				if linear_velocity.length() > 12: #Points
-					ScoreManager.give_points(500, 1, true, "HIGH JUMP")
+					ScoreManager.give_points(500, 1, true, "HIGH JUMP", "uncommon")
 					#play_trick_sfx("uncommon")
 			else:
 				var hspeed = linear_velocity #get your speed
@@ -124,7 +125,7 @@ func _physics_process(_delta: float) -> void:
 				hspeed = hspeed.length() #get your true horziontal speed 
 				print("LONG JUMP, speed: ", hspeed)
 				if linear_velocity.length() > 12:
-					ScoreManager.give_points(200, 1, true, "LONG JUMP")
+					ScoreManager.give_points(200, 1, true, "LONG JUMP", "uncommon")
 					#play_trick_sfx("uncommon")
 				
 	
@@ -146,7 +147,7 @@ func _physics_process(_delta: float) -> void:
 		
 	if Input.is_action_just_pressed("dive"):
 		var newSpd = clamp(height*-1.5 -10, -75, -10) 
-		linear_velocity = Vector3(0,newSpd,0)
+		linear_velocity.y = min(newSpd, linear_velocity.y)
 		print("height: ", height, " speed: ", newSpd, " points: ", 100*height )
 		ScoreManager.give_points(100*height, 0, false, "DIVE")
 		if height > 10:

@@ -1116,7 +1116,7 @@ transform = Transform3D(0.287665, -0.879139, -0.379951, 0.93709, 0.34029, -0.077
 transform = Transform3D(-4.37114e-08, 0.999998, 0, -1, -4.37113e-08, 0, 0, 0, 0.999998, 2.68961, 7.51986, -25.3029)
 
 [node name="BoostRing25" parent="group1" instance=ExtResource("9_2uuim")]
-transform = Transform3D(0.390574, -0.596618, 0.701066, -0.873577, -7.92905e-08, 0.486681, -0.290364, -0.802522, -0.521193, 26.0747, 0.843775, -25.3029)
+transform = Transform3D(0.458007, -0.338183, 0.822105, -0.873577, -2.12735e-08, 0.486681, -0.164588, -0.941077, -0.295429, 26.0747, 0.843775, -25.3029)
 strength = 12.0
 rotating = true
 
@@ -1904,37 +1904,34 @@ material_override = SubResource("StandardMaterial3D_8j1c5")
 transform = Transform3D(13.8564, 7.99999, 0, -7.99999, 13.8564, 0, 0, 0, 16, 128, -2, -18)
 
 [node name="Enemy" parent="." instance=ExtResource("21_46o8p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.343, 6.34424, -9.75048)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 98.2347, 0.461199, 7.42849)
 
 [node name="Enemy2" parent="." instance=ExtResource("21_46o8p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.97714, 6.30592, -7.98318)
-
-[node name="Enemy11" parent="." instance=ExtResource("21_46o8p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.95832, 41.1428, -5.79097)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 92.8689, 0.422879, 9.19579)
 
 [node name="Enemy3" parent="." instance=ExtResource("21_46o8p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.1896, 6.30592, -5.15182)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.081, 0.422879, 12.0272)
 
 [node name="Enemy6" parent="." instance=ExtResource("21_46o8p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 53.948, 12.7282, -5.15182)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 106.918, 14.8094, -23.3889)
 
 [node name="Enemy7" parent="." instance=ExtResource("21_46o8p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.0828, 12.7282, -17.3495)
 
 [node name="Enemy8" parent="." instance=ExtResource("21_46o8p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48.0232, 12.7282, -1.50818)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.993, 14.8094, -19.7452)
 
 [node name="Enemy9" parent="." instance=ExtResource("21_46o8p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48.0232, 12.7282, -8.22752)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.993, 14.8094, -26.4646)
 
 [node name="Enemy10" parent="." instance=ExtResource("21_46o8p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.9293, 12.7282, -17.3495)
 
 [node name="Enemy4" parent="." instance=ExtResource("21_46o8p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2255, 6.30592, -5.15182)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96.1172, 0.422879, 12.0272)
 
 [node name="Enemy5" parent="." instance=ExtResource("21_46o8p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1768, 6.30592, -9.76352)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 94.0685, 0.422879, 7.41545)
 
 [node name="tutoriwall" type="MeshInstance3D" parent="."]
 transform = Transform3D(-7.73341e-09, 0, -6.2761, 0, 3.62261, 0, 0.17692, 0, -2.74337e-07, -13.1156, 22.2604, -53.3321)

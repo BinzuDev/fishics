@@ -29,10 +29,10 @@ var airSpinRank : int = 0
 var airSpinHighestRank : int = 0
 #All of the required spin amounts to rank up the air spin meter
 var ASrequirements = [320*2, 360*4, 360*7, 360*11, 360*16, 360*24, 360*34, 360*55, 360*55, 360*89, 9999999*9999999]
-#var ASrankColor = ["ff00ff", "bb00ff", "0000ff", "0080ff", "00ffff", "00ff40", "f2ff00", "ff9900", "ff9900", "ff0000", "ff0000", "ffffff"]
+#var ASrankColor = ["ff00ff", "bb00ff", "0000ff", "0080ff", "00ffff" , "00ff40", "f2ff00", "ff9900", "ff9900", "ff0000", "ff0000", "ffffff"]
 var ASrankColor = ["00d8ff", "ff00e8", "00d8ff", "ff00e8", "00d8ff", "ff00e8", "00d8ff", "ff00e8", "ff00e8", "00d8ff", "00d8ff", "000000"]
 
-@onready var fish = get_tree().get_first_node_in_group("player")
+var fish #gets set automatically inside the fish script
 
 func _physics_process(_delta: float) -> void:
 	
@@ -213,6 +213,8 @@ func give_points(addPoints: int, addMult: float, resetTimer: bool = false, trick
 	if trickName != "": #dont add it to the list if the trick has no name
 		if !combo_dict.has(trickName): #create the trick if it doesnt exist
 			combo_dict[trickName] = [addPoints, addMult]
+			if rarity == "uncommon": #play sfx only the first time it gets added
+				play_trick_sfx("uncommon")
 			$UI/comboText.scale = Vector2(1.15, 1.15) #make combo list grow when something is added for the first time
 		else:   #if it exists, add pts and mult
 			combo_dict[trickName][0] += addPoints

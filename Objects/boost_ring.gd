@@ -41,6 +41,8 @@ func _process(_delta: float) -> void:
 func _on_body_entered(body: Node3D) -> void:
 	if body is player:
 		
+		
+		
 		if centerPlayer:
 			body.global_position = global_position
 		
@@ -55,8 +57,10 @@ func _on_body_entered(body: Node3D) -> void:
 		body.apply_impulse(distance*3)
 		
 		ScoreManager.reset_airspin()
-		ScoreManager.give_points(500, 1, true, "BOOST")
-		ScoreManager.play_trick_sfx("rare")
+		if body.lastUsedBoost != self:
+			body.lastUsedBoost = self
+			ScoreManager.give_points(500, 1, true, "BOOST")
+			ScoreManager.play_trick_sfx("rare")
 		#body.play_random_trick()
 		
 		#sound 

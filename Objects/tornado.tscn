@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://didbl7612qejr"]
+
+[ext_resource type="Script" uid="uid://d261xpavt7wxt" path="res://Objects/tornado.gd" id="1_d73hm"]
+[ext_resource type="Texture2D" uid="uid://dr5unb8uvt8tr" path="res://Sprites/tornado.png" id="1_x31e8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x31e8"]
+size = Vector3(1.6, 2.8, 1.6)
+
+[node name="tornado" type="Node3D"]
+script = ExtResource("1_d73hm")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+offset = Vector2(0, 75)
+billboard = 1
+texture_filter = 0
+texture = ExtResource("1_x31e8")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+shape = SubResource("BoxShape3D_x31e8")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

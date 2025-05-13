@@ -17,6 +17,7 @@ var superJumpTimer : int = -1
 var height : float = 0 ##stores how for away you are to the nearest floor
 var fishCooldown : int = 0
 var diving = false
+var lastUsedBoost
 
 #MOVEMENT CONSTS
 const torque_impulse = Vector3(-1.5, 0, 0)  #front-back rotation speed
@@ -114,7 +115,7 @@ func _physics_process(_delta: float) -> void:
 				var xtraYspd = clamp(angular_velocity.length()*0.3, 0, 30)
 				
 				apply_impulse(rotate_by_cam(Vector3(0, xtraYspd, 0)))
-				print("HIGH JUMP, speed: ", linear_velocity.length())
+				#print("HIGH JUMP, speed: ", linear_velocity.length())
 				
 				if linear_velocity.length() > 12: #Points
 					ScoreManager.give_points(500, 1, true, "HIGH JUMP", "uncommon")
@@ -123,7 +124,7 @@ func _physics_process(_delta: float) -> void:
 				var hspeed = linear_velocity #get your speed
 				hspeed.y = 0  #remove your vertical speed from the equation
 				hspeed = hspeed.length() #get your true horziontal speed 
-				print("LONG JUMP, speed: ", hspeed)
+				#print("LONG JUMP, speed: ", hspeed)
 				if linear_velocity.length() > 12:
 					ScoreManager.give_points(200, 1, true, "LONG JUMP", "uncommon")
 					#play_trick_sfx("uncommon")
@@ -133,7 +134,7 @@ func _physics_process(_delta: float) -> void:
 	if superJumpTimer >= 0:
 		superJumpTimer -= 1
 	if superJumpTimer == 0:
-		print("super jump:  v: ", linear_velocity.y)
+		#print("super jump:  v: ", linear_velocity.y)
 		if linear_velocity.y > 25:
 			ScoreManager.give_points(5000, 5, true, "VERTICAL JUMP")
 			ScoreManager.comboTimer += 80 #give you extra time
@@ -343,7 +344,8 @@ func _physics_process(_delta: float) -> void:
 	"fov: ", %cam.fov, "\n",
 	"height: ", height, "\n",
 	"linear velocity: ", linear_velocity.length(), "\n",
-	"angular velocity: ", angular_velocity.length(), "\n"
+	"angular velocity: ", angular_velocity, "\n",
+	"angular length: ", angular_velocity.length(), "\n",
 	)
 	
 

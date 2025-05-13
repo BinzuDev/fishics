@@ -36,12 +36,19 @@ func _physics_process(delta: float) -> void:
 		#$CrabSprite.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 	
 	
-	#dead sprite
+	#change sprite
 	
 	
 	#change sprite to dead
-		if hp < 1: $CrabSprite.modulate = Color(0.5, 0.5, 0.5, 1)
-		if hp == 1: $CrabSprite.texture = load("res://Sprites/crabcracked.png")
+		if hp < 1: 
+			$CrabSprite.modulate = Color(0.5, 0.5, 0.5, 1)
+			
+			#scale collsion shape so carb is flat
+			$CollisionShape3D.scale.z = 0.3 
+			
+			#crack sprite
+		if hp == 1: 
+			$CrabSprite.texture = load("res://Sprites/crabcracked.png")
 	
 
 

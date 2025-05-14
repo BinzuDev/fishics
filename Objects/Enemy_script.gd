@@ -20,10 +20,9 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	 
 	#var direction = (player.global_transform.origin - global_transform.origin).normalized()
-	if agro and get_contact_count() >= 0:
+	if agro:
 		apply_central_impulse(target * 0.5)
 		#get_parent().apply_central_impulse(direction * 5 * delta)
-		
 		
 		
 		#Checking if on floor and eneabling area 3d/disabling it
@@ -36,25 +35,9 @@ func _physics_process(delta: float) -> void:
 		#$CrabSprite.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 	
 	
-	#change sprite
-	
-	
-	#change sprite to dead
-		if hp < 1: 
-			$CrabSprite.modulate = Color(0.5, 0.5, 0.5, 1)
-			
-			#scale collsion shape so carb is flat
-			$CollisionShape3D.scale.z = 0.3 
-			
-			#crack sprite
-		if hp == 1: 
-			$CrabSprite.texture = load("res://Sprites/crabcracked.png")
-	
 
 
-
-
-
+## Enemy detect
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body is player:
 		
@@ -76,11 +59,8 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 	#if $FloorCast.is_colliding():
 		#$JumpPuff.emitting = true
 		
-		
-		
-		
-	
-	
+
+
 
 func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body is player:
@@ -137,6 +117,17 @@ func _on_bump_body_entered(body: Node3D) -> void:
 		
 		hp -= 1 #minus hp
 		
+		
+			#change sprite to dead
+		if hp < 1: 
+			$CrabSprite.modulate = Color(0.5, 0.5, 0.5, 1)
+			
+			#scale collsion shape so carb is flat
+			$CollisionShape3D.scale.z = 0.3 
+			
+			#crack sprite
+		if hp == 1: 
+			$CrabSprite.texture = load("res://Sprites/crabcracked.png")
 		
 		
 		

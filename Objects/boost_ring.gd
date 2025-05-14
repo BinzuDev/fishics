@@ -7,7 +7,7 @@ extends Area3D
 @export var centerPlayer : bool = false ##Forces the player to get centered when precision is needed
 @export var rotating : bool = false #new rotation option
 @export var rotationSpeed : float = 1.0
-
+@export var deactivateParticles : bool = false
 
 var strengthLastFrame = strength
 
@@ -34,6 +34,9 @@ func _process(_delta: float) -> void:
 	
 	if rotating: #checks for rotation value
 		rotation_degrees.y += rotationSpeed
+	
+
+	$ring/CPUParticles3D.emitting = !deactivateParticles
 	
 	
 

@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dks0ap6uq64p2"
-path.s3tc="res://.godot/imported/garden eel.png-6f2d9cd57de726b546157de7f3459798.s3tc.ctex"
+path="res://.godot/imported/garden eel.png-6f2d9cd57de726b546157de7f3459798.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/Garden Eel/garden eel.png"
-dest_files=["res://.godot/imported/garden eel.png-6f2d9cd57de726b546157de7f3459798.s3tc.ctex"]
+dest_files=["res://.godot/imported/garden eel.png-6f2d9cd57de726b546157de7f3459798.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

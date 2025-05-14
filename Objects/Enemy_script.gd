@@ -5,8 +5,8 @@ var og_position
 var target = 0
 #var fishplayer : player
 var agro : bool = false
-var speed = 2
-var hp = 2
+var speed := 2
+var hp := 2
 
 
 

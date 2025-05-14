@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://d003wfuaw73ku"]
+
+[ext_resource type="Texture2D" uid="uid://dks0ap6uq64p2" path="res://Sprites/Garden Eel/garden eel.png" id="1_h3c62"]
+[ext_resource type="Script" uid="uid://ckayq0dd14upk" path="res://Objects/eel.gd" id="2_f2cti"]
+[ext_resource type="Texture2D" uid="uid://duvmiscmbnnfu" path="res://Sprites/Garden Eel/scope.png" id="2_orarh"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_h3c62"]
+radius = 4.71294
+
+[node name="eel" type="Sprite3D"]
+sorting_use_aabb_center = false
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("1_h3c62")
+script = ExtResource("2_f2cti")
+
+[node name="scope" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.133608, 7.75871, 0.0721474)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("2_orarh")
+
+[node name="RemoteTransformArea" type="RemoteTransform3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.20798, 0)
+remote_path = NodePath("../AreaEel")
+update_position = false
+
+[node name="AreaEel" type="Area3D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AreaEel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.77624, 0)
+shape = SubResource("SphereShape3D_h3c62")
+debug_color = Color(0.352941, 0.152941, 0.729412, 0.988235)
+
+[connection signal="body_entered" from="AreaEel" to="." method="_on_area_eel_body_entered"]
+[connection signal="body_exited" from="AreaEel" to="." method="_on_area_eel_body_exited"]

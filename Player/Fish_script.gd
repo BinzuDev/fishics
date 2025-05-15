@@ -381,3 +381,8 @@ func set_skin(): #doesnt work yet
 	$pivotLower/lowerBody.texture = skin
 	$pivotLower/pivotTail/tail.texture = skin
 	
+
+func force_position(newPos : Vector3):
+	global_position = newPos
+	linear_velocity = Vector3(0,0,0)
+	angular_velocity = Vector3(0,0,0)

@@ -336,3 +336,9 @@ func format_decimal(value):
 		return str(int(value))
 	else:
 		return str(value)
+
+func hide():
+	$UI.visible = false
+
+func show():
+	$UI.visible = true

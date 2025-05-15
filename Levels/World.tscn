@@ -1048,7 +1048,7 @@ transform = Transform3D(-4.37114e-08, 0.999998, 0, -1, -4.37113e-08, 0, 0, 0, 0.
 strength = 5.0
 
 [node name="BoostRing25" parent="group1" instance=ExtResource("9_2uuim")]
-transform = Transform3D(0.483549, -0.113265, 0.867955, -0.873577, 6.74928e-07, 0.486681, -0.0551248, -0.99356, -0.0989459, 26.0747, 0.843775, -25.3029)
+transform = Transform3D(0.00178914, -0.999989, 0.00321296, -0.873577, 7.32944e-07, 0.48668, -0.486677, -0.00367751, -0.87357, 26.0747, 0.843775, -25.3029)
 strength = 12.0
 rotating = true
 
@@ -1367,6 +1367,30 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="group2/sphere5/StaticBody3D"]
 shape = SubResource("SphereShape3D_wvw3a")
 
+[node name="sphere6" type="MeshInstance3D" parent="group2"]
+transform = Transform3D(-1.15879e-06, 0, -26.51, 0, 26.51, 0, 26.51, 0, -1.15879e-06, 149.654, -8.82185, -11.429)
+material_override = SubResource("StandardMaterial3D_myu2g")
+material_overlay = ExtResource("5_2uuim")
+mesh = SubResource("SphereMesh_dcke8")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="group2/sphere6"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="group2/sphere6/StaticBody3D"]
+shape = SubResource("SphereShape3D_wvw3a")
+
+[node name="sphere7" type="MeshInstance3D" parent="group2"]
+transform = Transform3D(-1.15879e-06, 0, -26.51, 0, 26.51, 0, 26.51, 0, -1.15879e-06, 152.238, -10.3902, 2.23812)
+material_override = SubResource("StandardMaterial3D_myu2g")
+material_overlay = ExtResource("5_2uuim")
+mesh = SubResource("SphereMesh_dcke8")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="group2/sphere7"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="group2/sphere7/StaticBody3D"]
+shape = SubResource("SphereShape3D_wvw3a")
+
 [node name="sphere2" type="MeshInstance3D" parent="group2"]
 transform = Transform3D(-2.52215e-07, 0, -5.77, 0, 5.77, 0, 5.77, 0, -2.52215e-07, 45.4557, 0.790712, -31.194)
 material_override = SubResource("StandardMaterial3D_myu2g")
@@ -1548,7 +1572,7 @@ strength = 19.0
 centerPlayer = true
 
 [node name="BoostRing30" parent="group2" instance=ExtResource("9_2uuim")]
-transform = Transform3D(-0.857318, -0.974685, 0.070663, -0.642087, 0.490953, -1.01818, 0.736701, -0.706366, -0.805182, 138.545, 41.4851, -17.1785)
+transform = Transform3D(-0.330416, -1.20135, -0.370911, -0.9827, 0.485983, -0.698657, 0.784299, 0.102805, -1.03165, 149.387, 32.7013, -17.1785)
 strength = 19.0
 centerPlayer = true
 
@@ -1560,6 +1584,11 @@ centerPlayer = true
 [node name="BoostRing28" parent="group2" instance=ExtResource("9_2uuim")]
 transform = Transform3D(-0.786251, -0.617905, -0.00176382, -0.481804, 0.61485, -0.624358, 0.386879, -0.490052, -0.781135, 174.475, 74.2267, -32.8521)
 strength = 19.0
+centerPlayer = true
+
+[node name="BoostRing31" parent="group2" instance=ExtResource("9_2uuim")]
+transform = Transform3D(-0.870472, -0.253925, 0.421665, -0.481804, 0.61485, -0.624358, -0.100721, -0.746646, -0.657552, 118.657, 1.77413, 11.3835)
+strength = 23.0
 centerPlayer = true
 
 [node name="BoostRing29" parent="group2" instance=ExtResource("9_2uuim")]
@@ -1802,7 +1831,7 @@ shape = SubResource("BoxShape3D_m3j4o")
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 63.612, 43.3847, -51.1557)
 
 [node name="Basketballhoop2" parent="highUpSection" instance=ExtResource("11_vbdqq")]
-transform = Transform3D(-3.93403e-08, 0, 0.9, 0, 0.9, 0, -0.9, 0, -3.93403e-08, 161.576, 50.6281, -17.9651)
+transform = Transform3D(-3.93403e-08, 0, 0.9, 0, 0.9, 0, -0.9, 0, -3.93403e-08, 172.123, 36.9707, -17.2553)
 
 [node name="Basketballhoop3" parent="highUpSection" instance=ExtResource("11_vbdqq")]
 transform = Transform3D(-3.93403e-08, 0, -0.9, 0, 0.9, 0, 0.9, 0, -3.93403e-08, 259.422, 81.3505, -12.4131)
@@ -1853,7 +1882,7 @@ metadata/_edit_group_ = true
 shape = SubResource("BoxShape3D_m3j4o")
 
 [node name="Platform6" type="MeshInstance3D" parent="highUpSection"]
-transform = Transform3D(-2.54667e-07, 0, -6.27939, 0, 1.8051, 0, 5.82609, 0, -2.74481e-07, 95.9287, 39.9313, -50.7782)
+transform = Transform3D(-6.82472e-07, 0, -6.27939, 0, 1.8051, 0, 15.6131, 0, -2.74481e-07, 95.9287, 39.9313, -50.7782)
 material_override = ExtResource("4_vbdqq")
 material_overlay = ExtResource("5_2uuim")
 mesh = SubResource("BoxMesh_j5go0")
@@ -1866,7 +1895,7 @@ metadata/_edit_group_ = true
 shape = SubResource("BoxShape3D_m3j4o")
 
 [node name="Platform7" type="MeshInstance3D" parent="highUpSection"]
-transform = Transform3D(-2.54667e-07, 0, -6.27939, 0, 1.8051, 0, 5.82609, 0, -2.74481e-07, 103.595, 42.5637, -50.7782)
+transform = Transform3D(-6.82472e-07, 0, -6.27939, 0, 1.8051, 0, 15.6131, 0, -2.74481e-07, 103.595, 42.5637, -50.7782)
 material_override = ExtResource("4_vbdqq")
 material_overlay = ExtResource("5_2uuim")
 mesh = SubResource("BoxMesh_j5go0")
@@ -1879,7 +1908,7 @@ metadata/_edit_group_ = true
 shape = SubResource("BoxShape3D_m3j4o")
 
 [node name="Platform8" type="MeshInstance3D" parent="highUpSection"]
-transform = Transform3D(-2.54667e-07, 0, -6.27939, 0, 1.8051, 0, 5.82609, 0, -2.74481e-07, 113.194, 42.5637, -50.7782)
+transform = Transform3D(-6.82472e-07, 0, -6.27939, 0, 1.8051, 0, 15.6131, 0, -2.74481e-07, 113.194, 42.5637, -50.7782)
 material_override = ExtResource("4_vbdqq")
 material_overlay = ExtResource("5_2uuim")
 mesh = SubResource("BoxMesh_j5go0")
@@ -1892,7 +1921,7 @@ metadata/_edit_group_ = true
 shape = SubResource("BoxShape3D_m3j4o")
 
 [node name="Platform9" type="MeshInstance3D" parent="highUpSection"]
-transform = Transform3D(-2.54667e-07, 0, -14.3135, 0, 1.8051, 0, 5.82609, 0, -6.25662e-07, 126.57, 40.5704, -50.7782)
+transform = Transform3D(-6.82472e-07, 0, -14.3135, 0, 1.8051, 0, 15.6131, 0, -6.25662e-07, 126.57, 40.5704, -50.7782)
 material_override = ExtResource("4_vbdqq")
 material_overlay = ExtResource("5_2uuim")
 mesh = SubResource("BoxMesh_j5go0")
@@ -1905,7 +1934,7 @@ metadata/_edit_group_ = true
 shape = SubResource("BoxShape3D_m3j4o")
 
 [node name="Platform11" type="MeshInstance3D" parent="highUpSection"]
-transform = Transform3D(-2.54667e-07, 0, -8.13589, 0, 1.8051, 0, 5.82609, 0, -3.55631e-07, 140.199, 39.8621, -50.7782)
+transform = Transform3D(-6.82472e-07, 0, -8.13589, 0, 1.8051, 0, 15.6131, 0, -3.55631e-07, 140.199, 39.8621, -50.7782)
 material_override = ExtResource("4_vbdqq")
 material_overlay = ExtResource("5_2uuim")
 mesh = SubResource("BoxMesh_j5go0")
@@ -1931,7 +1960,7 @@ metadata/_edit_group_ = true
 shape = SubResource("BoxShape3D_m3j4o")
 
 [node name="Platform12" type="MeshInstance3D" parent="highUpSection"]
-transform = Transform3D(-2.54667e-07, 0, -6.27939, 0, 1.8051, 0, 5.82609, 0, -2.74481e-07, 149.838, 37.5547, -50.7782)
+transform = Transform3D(-2.54666e-07, 0, -6.27939, 0, 1.8051, 0, 5.82609, 0, -2.74481e-07, 149.838, 37.5547, -50.7782)
 material_override = ExtResource("4_vbdqq")
 material_overlay = ExtResource("5_2uuim")
 mesh = SubResource("BoxMesh_j5go0")
@@ -1965,7 +1994,7 @@ shape = SubResource("BoxShape3D_h7041")
 debug_color = Color(1, 1, 1, 1)
 
 [node name="CollisionShape3D6" type="CollisionShape3D" parent="lookDown"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.386, 54.4923, 3.21674)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 112.493, 37.3435, 9.87258)
 shape = SubResource("BoxShape3D_h7041")
 debug_color = Color(1, 1, 1, 1)
 
@@ -2020,7 +2049,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.7253, 13.5079, -6.92634)
 skeleton = NodePath("../..")
 
 [node name="worm9" parent="worms" instance=ExtResource("16_e1uki")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 159.542, 54.1113, -17.9537)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 169.807, 41.5049, -17.1757)
 skeleton = NodePath("../..")
 
 [node name="worm7" parent="worms" instance=ExtResource("16_e1uki")]
@@ -2071,7 +2100,7 @@ transform = Transform3D(-0.2, 0, -0.34641, 0, 0.4, 0, 0.34641, 0, -0.2, 146.7, 2
 material_override = SubResource("StandardMaterial3D_8j1c5")
 
 [node name="EffielTower" parent="." instance=ExtResource("19_bccto")]
-transform = Transform3D(13.8564, 7.99999, 0, -7.99999, 13.8564, 0, 0, 0, 16, 128, -2, -18)
+transform = Transform3D(11.125, 11.4993, 0, -11.4993, 11.125, 0, 0, 0, 16, 125.873, -3.24256, -17.104)
 
 [node name="Enemy6" parent="." instance=ExtResource("21_46o8p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 106.918, 14.8094, -23.3889)

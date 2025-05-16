@@ -7,8 +7,6 @@ func _ready():
 	$Label3D.visible = false
 	$UI.visible = false
 	
-	
-	
 
 func _process(delta: float) -> void:
 	
@@ -25,9 +23,6 @@ func _process(delta: float) -> void:
 		## When confirmed pressed inside the area
 		if Input.is_action_just_pressed("confirm"):
 			lockFish = true
-			
-			#lil scope aniamtion
-			$AnimationPlayerScope.play("SCOPE")
 			
 			#lil scope sound
 			%AudioScopeOpen.play()
@@ -55,7 +50,6 @@ func _process(delta: float) -> void:
 		
 		
 		if Input.is_action_just_pressed("cancel"):
-			lockFish = false
 			$AnimationPlayer.play("lower_to_floor")
 			$cam_anchor/Camera3D.current = false
 			fish.visible = true
@@ -63,16 +57,10 @@ func _process(delta: float) -> void:
 			$UI.visible = false
 			$eel_sprite/scope.visible = true
 			ScoreManager.show()
-			
-			#reverse scope animation
-			$AnimationPlayerScope.play("SCOPE", -1)
-			
 			#scope close sound
 			%AudioScopeClose.play()
 	
-	
-	
-	
+
 
 func _on_area_eel_body_entered(body: Node3D) -> void:
 	if body is player:
@@ -87,3 +75,6 @@ func _on_animation_finished(anim_name):
 		$eel_sprite/scope.visible = false
 		ScoreManager.hide()
 		%Camera3D.fov = 60
+	if anim_name == "lower_to_floor":
+		$AnimationPlayer.play("idle")
+		lockFish = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://d003wfuaw73ku"]
+[gd_scene load_steps=21 format=3 uid="uid://d003wfuaw73ku"]
 
 [ext_resource type="Texture2D" uid="uid://dks0ap6uq64p2" path="res://Sprites/Garden Eel/garden eel.png" id="1_h3c62"]
 [ext_resource type="Script" uid="uid://ckayq0dd14upk" path="res://Objects/eel.gd" id="2_f2cti"]
@@ -42,6 +42,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(0, -14, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("eel_sprite/scope:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_2ec3g"]
 resource_name = "lower_to_floor"
@@ -53,9 +65,9 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.4, 1),
+"transitions": PackedFloat32Array(0.5, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, -14, 0)]
+"values": [Vector3(0, 14, 0), Vector3(0, -14, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_orarh"]
@@ -70,12 +82,41 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5, 1),
 "transitions": PackedFloat32Array(2, 0.5, 1),
 "update": 0,
-"values": [Vector3(0, -14, 0), Vector3(0, -7, 0), Vector3(0, 0, 0)]
+"values": [Vector3(0, -14, 0), Vector3(0, 0, 0), Vector3(0, 14, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ujmdm"]
+resource_name = "idle"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("eel_sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -14, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("eel_sprite/scope:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(2, 0.5, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.139626), Vector3(0, 0, -0.279253)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f2cti"]
 _data = {
 &"RESET": SubResource("Animation_f2cti"),
+&"idle": SubResource("Animation_ujmdm"),
 &"lower_to_floor": SubResource("Animation_2ec3g"),
 &"raise_high": SubResource("Animation_orarh")
 }
@@ -89,32 +130,6 @@ shader_parameter/screen_height = 1080.0
 [sub_resource type="LabelSettings" id="LabelSettings_f2cti"]
 font_size = 43
 
-[sub_resource type="Animation" id="Animation_nvi72"]
-length = 0.001
-tracks/0/type = "rotation_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("eel_sprite/scope")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
-
-[sub_resource type="Animation" id="Animation_8q0io"]
-resource_name = "SCOPE"
-tracks/0/type = "rotation_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("eel_sprite/scope")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.433333, 1, 0, 0, -0.139631, 0.990204)
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_nvi72"]
-_data = {
-&"RESET": SubResource("Animation_nvi72"),
-&"SCOPE": SubResource("Animation_8q0io")
-}
-
 [node name="eel" type="Node3D"]
 process_priority = 1
 process_physics_priority = 1
@@ -124,6 +139,7 @@ script = ExtResource("2_f2cti")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -14, 0)
 offset = Vector2(-80, 900)
 alpha_cut = 2
+texture_filter = 0
 texture = ExtResource("1_h3c62")
 
 [node name="scope" type="Sprite3D" parent="eel_sprite"]
@@ -143,6 +159,15 @@ stream = SubResource("AudioStreamRandomizer_3o7ct")
 [node name="fish_pos" type="Node3D" parent="eel_sprite"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.549628, 17.138, 0)
 
+[node name="eel_sprite_extended" type="Sprite3D" parent="eel_sprite"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15.94, 0)
+offset = Vector2(-80, 900)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("1_h3c62")
+region_enabled = true
+region_rect = Rect2(0, 613.573, 800, 1286.43)
+
 [node name="appear" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 2
@@ -160,17 +185,16 @@ font_size = 136
 libraries = {
 &"": SubResource("AnimationLibrary_f2cti")
 }
+autoplay = "idle"
 
 [node name="cam_anchor" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, 0)
+transform = Transform3D(1, 0, 0, 0, 0.826786, 0.562516, 0, -0.562516, 0.826786, 0.091394, 31.4961, -0.158273)
 
 [node name="Camera3D" type="Camera3D" parent="cam_anchor"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4)
 fov = 60.0
 
 [node name="UI" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -199,24 +223,36 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.960569, 0.335203, 0.756788, 1)
 
-[node name="Label" type="Label" parent="UI"]
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Look around: Arrow keys
-zoom in: (Z)
-exit: (X)
-zoom out: (C)
-"
-label_settings = SubResource("LabelSettings_f2cti")
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
 
-[node name="AnimationPlayerScope" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_nvi72")
-}
+[node name="Label" type="Label" parent="UI/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "zoom in: (Z)
+exit: (X)
+zoom out: (C)"
+label_settings = SubResource("LabelSettings_f2cti")
+vertical_alignment = 2
+
+[node name="Label2" type="Label" parent="UI/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "Look around: 
+Arrow keys"
+label_settings = SubResource("LabelSettings_f2cti")
+vertical_alignment = 2
 
 [connection signal="body_entered" from="appear" to="." method="_on_area_eel_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]

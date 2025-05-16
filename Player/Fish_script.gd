@@ -141,7 +141,7 @@ func _physics_process(_delta: float) -> void:
 			ScoreManager.play_trick_sfx("legendary")
 		
 	
-	
+	#print(diving)
 	## Diving
 	if $heightDetect.is_colliding():
 		height = global_position.y - $heightDetect.get_collision_point().y

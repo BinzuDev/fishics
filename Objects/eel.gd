@@ -31,7 +31,7 @@ func _process(delta: float) -> void:
 			ScoreManager.reset_airspin()
 			
 	
-	print(%Camera3D.fov)
+	#print(%Camera3D.fov)
 	
 	## When fish is on eel
 	if lockFish:

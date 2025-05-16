@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dl0tegipr4hke"]
+[gd_scene load_steps=14 format=3 uid="uid://dl0tegipr4hke"]
 
 [ext_resource type="Script" uid="uid://i64vykvxs4e2" path="res://Objects/Enemy_script.gd" id="1_edmjf"]
 [ext_resource type="Texture2D" uid="uid://uksyye4xv1r2" path="res://Sprites/crab.png" id="2_dnm5c"]
@@ -25,6 +25,50 @@ radius = 0.866071
 random_pitch = 1.2
 streams_count = 1
 stream_0/stream = ExtResource("3_d3xos")
+
+[sub_resource type="Animation" id="Animation_d3xos"]
+resource_name = "RAVE"
+loop_mode = 2
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CrabSprite")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array()
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CrabSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.133333, 0.933333),
+"transitions": PackedFloat32Array(1, 0.784584),
+"update": 0,
+"values": [Vector3(0.36885, 0.357478, 1), Vector3(0.494, 0.478, 1.339)]
+}
+
+[sub_resource type="Animation" id="Animation_yfe2k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CrabSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.36885, 0.357478, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_756aq"]
+_data = {
+&"RAVE": SubResource("Animation_d3xos"),
+&"RESET": SubResource("Animation_yfe2k")
+}
 
 [node name="Enemy" type="RigidBody3D"]
 collision_layer = 16
@@ -98,6 +142,13 @@ debug_color = Color(0.792157, 1, 0.729412, 0.419608)
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_yfe2k")
+
+[node name="AnimationCrab" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_756aq")
+}
+speed_scale = 2.0
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

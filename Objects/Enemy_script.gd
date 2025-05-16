@@ -1,6 +1,9 @@
 class_name enemy
 extends RigidBody3D
 
+@onready var animation_crab : AnimationPlayer = $AnimationCrab
+
+
 var og_position
 var target = 0
 #var fishplayer : player
@@ -34,7 +37,9 @@ func _physics_process(delta: float) -> void:
 		$Area3D.monitoring = false
 		#$CrabSprite.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 	
-	
+	#reset rave
+	if agro:
+		%AnimationCrab.play("RESET")
 
 
 ## Enemy detect
@@ -104,10 +109,22 @@ func _on_bump_body_entered(body: Node3D) -> void:
 		
 		
 		if hp > 0:
-			#trick
-			ScoreManager.give_points(1000, 1, true, "CRAB TOSS")
+			#Audio 
 			$AudioStreamPlayer3D.play()
-			#body.body.func_set_fov()
+			
+			if not body.diving:
+				#trick
+				ScoreManager.give_points(1000, 1, true, "CRAB TOSS")
+				#$AudioStreamPlayer3D.play()
+				#body.body.func_set_fov()
+			
+			#diving pogo
+			if body.diving:
+				print("diving")
+				body.linear_velocity = Vector3.ZERO
+				body.linear_velocity += Vector3(0, 20, 0)
+				ScoreManager.give_points(2000, 2, true, "CRAB POGO")
+			
 			
 		else:
 			ScoreManager.give_points(100, 0, false, "DISRESPECT")

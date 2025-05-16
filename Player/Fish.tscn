@@ -280,6 +280,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.72529e-09, -0.0354262)
 top_level = true
 shape = SubResource("CylinderShape3D_uucyj")
 target_position = Vector3(0, -0.7, 0)
+collision_mask = 17
 
 [node name="RemoteTransformCamera" type="RemoteTransform3D" parent="."]
 remote_path = NodePath("../cameraAnchor")
@@ -307,6 +308,7 @@ update_rotation = false
 [node name="nearFloor" type="RayCast3D" parent="."]
 top_level = true
 target_position = Vector3(0, -1.5, 0)
+collision_mask = 17
 
 [node name="RemoteTransformHeight" type="RemoteTransform3D" parent="."]
 remote_path = NodePath("../heightDetect")
@@ -470,5 +472,5 @@ stream = ExtResource("25_dhdhv")
 max_polyphony = 5
 bus = &"fishsfx"
 
-[connection signal="body_entered" from="." to="." method="checkpoint"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="." to="." method="checkpoint"]

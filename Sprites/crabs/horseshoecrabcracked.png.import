@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bypxo5hwran41"
-path="res://.godot/imported/crabcracked.png-d0bdc513f24889d21422a6dd88a3ce80.ctex"
+uid="uid://cd6q77yg5wjpo"
+path="res://.godot/imported/horseshoecrabcracked.png-1d9f0cb77b5a8aa969a43d49afeb9214.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/crabcracked.png"
-dest_files=["res://.godot/imported/crabcracked.png-d0bdc513f24889d21422a6dd88a3ce80.ctex"]
+source_file="res://Sprites/crabs/horseshoecrabcracked.png"
+dest_files=["res://.godot/imported/horseshoecrabcracked.png-1d9f0cb77b5a8aa969a43d49afeb9214.ctex"]
 
 [params]
 

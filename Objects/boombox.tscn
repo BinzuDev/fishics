@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://d68o86ovw7jn" path="res://Sounds/radio/crabrave.ogg" id="3_i3sl1"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_byss4"]
-radius = 24.0
+radius = 18.1561
 
 [node name="Boombox" type="Sprite3D"]
 texture = ExtResource("1_8gbqa")
@@ -18,7 +18,12 @@ autoplay = true
 max_distance = 30.0
 parameters/looping = true
 
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="."]
+remote_path = NodePath("../RaveArea")
+update_scale = false
+
 [node name="RaveArea" type="Area3D" parent="."]
+top_level = true
 collision_layer = 16
 collision_mask = 17
 

@@ -1,15 +1,19 @@
 class_name enemy
 extends RigidBody3D
 
-@onready var animation_crab : AnimationPlayer = $AnimationCrab
+#rave
+@onready var animation_crab : AnimationPlayer = $AnimationCrab 
+
+enum Enum1 {Regular_Crab, Horse_Shoe}
+@export var enemyType:Enum1
 
 
 var og_position
 var target = 0
-#var fishplayer : player
 var agro : bool = false
 var speed := 2
 var hp := 2
+var shiny :bool = false
 
 
 
@@ -17,6 +21,21 @@ var hp := 2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	og_position = position #stores it's position so it can return to it if it moves
+	
+	
+	#enemy type loads
+	if enemyType == Enum1.Horse_Shoe:
+		$CrabSprite.texture = load("res://Sprites/crabs/horseshoecrab.png")
+	
+	
+	
+	#shiny chance
+	var chance := 0
+	chance = randi_range(1, 100)
+	
+	if chance == 1:
+		$CrabSprite.modulate = Color(0, 1, 1)  # Sets the sprite to blue
+		shiny = true
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -40,6 +59,10 @@ func _physics_process(delta: float) -> void:
 	#reset rave
 	if agro:
 		%AnimationCrab.play("RESET")
+	
+	#ensure ragdoll death
+	if hp <= 0:
+		$CrabSprite.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 
 
 ## Enemy detect
@@ -82,6 +105,25 @@ func _on_area_3d_body_exited(body: Node3D) -> void:
 
 
 func _on_bump_body_entered(body: Node3D) -> void:
+	
+	#horsehoe crabs can only be damaged if diving
+	if enemyType == Enum1.Horse_Shoe and not body.diving:
+		if hp > 0:
+			#Push opposite side
+			var push_direction = -body.linear_velocity.normalized()
+			var push_force = 30.0
+			#
+			body.apply_central_impulse(push_direction * push_force)
+			
+			#Upwards force
+			body.apply_central_impulse((-body.linear_velocity.normalized() + Vector3.UP * 0.5) * push_force)
+			#
+			#"ragdoll" push
+			$CrabSprite.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+			apply_torque(Vector3(0, 10, 0))
+	
+	
+	#regular crab logic
 	if body.linear_velocity.length() < 2 and not body.isTipSpinning:
 		if hp > 0:
 			print("WEAK")
@@ -97,22 +139,37 @@ func _on_bump_body_entered(body: Node3D) -> void:
 			#
 		
 	if body.linear_velocity.length() > 2 or body.isTipSpinning:
-		#player pushing
-		var push_force = 30.0
-		#
-		var push_direction = body.linear_velocity.normalized()
-		self.apply_central_impulse(push_direction * push_force)
 		
-		#"ragdoll"
-		$CrabSprite.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-		apply_torque(Vector3(0, 10, 0))
+		if enemyType == Enum1.Regular_Crab: #regular crab logic
+			#player pushing
+			var push_force = 30.0
+			#
+			var push_direction = body.linear_velocity.normalized()
+			self.apply_central_impulse(push_direction * push_force)
+			
+			#"ragdoll"
+			$CrabSprite.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+			apply_torque(Vector3(0, 10, 0))
+		
+		
+		
 		
 		
 		if hp > 0:
-			#Audio 
-			$AudioStreamPlayer3D.play()
+			#Audio for bumps
 			
-			if not body.diving:
+			if enemyType == Enum1.Horse_Shoe and body.diving:
+				$AudioStreamPlayer3D.play()
+			
+			if enemyType == Enum1.Regular_Crab:
+				$AudioStreamPlayer3D.play()
+			
+			
+			
+			
+			
+			
+			if not body.diving and enemyType == Enum1.Regular_Crab:
 				#trick
 				ScoreManager.give_points(1000, 1, true, "CRAB TOSS")
 				#$AudioStreamPlayer3D.play()
@@ -132,19 +189,40 @@ func _on_bump_body_entered(body: Node3D) -> void:
 			
 			#body.play_trick_sfx("rare")
 		
-		hp -= 1 #minus hp
+		
+		if enemyType == Enum1.Regular_Crab:
+			hp -= 1 #minus hp
+		
+		if enemyType == Enum1.Horse_Shoe and body.diving:
+			hp -= 1 #minus hp
+		
 		
 		
 			#change sprite to dead
 		if hp < 1: 
-			$CrabSprite.modulate = Color(0.5, 0.5, 0.5, 1)
-			
 			#scale collsion shape so carb is flat
 			$CollisionShape3D.scale.z = 0.3 
 			
+			if not shiny:
+				$CrabSprite.modulate = Color(0.5, 0.5, 0.5, 1)
+			elif shiny:
+					$CrabSprite.modulate = Color(0.0, 0.29, 0.47, 1)
+			
+			
+			
 			#crack sprite
-		if hp == 1: 
-			$CrabSprite.texture = load("res://Sprites/crabcracked.png")
+		if hp <= 1: 
+			#stores current sprite name
+			var sprite_name = $CrabSprite.texture.resource_path.get_file().get_basename()
+			var cracked_path = "res://Sprites/crabs/" + sprite_name + "cracked.png"
+			
+			#checks if name exists then changes sprite to sprite name + cracked
+			if ResourceLoader.exists(cracked_path):
+				$CrabSprite.texture = load(cracked_path)
+			
+			
+			
+			
 		
 		
 		

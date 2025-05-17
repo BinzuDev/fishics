@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://dl0tegipr4hke"]
 
 [ext_resource type="Script" uid="uid://i64vykvxs4e2" path="res://Objects/Enemy_script.gd" id="1_edmjf"]
-[ext_resource type="Texture2D" uid="uid://uksyye4xv1r2" path="res://Sprites/crab.png" id="2_dnm5c"]
+[ext_resource type="Texture2D" uid="uid://uksyye4xv1r2" path="res://Sprites/crabs/crab.png" id="2_dnm5c"]
 [ext_resource type="AudioStream" uid="uid://bm8tigdhl3rf2" path="res://Sounds/crabbump.ogg" id="3_d3xos"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_edmjf"]

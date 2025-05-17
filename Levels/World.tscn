@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://c7ygdu4mhaem4"]
+[gd_scene load_steps=80 format=3 uid="uid://c7ygdu4mhaem4"]
 
 [ext_resource type="Texture2D" uid="uid://drw6uhypyo4ey" path="res://Textures/skyrender.png" id="1_hmvop"]
 [ext_resource type="Texture2D" uid="uid://d0lx7l3a52xjm" path="res://Textures/wood.png" id="2_j5go0"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://bbqdwespslc76" path="res://Sprites/barnicles.png" id="13_11qgy"]
 [ext_resource type="PackedScene" uid="uid://biji6soms632" path="res://Objects/skate_park.tscn" id="14_63vwh"]
 [ext_resource type="PackedScene" uid="uid://bf8smqh6dbfvm" path="res://Objects/fricking_awesome_tube.tscn" id="15_myu2g"]
+[ext_resource type="Texture2D" uid="uid://bwjgjk84nbeei" path="res://Sprites/streetsign.png" id="15_wvw3a"]
 [ext_resource type="PackedScene" uid="uid://dekjyfsmafh8k" path="res://Objects/worm.tscn" id="16_e1uki"]
 [ext_resource type="PackedScene" uid="uid://cgsag1mii1t2g" path="res://Objects/surf_board.tscn" id="16_h7041"]
 [ext_resource type="PackedScene" uid="uid://bkt03g6s8240c" path="res://Objects/rocks.tscn" id="17_e1uki"]
@@ -924,6 +925,23 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 9.45022e-13, -3.90799e-14, -2.66454e-15, 1, -4.09461e-17, 7.10543e-15, -5.87568e-15, 1, 0, 0.0535278, 2.86102e-06)
 shape = SubResource("BoxShape3D_w578l")
 
+[node name="streetsign" type="MeshInstance3D" parent="group1"]
+transform = Transform3D(-2.24283e-08, 0.946947, -0.37995, -1.44762e-09, 4.55142, 0.0790505, 0.514169, 5.41208e-08, -1.63511e-08, 10.2522, 4.90199, -11.8157)
+material_override = SubResource("StandardMaterial3D_11qgy")
+material_overlay = ExtResource("5_2uuim")
+mesh = SubResource("CylinderMesh_6r7q6")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="group1/streetsign"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="group1/streetsign/StaticBody3D"]
+transform = Transform3D(1, 9.45022e-13, -3.90799e-14, -2.66454e-15, 1, -4.09461e-17, 7.10543e-15, -5.87568e-15, 1, 0, 0.0535278, 2.86102e-06)
+shape = SubResource("BoxShape3D_w578l")
+
+[node name="Sprite3D" type="Sprite3D" parent="group1/streetsign"]
+transform = Transform3D(0.0178805, -0.00149047, 1.02323, 0.0141063, 0.0858247, 0.0173822, -0.812185, 0.00145777, 0.0228287, 0.560671, 0.874672, -0.222008)
+texture = ExtResource("15_wvw3a")
+
 [node name="pole2" type="MeshInstance3D" parent="group1"]
 transform = Transform3D(-0.139089, 0.235637, -0.373099, -0.312643, 3.55743, 0.0820562, 0.383769, 2.98351, -0.0683735, -12.5529, 14.4055, -53.3846)
 material_override = SubResource("StandardMaterial3D_11qgy")
@@ -963,7 +981,7 @@ transform = Transform3D(0.287665, -0.879139, -0.379951, 0.93709, 0.34029, -0.077
 transform = Transform3D(-4.37114e-08, 0.999998, 0, -1, -4.37113e-08, 0, 0, 0, 0.999998, 2.68961, 7.51986, -25.3029)
 
 [node name="BoostRing25" parent="group1" instance=ExtResource("9_2uuim")]
-transform = Transform3D(0.432488, -0.458582, 0.776304, -0.873577, 1.02303e-06, 0.486679, -0.223184, -0.888648, -0.400607, 26.0747, 0.843775, -25.3029)
+transform = Transform3D(-0.143953, 0.95525, -0.258394, -0.873577, 8.48976e-07, 0.486678, 0.464902, 0.295788, 0.834486, 26.0747, 0.843775, -25.3029)
 strength = 12.0
 rotating = true
 
@@ -2023,7 +2041,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.093689, -2.05035, -1.43271
 shape = SubResource("BoxShape3D_hqwgh")
 
 [node name="Basketballhoop3" parent="highUpSection" instance=ExtResource("11_vbdqq")]
-transform = Transform3D(-3.93403e-08, 0, -0.9, 0, 0.9, 0, 0.9, 0, -3.93403e-08, 259.422, 82.323, -12.4131)
+transform = Transform3D(-3.93403e-08, 0, -0.9, 0, 0.9, 0, 0.9, 0, -3.93403e-08, 259.422, 87.9788, -12.4131)
 
 [node name="Basketballhoop4" parent="highUpSection" instance=ExtResource("11_vbdqq")]
 transform = Transform3D(-3.93403e-08, 0, -0.9, 0, 0.9, 0, 0.9, 0, -3.93403e-08, 259.415, 53.0882, -17.7734)
@@ -2297,6 +2315,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 102.401, 21.0554, -31.0768)
 
 [node name="Enemy7" parent="." instance=ExtResource("21_46o8p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.0828, 12.7282, -17.3495)
+enemyType = 1
 
 [node name="Enemy8" parent="." instance=ExtResource("21_46o8p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 102.411, 21.0554, -22.8349)
@@ -2837,3 +2856,67 @@ texture = ExtResource("6_53g8k")
 
 [node name="Boombox" parent="." instance=ExtResource("31_wvw3a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60.6948, 0.64544, -22.2361)
+audio_file = "uid://d68o86ovw7jn"
+
+[node name="Boombox2" parent="." instance=ExtResource("31_wvw3a")]
+transform = Transform3D(0.681398, 0, 0.731913, 0, 1, 0, -0.731913, 0, 0.681398, 23.6563, 33.4436, 62.3394)
+audio_file = "uid://7u4db4jpeis3"
+
+[node name="streetsign" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.503626, 0.190783, -0.0765489, 4.65031e-09, 4.55142, 0.0790505, 0.10359, 0.92753, -0.372159, 42.3593, 6.38038, -9.28557)
+material_override = SubResource("StandardMaterial3D_11qgy")
+material_overlay = ExtResource("5_2uuim")
+mesh = SubResource("CylinderMesh_6r7q6")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="streetsign"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="streetsign/StaticBody3D"]
+transform = Transform3D(1, 9.45022e-13, -3.90799e-14, -2.66454e-15, 1, -4.09461e-17, 7.10543e-15, -5.87568e-15, 1, 0, 0.0535278, 2.86102e-06)
+shape = SubResource("BoxShape3D_w578l")
+
+[node name="Sprite3D" type="Sprite3D" parent="streetsign"]
+transform = Transform3D(-0.225728, -0.00143217, 0.983186, 0.0135542, 0.085817, 0.0227111, -0.780402, 0.00190473, -0.283988, 0.560677, 0.874672, -0.222008)
+texture = ExtResource("15_wvw3a")
+
+[node name="streetsign3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.127095, 0.917562, -0.368159, 4.65031e-09, 4.55142, 0.0790505, 0.498213, -0.234071, 0.0939179, 51.3231, 13.6303, -9.28557)
+material_override = SubResource("StandardMaterial3D_11qgy")
+material_overlay = ExtResource("5_2uuim")
+mesh = SubResource("CylinderMesh_6r7q6")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="streetsign3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="streetsign3/StaticBody3D"]
+transform = Transform3D(1, 9.45022e-13, -3.90799e-14, -2.66454e-15, 1, -4.09461e-17, 7.10543e-15, -5.87568e-15, 1, 0, 0.0535278, 2.86102e-06)
+shape = SubResource("BoxShape3D_w578l")
+
+[node name="Sprite3D" type="Sprite3D" parent="streetsign3"]
+transform = Transform3D(-0.156079, 0.00660095, 1.00148, 0.0446472, 0.0855242, -0.0690977, -0.796122, 0.00350213, -0.200213, 0.560669, 0.874672, -0.222008)
+texture = ExtResource("15_wvw3a")
+
+[node name="Sprite3D3" type="Sprite3D" parent="streetsign3"]
+transform = Transform3D(0.720648, -0.000688575, 0.472716, 0.00651686, 0.0858472, 0.00200933, -0.375217, 0.000168596, 0.90794, 1.09004, 0.148155, 0.0837021)
+texture = ExtResource("15_wvw3a")
+
+[node name="Sprite3D2" type="Sprite3D" parent="streetsign3"]
+transform = Transform3D(-0.282813, -0.00237991, 0.9592, -0.0414015, 0.0857337, 0.010867, -0.76057, -0.00378196, -0.357263, 0.6828, 0.445052, -0.283684)
+texture = ExtResource("15_wvw3a")
+
+[node name="streetsign2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.146634, 2.17363, -0.324709, -0.0439867, 4.09976, 0.179936, 0.49085, -0.281945, 0.113127, 253.106, 89.8869, -14.6361)
+material_override = SubResource("StandardMaterial3D_11qgy")
+material_overlay = ExtResource("5_2uuim")
+mesh = SubResource("CylinderMesh_6r7q6")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="streetsign2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="streetsign2/StaticBody3D"]
+transform = Transform3D(1, 9.45022e-13, -3.90799e-14, -2.66454e-15, 1, -4.09461e-17, 7.10543e-15, -5.87568e-15, 1, 0, 0.0535278, 2.86102e-06)
+shape = SubResource("BoxShape3D_w578l")
+
+[node name="Sprite3D" type="Sprite3D" parent="streetsign2"]
+transform = Transform3D(0.323818, -0.00168026, 0.938608, -0.0176727, 0.0857891, 0.0315114, -0.744978, -0.00276544, 0.407235, 0.794647, 0.874355, -0.203674)
+texture = ExtResource("15_wvw3a")

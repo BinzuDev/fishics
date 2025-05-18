@@ -64,11 +64,11 @@ process_priority = 5
 process_physics_priority = 5
 rotation_order = 3
 collision_layer = 0
-collision_mask = 2
+collision_mask = 18
 script = ExtResource("1_5o6kl")
 
 [node name="ring" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1.82021e-07, -1.7, -2.51016e-07, -1.6624, 1.25509e-07, 0.355479, -0.355479, 2.83531e-07, -1.6624, 0, 0, 0)
+transform = Transform3D(1.27325e-07, -1.7, -2.28574e-08, -0.151378, 1.14288e-08, -1.69323, 1.69323, 1.28856e-07, -0.151378, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_75vsp")
 mesh = SubResource("TorusMesh_3ffwv")
 

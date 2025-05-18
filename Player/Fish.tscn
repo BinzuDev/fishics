@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bwb5dddkenrbh"]
+[gd_scene load_steps=45 format=3 uid="uid://bwb5dddkenrbh"]
 
 [ext_resource type="Script" uid="uid://d08pu76ylr3bv" path="res://Player/Fish_script.gd" id="1_8ijwk"]
 [ext_resource type="Texture2D" uid="uid://cgy362847wh6a" path="res://Sprites/fish.png" id="2_dhdhv"]
@@ -62,6 +62,14 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.223301, 0.0156658), 0.0, 0.0, 
 point_count = 2
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dhdhv"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_40mal"]
+height = 3.0
+radius = 3.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_mdn8s"]
+height = 60.0
+radius = 5.5
 
 [sub_resource type="LabelSettings" id="LabelSettings_nmgcd"]
 font_size = 30
@@ -373,11 +381,6 @@ target_position = Vector3(0, 0, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.24)
 target_position = Vector3(0, 0, -0.3)
 
-[node name="dead_fish" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0)
-position = Vector2(963, 515)
-texture = ExtResource("2_dhdhv")
-
 [node name="detectCamSwitch" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 8
@@ -385,9 +388,32 @@ collision_mask = 8
 [node name="CollisionShape3D" type="CollisionShape3D" parent="detectCamSwitch"]
 shape = SubResource("SphereShape3D_dhdhv")
 
+[node name="RemoteTransformHoming" type="RemoteTransform3D" parent="."]
+remote_path = NodePath("../homing")
+update_rotation = false
+update_scale = false
+
+[node name="homing" type="Area3D" parent="."]
+top_level = true
+collision_layer = 0
+collision_mask = 16
+
+[node name="debug" type="RayCast3D" parent="homing"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+collision_mask = 16
+
+[node name="top" type="CollisionShape3D" parent="homing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)
+shape = SubResource("CylinderShape3D_40mal")
+debug_color = Color(0, 0.6, 0.701961, 1)
+
+[node name="bottom" type="CollisionShape3D" parent="homing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -34, 0)
+shape = SubResource("CylinderShape3D_mdn8s")
+debug_color = Color(0, 0.6, 0.701961, 1)
+
 [node name="debugLabel" type="Label" parent="."]
 unique_name_in_owner = true
-visible = false
 offset_left = 8.0
 offset_top = 106.0
 offset_right = 274.0
@@ -395,9 +421,24 @@ offset_bottom = 353.0
 text = "debug info"
 label_settings = SubResource("LabelSettings_nmgcd")
 
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="dead_fish" type="Sprite2D" parent="CenterContainer/Control"]
+unique_name_in_owner = true
+texture = ExtResource("2_dhdhv")
+
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -472,5 +513,5 @@ stream = ExtResource("25_dhdhv")
 max_polyphony = 5
 bus = &"fishsfx"
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="." to="." method="checkpoint"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

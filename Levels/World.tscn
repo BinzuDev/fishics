@@ -36,13 +36,13 @@
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_53g8k"]
 panorama = ExtResource("1_hmvop")
 
-[sub_resource type="Sky" id="Sky_jsk3o"]
+[sub_resource type="Sky" id="Sky_wvw3a"]
 sky_material = SubResource("PanoramaSkyMaterial_53g8k")
 
 [sub_resource type="Environment" id="Environment_v72nc"]
 background_mode = 2
 background_energy_multiplier = 1.6
-sky = SubResource("Sky_jsk3o")
+sky = SubResource("Sky_wvw3a")
 fog_mode = 1
 fog_light_color = Color(0.5225, 0.5795, 0.95, 1)
 fog_density = 1.0
@@ -285,7 +285,7 @@ directional_shadow_fade_start = 0.647
 environment = SubResource("Environment_v72nc")
 
 [node name="fish" parent="." instance=ExtResource("5_m3j4o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5018, 30.2728, 66.9178)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.0239, 30.8277, 62.7224)
 gravity_scale = 1.5
 
 [node name="invisible wall" type="StaticBody3D" parent="."]
@@ -981,7 +981,7 @@ transform = Transform3D(0.287665, -0.879139, -0.379951, 0.93709, 0.34029, -0.077
 transform = Transform3D(-4.37114e-08, 0.999998, 0, -1, -4.37113e-08, 0, 0, 0, 0.999998, 2.68961, 7.51986, -25.3029)
 
 [node name="BoostRing25" parent="group1" instance=ExtResource("9_2uuim")]
-transform = Transform3D(-0.25235, -0.855067, -0.452959, -0.873577, 1.37113e-06, 0.486678, -0.416144, 0.51851, -0.746969, 26.0747, 0.843775, -25.3029)
+transform = Transform3D(-0.0405112, -0.996526, -0.0727136, -0.873577, 1.48716e-06, 0.486678, -0.48499, 0.0832372, -0.870544, 26.0747, 0.843775, -25.3029)
 strength = 12.0
 rotating = true
 
@@ -1867,6 +1867,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1175, -0.03832, 4.59871)
 
 [node name="Enemy5" parent="group2/crab cave" instance=ExtResource("21_46o8p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.16621, -0.03832, -0.0130386)
+enemyType = 1
 
 [node name="Enemy6" parent="group2/crab cave" instance=ExtResource("21_46o8p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.91945, -0.03832, 6.16671)
@@ -2325,6 +2326,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 107.749, 21.0554, -28.3292)
 
 [node name="Enemy10" parent="." instance=ExtResource("21_46o8p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.9293, 12.7282, -17.3495)
+
+[node name="Enemy11" parent="." instance=ExtResource("21_46o8p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.7713, 0.638682, -3.80544)
 
 [node name="tutoriwall" type="MeshInstance3D" parent="."]
 transform = Transform3D(-7.73341e-09, 0, -6.2761, 0, 3.62261, 0, 0.17692, 0, -2.74337e-07, -13.1156, 22.2604, -53.3321)

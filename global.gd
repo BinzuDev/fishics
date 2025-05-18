@@ -12,7 +12,7 @@ func toggle_pause():
 
 
 func _physics_process(_delta):
-	process_mode =Node.PROCESS_MODE_ALWAYS
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	gameTimer += 1
 	if Input.is_action_just_pressed("pause"):
 		toggle_pause()

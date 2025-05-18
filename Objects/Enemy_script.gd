@@ -165,29 +165,31 @@ func _on_bump_body_entered(body: Node3D) -> void:
 				$AudioStreamPlayer3D.play()
 			
 			
-			
-			
-			
-			
 			if not body.diving and enemyType == Enum1.Regular_Crab:
 				#trick
 				ScoreManager.give_points(1000, 1, true, "CRAB TOSS")
 				#$AudioStreamPlayer3D.play()
 				#body.body.func_set_fov()
 			
-			#diving pogo
-			if body.diving:
-				print("diving")
-				body.linear_velocity = Vector3.ZERO
-				body.linear_velocity += Vector3(0, 20, 0)
-				ScoreManager.give_points(2000, 2, true, "CRAB POGO")
-			
-			
 		else:
 			ScoreManager.give_points(100, 0, false, "DISRESPECT")
 			
-			
 			#body.play_trick_sfx("rare")
+		
+		#diving pogo
+		if body.diving:
+			body.linear_velocity.x *= 0.4
+			body.linear_velocity.y = 20
+			body.linear_velocity.z *= 0.4
+			
+			if $FloorCast/airshot.is_colliding():
+				if hp > 0:
+					ScoreManager.give_points(2000, 2, true, "HOMING ATTACK")
+			else:
+				ScoreManager.give_points(0, 5, true, "HOMING AIRSHOT")
+				ScoreManager.play_trick_sfx("rare")
+				 
+		
 		
 		
 		if enemyType == Enum1.Regular_Crab:

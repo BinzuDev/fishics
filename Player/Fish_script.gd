@@ -141,7 +141,7 @@ func _physics_process(_delta: float) -> void:
 			ScoreManager.play_trick_sfx("legendary")
 		
 	
-	#print(diving)
+	
 	## Diving
 	if $heightDetect.is_colliding():
 		height = global_position.y - $heightDetect.get_collision_point().y
@@ -149,7 +149,9 @@ func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("dive"):
 		var newSpd = clamp(height*-1.5 -10, -75, -10) 
 		linear_velocity.y = min(newSpd, linear_velocity.y)
-		print("height: ", height, " speed: ", newSpd, " points: ", 100*height )
+		linear_velocity.x *= 0.5
+		linear_velocity.z *= 0.5
+		#print("height: ", height, " speed: ", newSpd, " points: ", 100*height )
 		ScoreManager.give_points(100*height, 0, false, "DIVE")
 		if height > 10:
 			ScoreManager.give_points(0, 0, true) #only reset the timer if you're high up enough
@@ -157,8 +159,32 @@ func _physics_process(_delta: float) -> void:
 		if newSpd == -75:
 			ScoreManager.give_points(0, 10, true, "HIGH DIVE") #diving at capped height
 			ScoreManager.play_trick_sfx("legendary")
-		
+			
 		diving = true #DIVING VARIABLE
+		
+		# HOMING ATTACK
+		if $homing.has_overlapping_bodies():
+			var crabs = $homing.get_overlapping_bodies()
+			
+			var allDead := true
+			for crab in crabs:    
+				if crab.hp > 0:
+					allDead = false
+			
+			##Find which crab is the closest
+			var closest = crabs[0]
+			for crab in crabs:
+				if global_position.distance_to(crab.global_position) < global_position.distance_to(closest.global_position):
+					if allDead == false: #if some are alive
+						if crab.hp > 0: #Prioritise alive crabs
+							closest = crab
+					else:
+						closest = crab
+			var direction = global_position.direction_to(closest.global_position)
+			linear_velocity = direction * 50
+			$homing/debug.target_position = direction
+			
+		
 	
 	if get_contact_count() >= 1:
 		diving = false
@@ -304,8 +330,8 @@ func _physics_process(_delta: float) -> void:
 	$pivotLower.visible = true
 	$posing.visible = false
 	$flash.visible = false
-	$dead_fish.modulate.a -= 0.05
-	$dead_fish.scale -= Vector2(0.01, 0.01)
+	%dead_fish.modulate.a -= 0.05
+	%dead_fish.scale -= Vector2(0.01, 0.01)
 	fishCooldown += 1
 	if Input.is_action_just_pressed("FIsh"):
 		$FIsh.play()
@@ -321,9 +347,9 @@ func _physics_process(_delta: float) -> void:
 			$tauntAnimation.play("taunt")
 		else:
 			ScoreManager.give_points(100, 0, false, "FISH!")
-			$dead_fish.visible = true
-			$dead_fish.modulate.a = 1
-			$dead_fish.scale = Vector2(1.2, 1.2)
+			%dead_fish.visible = true
+			%dead_fish.modulate.a = 1
+			%dead_fish.scale = Vector2(1.2, 1.2)
 		fishCooldown = 0
 	
 	
@@ -343,7 +369,8 @@ func _physics_process(_delta: float) -> void:
 	%debugLabel.text = str(
 	"fov: ", %cam.fov, "\n",
 	"height: ", height, "\n",
-	"linear velocity: ", linear_velocity.length(), "\n",
+	"linear velocity: ", linear_velocity, "\n",
+	"linear length: ", linear_velocity.length(), "\n",
 	"angular velocity: ", angular_velocity, "\n",
 	"angular length: ", angular_velocity.length(), "\n",
 	)

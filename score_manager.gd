@@ -168,9 +168,9 @@ func _physics_process(_delta: float) -> void:
 	var strenght : int = 2
 	if styleRank == PSSS: #makes effect even strong on final rank
 		strenght = 4               #rotates faster at higher ranks
-	%rankBG.position.x = -281 + sin(rankAnimTimer*styleRank*-1)*strenght
+	%rankBG.position.x = -257 + sin(rankAnimTimer*styleRank*-1)*strenght
 	%rankBG.position.y = 139 + cos(rankAnimTimer*styleRank*-1)*strenght
-	%rank.position.x = -283 + cos(rankAnimTimer*styleRank)*strenght
+	%rank.position.x = -259 + cos(rankAnimTimer*styleRank)*strenght
 	%rank.position.y = 142 + sin(rankAnimTimer*styleRank)*strenght
 	
 	#Instant rank up for testing

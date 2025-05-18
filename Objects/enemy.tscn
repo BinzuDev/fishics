@@ -100,6 +100,10 @@ update_rotation = false
 [node name="FloorCast" type="RayCast3D" parent="."]
 top_level = true
 
+[node name="airshot" type="RayCast3D" parent="FloorCast"]
+target_position = Vector3(0, -4, 0)
+debug_shape_custom_color = Color(0.976938, 0.280853, 1, 1)
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 layers = 3

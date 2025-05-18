@@ -1,0 +1,219 @@
+[gd_scene load_steps=13 format=3 uid="uid://pw7e5mau5ey5"]
+
+[ext_resource type="Texture2D" uid="uid://drw6uhypyo4ey" path="res://Textures/skyrender.png" id="1_cdwid"]
+[ext_resource type="PackedScene" uid="uid://bwb5dddkenrbh" path="res://Player/Fish.tscn" id="2_4xlq2"]
+[ext_resource type="Material" uid="uid://ceeuporpmp8lt" path="res://Textures/sand_material.tres" id="3_3poln"]
+[ext_resource type="Material" uid="uid://b8pdw50ywdhkt" path="res://Shaders/water_shader_material.tres" id="4_vnqya"]
+[ext_resource type="PackedScene" uid="uid://dl0tegipr4hke" path="res://Objects/enemy.tscn" id="5_cqpc2"]
+[ext_resource type="Script" uid="uid://budr7hv3mbcbu" path="res://Objects/camera_controller.gd" id="6_fbcg4"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1c1wt"]
+panorama = ExtResource("1_cdwid")
+
+[sub_resource type="Sky" id="Sky_jsk3o"]
+sky_material = SubResource("PanoramaSkyMaterial_1c1wt")
+
+[sub_resource type="Environment" id="Environment_2ilbj"]
+background_mode = 2
+background_energy_multiplier = 1.6
+sky = SubResource("Sky_jsk3o")
+fog_mode = 1
+fog_light_color = Color(0.5225, 0.5795, 0.95, 1)
+fog_density = 1.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+volumetric_fog_albedo = Color(0.307671, 0.802774, 1, 1)
+volumetric_fog_emission = Color(0.665666, 0.0532141, 0.675798, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_y04ds"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8amj1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_epcd0"]
+size = Vector3(135.191, 139.396, 48.401)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0.998027, 0.0627905, 0, -0.0627905, 0.998027, 1, 4.36251e-08, 2.74466e-09, 0, 13.966, 0)
+shadow_enabled = true
+shadow_normal_bias = 6.028
+directional_shadow_fade_start = 0.647
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2ilbj")
+
+[node name="fish" parent="." instance=ExtResource("2_4xlq2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 134.505, 16.312, 85.1762)
+gravity_scale = 1.5
+
+[node name="crabTestArea" type="Node3D" parent="."]
+
+[node name="Platform14" type="MeshInstance3D" parent="crabTestArea"]
+transform = Transform3D(-6.82472e-07, 0, -20.1067, 0, 1.8051, 0, 15.6131, 0, -8.78891e-07, 134.034, 11.89, 86.6651)
+material_override = ExtResource("3_3poln")
+material_overlay = ExtResource("4_vnqya")
+mesh = SubResource("BoxMesh_y04ds")
+skeleton = NodePath("../..")
+metadata/_edit_group_ = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="crabTestArea/Platform14"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="crabTestArea/Platform14/StaticBody3D"]
+shape = SubResource("BoxShape3D_8amj1")
+
+[node name="Platform16" type="MeshInstance3D" parent="crabTestArea"]
+transform = Transform3D(-6.82472e-07, 0, -48.6016, 0, 1.8051, 0, 15.6131, 0, -2.12444e-06, 227.219, -6.55974, 86.6651)
+material_override = ExtResource("3_3poln")
+material_overlay = ExtResource("4_vnqya")
+mesh = SubResource("BoxMesh_y04ds")
+skeleton = NodePath("../..")
+metadata/_edit_group_ = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="crabTestArea/Platform16"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="crabTestArea/Platform16/StaticBody3D"]
+shape = SubResource("BoxShape3D_8amj1")
+
+[node name="Platform15" type="MeshInstance3D" parent="crabTestArea"]
+transform = Transform3D(-4.55289e-06, 0, -40.1626, 0, 1.8051, 0, 104.158, 0, -1.75556e-06, 132.513, -1.31891, 53.1898)
+material_override = ExtResource("3_3poln")
+material_overlay = ExtResource("4_vnqya")
+mesh = SubResource("BoxMesh_y04ds")
+skeleton = NodePath("../..")
+metadata/_edit_group_ = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="crabTestArea/Platform15"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="crabTestArea/Platform15/StaticBody3D"]
+shape = SubResource("BoxShape3D_8amj1")
+
+[node name="Enemy" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 134.293, 0.614754, 62.2596)
+
+[node name="Enemy2" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 134.293, 0.614754, 58.4625)
+
+[node name="Enemy3" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 132.052, 0.614754, 60.6179)
+
+[node name="Enemy4" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 137.429, 0.614753, 60.3115)
+
+[node name="Enemy5" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 135.647, 0.614753, 60.6246)
+
+[node name="Enemy6" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 132.177, 0.614753, 58.4102)
+
+[node name="Enemy7" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 136.717, 0.614753, 57.9367)
+
+[node name="Enemy8" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 134.586, 0.614753, 56.7211)
+
+[node name="Enemy9" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 132.221, 0.614753, 56.2688)
+
+[node name="Enemy10" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 136.681, 0.614753, 55.903)
+
+[node name="Enemy11" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 133.726, 0.614753, 53.8241)
+
+[node name="Enemy12" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 136.287, 0.614753, 52.8054)
+
+[node name="Enemy13" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 134.047, 0.614752, 50.4384)
+
+[node name="Enemy14" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 130.17, 0.614753, 49.8972)
+
+[node name="Enemy15" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 126.419, 0.614753, 55.1666)
+
+[node name="Enemy16" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 130.101, 0.614753, 60.4451)
+
+[node name="Enemy17" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128.925, 0.614752, 55.4745)
+
+[node name="Enemy18" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 126.896, 0.614753, 51.2071)
+
+[node name="Enemy19" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 131.69, 0.614754, 46.3699)
+
+[node name="Enemy20" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 137.927, 0.614754, 49.1622)
+
+[node name="Enemy21" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140.398, 0.614754, 54.6036)
+
+[node name="Enemy22" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140.7, 0.614754, 59.8198)
+
+[node name="Enemy23" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140.7, 0.614754, 59.8198)
+
+[node name="Enemy24" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 135.409, 0.614753, 69.4453)
+
+[node name="Enemy33" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 148.294, 28.1147, 87.1503)
+
+[node name="Enemy34" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 154.402, 29.9048, 87.1347)
+
+[node name="Enemy35" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160.013, 32.2324, 87.1503)
+
+[node name="Enemy36" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 165.474, 37.0199, 87.1503)
+
+[node name="Enemy37" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 173.261, 40.1199, 87.1503)
+
+[node name="Enemy38" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180.505, 44.494, 87.1503)
+
+[node name="Enemy39" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 190.571, 50.3465, 87.1503)
+
+[node name="Enemy40" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 203.539, -5.03887, 87.1503)
+
+[node name="Enemy32" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140.457, 0.614753, 69.4453)
+
+[node name="Enemy25" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140.589, 0.614754, 56.9238)
+
+[node name="Enemy26" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 130.579, 0.614754, 52.7627)
+
+[node name="Enemy27" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 134.746, 0.614754, 46.1231)
+
+[node name="Enemy28" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 141.052, 0.614754, 51.4351)
+
+[node name="Enemy29" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140.289, 0.614754, 47.486)
+
+[node name="Enemy30" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 133.599, 0.614754, 48.8214)
+
+[node name="Enemy31" parent="crabTestArea" instance=ExtResource("5_cqpc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 125.454, 0.614754, 45.0438)
+
+[node name="CameraController" type="Area3D" parent="crabTestArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 136.067, 0, 76.3045)
+script = ExtResource("6_fbcg4")
+newCameraAngle = Vector3(-35, 0, 0)
+metadata/_custom_type_script = "uid://budr7hv3mbcbu"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="crabTestArea/CameraController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.6552, 10.5425, -5.77704)
+shape = SubResource("BoxShape3D_epcd0")

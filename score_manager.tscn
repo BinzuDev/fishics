@@ -1,7 +1,6 @@
-[gd_scene load_steps=77 format=3 uid="uid://bf4od5ihf5y78"]
+[gd_scene load_steps=76 format=3 uid="uid://bf4od5ihf5y78"]
 
 [ext_resource type="Script" uid="uid://2quft78r0yym" path="res://score_manager.gd" id="1_vublb"]
-[ext_resource type="Texture2D" uid="uid://drbikn5ifimak" path="res://Sprites/UI/image.png" id="2_arc6k"]
 [ext_resource type="Texture2D" uid="uid://cung8p46bqyev" path="res://Sprites/UI/spin_meter_white.png" id="3_uvms0"]
 [ext_resource type="FontFile" uid="uid://hsdppwfineel" path="res://Fonts/SegoeUIBlack.ttf" id="4_bfd2b"]
 [ext_resource type="Texture2D" uid="uid://brk5f6m6r7rwt" path="res://Sprites/UI/fishrank_background.png" id="5_1x5f8"]
@@ -396,25 +395,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="splashScreen" type="TextureRect" parent="UI"]
-visible = false
-z_index = 10
-texture_filter = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_arc6k")
-
-[node name="MarginContainer" type="MarginContainer" parent="UI"]
-layout_mode = 1
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_constants/margin_left = 28
-theme_override_constants/margin_top = 10
-
 [node name="airSpin" type="Control" parent="UI"]
 layout_mode = 1
 anchors_preset = 8
@@ -562,20 +542,29 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
-[node name="marginRank" type="MarginContainer" parent="UI"]
+[node name="RankAnchor" type="Control" parent="UI"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = 15.0
-offset_right = 15.0
+offset_left = -1920.0
+offset_right = -1920.0
 grow_horizontal = 0
 
-[node name="rankBG" type="Sprite2D" parent="UI/marginRank"]
+[node name="marginRank" type="MarginContainer" parent="UI/RankAnchor"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1935.0
+offset_right = 1935.0
+grow_horizontal = 0
+
+[node name="rankBG" type="Sprite2D" parent="UI/RankAnchor/marginRank"]
 unique_name_in_owner = true
 show_behind_parent = true
 texture_filter = 1
-position = Vector2(-283, 142)
+position = Vector2(-259, 142)
 rotation = 0.261799
 scale = Vector2(2.5, 2.5)
 skew = -0.261799
@@ -583,7 +572,7 @@ texture = ExtResource("5_1x5f8")
 vframes = 8
 frame = 7
 
-[node name="scoreBG" type="Label" parent="UI/marginRank/rankBG"]
+[node name="scoreBG" type="Label" parent="UI/RankAnchor/marginRank/rankBG"]
 unique_name_in_owner = true
 show_behind_parent = true
 offset_left = -119.0
@@ -593,7 +582,7 @@ offset_bottom = 77.0
 text = "0000000000"
 label_settings = SubResource("LabelSettings_5htxl")
 
-[node name="StyleBarProgressBG" type="Sprite2D" parent="UI/marginRank/rankBG"]
+[node name="StyleBarProgressBG" type="Sprite2D" parent="UI/RankAnchor/marginRank/rankBG"]
 unique_name_in_owner = true
 modulate = Color(0, 0, 0, 0.509804)
 show_behind_parent = true
@@ -602,10 +591,10 @@ scale = Vector2(208, 1)
 texture = ExtResource("6_r4nh4")
 offset = Vector2(0.5, 0)
 
-[node name="rank" type="Sprite2D" parent="UI/marginRank"]
+[node name="rank" type="Sprite2D" parent="UI/RankAnchor/marginRank"]
 unique_name_in_owner = true
 texture_filter = 1
-position = Vector2(-283, 142)
+position = Vector2(-259, 142)
 rotation = 0.261799
 scale = Vector2(2.5, 2.5)
 skew = -0.261799
@@ -613,7 +602,7 @@ texture = ExtResource("7_lu126")
 vframes = 8
 frame = 7
 
-[node name="score" type="Label" parent="UI/marginRank/rank"]
+[node name="score" type="Label" parent="UI/RankAnchor/marginRank/rank"]
 unique_name_in_owner = true
 show_behind_parent = true
 offset_left = -122.0
@@ -623,7 +612,7 @@ offset_bottom = 80.0
 text = "0000000000"
 label_settings = SubResource("LabelSettings_2ysk2")
 
-[node name="styleBarUnder" type="Sprite2D" parent="UI/marginRank/rank"]
+[node name="styleBarUnder" type="Sprite2D" parent="UI/RankAnchor/marginRank/rank"]
 visible = false
 modulate = Color(0, 0, 0, 1)
 show_behind_parent = true
@@ -632,7 +621,7 @@ scale = Vector2(208, 1)
 texture = ExtResource("6_r4nh4")
 offset = Vector2(0.5, 0)
 
-[node name="StyleBarProgress" type="Sprite2D" parent="UI/marginRank/rank"]
+[node name="StyleBarProgress" type="Sprite2D" parent="UI/RankAnchor/marginRank/rank"]
 unique_name_in_owner = true
 show_behind_parent = true
 position = Vector2(-121, 28)
@@ -640,7 +629,7 @@ scale = Vector2(208, 1)
 texture = ExtResource("6_r4nh4")
 offset = Vector2(0.5, 0)
 
-[node name="rankAnim" type="AnimationPlayer" parent="UI/marginRank"]
+[node name="rankAnim" type="AnimationPlayer" parent="UI/RankAnchor/marginRank"]
 unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_ql6v6")

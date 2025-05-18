@@ -42,7 +42,7 @@ func _process(_delta: float) -> void:
 
 
 func _on_body_entered(body: Node3D) -> void:
-	if body is player:
+	if body is RigidBody3D:
 		
 		
 		
@@ -60,7 +60,7 @@ func _on_body_entered(body: Node3D) -> void:
 		body.apply_impulse(distance*3)
 		
 		ScoreManager.reset_airspin()
-		if body.lastUsedBoost != self:
+		if body is player and body.lastUsedBoost != self:
 			body.lastUsedBoost = self
 			ScoreManager.give_points(500, 1, true, "BOOST")
 			ScoreManager.play_trick_sfx("rare")

@@ -234,6 +234,7 @@ streams_count = 1
 stream_0/stream = ExtResource("6_t0nqp")
 
 [node name="fish" type="RigidBody3D" groups=["player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0160396, 9.53674e-07, -0.0210142)
 collision_layer = 2
 collision_mask = 21
 mass = 1.5
@@ -298,7 +299,7 @@ remote_path = NodePath("../floorDetection")
 update_rotation = false
 
 [node name="floorDetection" type="ShapeCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.72529e-09, -0.0354262)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0160396, 9.49949e-07, -0.0564404)
 top_level = true
 shape = SubResource("CylinderShape3D_uucyj")
 target_position = Vector3(0, -0.7, 0)
@@ -311,6 +312,7 @@ update_scale = false
 
 [node name="cameraAnchor" type="Node3D" parent="."]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0160396, 9.53674e-07, -0.0210142)
 top_level = true
 
 [node name="camMove" type="Node3D" parent="cameraAnchor"]
@@ -328,6 +330,7 @@ remote_path = NodePath("../nearFloor")
 update_rotation = false
 
 [node name="nearFloor" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0160396, 9.53674e-07, -0.0210142)
 top_level = true
 target_position = Vector3(0, -1.5, 0)
 collision_mask = 17
@@ -337,6 +340,7 @@ remote_path = NodePath("../heightDetect")
 update_rotation = false
 
 [node name="heightDetect" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0160396, 9.53674e-07, -0.0210142)
 top_level = true
 target_position = Vector3(0, -150, 0)
 
@@ -408,6 +412,7 @@ update_rotation = false
 update_scale = false
 
 [node name="homing" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0160396, 9.53674e-07, -0.0210142)
 top_level = true
 collision_layer = 0
 collision_mask = 32
@@ -563,5 +568,5 @@ stream = ExtResource("25_dhdhv")
 max_polyphony = 5
 bus = &"fishsfx"
 
-[connection signal="body_entered" from="." to="." method="checkpoint"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="." to="." method="checkpoint"]

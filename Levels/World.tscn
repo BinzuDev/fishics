@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://c7ygdu4mhaem4"]
+[gd_scene load_steps=87 format=3 uid="uid://c7ygdu4mhaem4"]
 
 [ext_resource type="Texture2D" uid="uid://drw6uhypyo4ey" path="res://Textures/skyrender.png" id="1_hmvop"]
 [ext_resource type="Texture2D" uid="uid://d0lx7l3a52xjm" path="res://Textures/wood.png" id="2_j5go0"]
@@ -33,6 +33,9 @@
 [ext_resource type="PackedScene" uid="uid://d003wfuaw73ku" path="res://Objects/eel.tscn" id="31_exl13"]
 [ext_resource type="PackedScene" uid="uid://uo7r1md5qd4y" path="res://Objects/boombox.tscn" id="31_wvw3a"]
 [ext_resource type="PackedScene" uid="uid://cf81w8s7c7kox" path="res://Objects/pillar.tscn" id="33_fbdpx"]
+[ext_resource type="Texture2D" uid="uid://c5hwbfaxo6ov7" path="res://Sprites/tornadowarning.png" id="33_nykkc"]
+[ext_resource type="PackedScene" uid="uid://cheqhyt0b5ovq" path="res://Objects/pillarhalf.tscn" id="34_er564"]
+[ext_resource type="Texture2D" uid="uid://bgeyga2o4k8mo" path="res://Textures/concrete.png" id="35_5g6ug"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_53g8k"]
 panorama = ExtResource("1_hmvop")
@@ -279,6 +282,11 @@ size = Vector3(18.7529, 21.7697, 8)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8j1c5"]
 albedo_texture = ExtResource("18_sehqq")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gpdup"]
+albedo_color = Color(0.490196, 0.619608, 0.584314, 1)
+albedo_texture = ExtResource("35_5g6ug")
+disable_receive_shadows = true
 
 [node name="Node3D" type="Node3D"]
 
@@ -1022,7 +1030,7 @@ transform = Transform3D(0.287665, -0.879139, -0.379951, 0.93709, 0.34029, -0.077
 transform = Transform3D(-4.37114e-08, 0.999998, 0, -1, -4.37113e-08, 0, 0, 0, 0.999998, 2.68961, 7.51986, -25.3029)
 
 [node name="BoostRing25" parent="group1" instance=ExtResource("9_2uuim")]
-transform = Transform3D(-0.139199, 0.958219, -0.249864, -0.873577, 2.18336e-06, 0.486678, 0.466347, 0.286022, 0.837079, 26.0747, 0.843775, -25.3029)
+transform = Transform3D(0.167091, -0.93921, 0.299929, -0.873577, 2.58947e-06, 0.486677, -0.457096, -0.343332, -0.820473, 26.0747, 0.843775, -25.3029)
 strength = 12.0
 rotating = true
 
@@ -2827,7 +2835,7 @@ texture = ExtResource("6_53g8k")
 
 [node name="Boombox" parent="." instance=ExtResource("31_wvw3a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60.6948, 0.64544, -22.2361)
-audio_file = "uid://d68o86ovw7jn"
+audio_file = "uid://cv7x2xq8oskhx"
 
 [node name="streetsign" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.503626, 0.190783, -0.0765489, 4.65031e-09, 4.55142, 0.0790505, 0.10359, 0.92753, -0.372159, 42.3593, 6.38038, -9.28557)
@@ -2871,6 +2879,23 @@ texture = ExtResource("15_wvw3a")
 transform = Transform3D(-0.282813, -0.00237991, 0.9592, -0.0414015, 0.0857337, 0.010867, -0.76057, -0.00378196, -0.357263, 0.6828, 0.445052, -0.283684)
 texture = ExtResource("15_wvw3a")
 
+[node name="streetsign4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.0550479, 0.941505, -0.377766, 2.79432e-09, 4.55142, 0.0790505, 0.511213, 0.101383, -0.0406782, 51.3231, 13.6303, -17.3275)
+material_override = SubResource("StandardMaterial3D_11qgy")
+material_overlay = ExtResource("5_2uuim")
+mesh = SubResource("CylinderMesh_6r7q6")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="streetsign4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="streetsign4/StaticBody3D"]
+transform = Transform3D(1, 9.45022e-13, -3.90799e-14, -2.66454e-15, 1, -4.09461e-17, 7.10543e-15, -5.87568e-15, 1, 0, 0.0535278, 2.86102e-06)
+shape = SubResource("BoxShape3D_w578l")
+
+[node name="Sprite3D" type="Sprite3D" parent="streetsign4"]
+transform = Transform3D(-0.0110641, 0.00910258, 1.14227, 0.030238, 0.116794, -0.0888076, -1.43996, 0.00238247, -0.0106404, 0.560677, 0.882424, -0.202637)
+texture = ExtResource("33_nykkc")
+
 [node name="streetsign2" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.146634, 2.17363, -0.324709, -0.0439867, 4.09976, 0.179936, 0.49085, -0.281945, 0.113127, 183.606, 89.8869, -125.503)
 material_override = SubResource("StandardMaterial3D_11qgy")
@@ -2890,6 +2915,11 @@ texture = ExtResource("15_wvw3a")
 
 [node name="Pillar" parent="." instance=ExtResource("33_fbdpx")]
 transform = Transform3D(0.999997, -0.00170896, 0.00151882, 0.00170895, 0.999999, 1.33931e-05, -0.00151884, -1.07887e-05, 0.999999, -7.57763, -0.354484, 5.51462)
+material_override = SubResource("StandardMaterial3D_gpdup")
 
 [node name="Pillar2" parent="." instance=ExtResource("33_fbdpx")]
 transform = Transform3D(0.481124, 0.559157, 0.675176, -0.704198, 0.705225, -0.0822382, -0.522135, -0.435891, 0.733058, 5.87817, -1.94927, 4.73233)
+material_override = SubResource("StandardMaterial3D_gpdup")
+
+[node name="Pillar3" parent="." instance=ExtResource("34_er564")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.66814, -0.303532, 8.04283)

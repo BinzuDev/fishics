@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cu87u6588tm6x"]
+[gd_scene load_steps=19 format=3 uid="uid://cu87u6588tm6x"]
 
 [ext_resource type="Script" uid="uid://1b1lupixtjff" path="res://Objects/boost_ring.gd" id="1_5o6kl"]
 [ext_resource type="Shader" uid="uid://cm0a5kd1avm50" path="res://Shaders/bubble.gdshader" id="2_rd0gv"]
@@ -32,7 +32,7 @@ _data = [Vector2(0.159363, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.55341, 0.0, 0, 
 point_count = 2
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_iqjpu"]
-height = 0.1
+height = 0.3
 radius = 0.7
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5o6kl"]
@@ -59,6 +59,8 @@ stream_0/stream = ExtResource("4_rd0gv")
 inner_radius = 1.0
 outer_radius = 1.8
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_75vsp"]
+
 [node name="BoostRing" type="Area3D"]
 process_priority = 5
 process_physics_priority = 5
@@ -68,7 +70,7 @@ collision_mask = 18
 script = ExtResource("1_5o6kl")
 
 [node name="ring" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.04268e-07, -1.7, -1.08541e-07, -0.718832, 5.42709e-08, -1.54053, 1.54053, 1.40385e-07, -0.718832, 0, 0, 0)
+transform = Transform3D(-3.4808e-07, -1.7, -1.32691e-07, -0.878774, 6.63462e-08, 1.45523, -1.45523, 3.66561e-07, -0.878774, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_75vsp")
 mesh = SubResource("TorusMesh_3ffwv")
 
@@ -128,5 +130,13 @@ mesh = SubResource("TorusMesh_rd0gv")
 stream = ExtResource("5_75vsp")
 autoplay = true
 max_distance = 35.0
+
+[node name="homingTarget" type="Area3D" parent="."]
+collision_layer = 32
+collision_mask = 0
+priority = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="homingTarget"]
+shape = SubResource("BoxShape3D_75vsp")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

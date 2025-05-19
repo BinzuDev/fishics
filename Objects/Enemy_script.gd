@@ -63,6 +63,7 @@ func _physics_process(delta: float) -> void:
 	#ensure ragdoll death
 	if hp <= 0:
 		$CrabSprite.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+		$homingTarget.priority = 0 #lower the target priority of dead crabs
 
 
 ## Enemy detect
@@ -184,7 +185,7 @@ func _on_bump_body_entered(body: Node3D) -> void:
 			
 			if $FloorCast/airshot.is_colliding():
 				if hp > 0:
-					ScoreManager.give_points(2000, 2, true, "HOMING ATTACK")
+					ScoreManager.give_points(2000, 1, true, "HOMING ATTACK")
 			else:
 				ScoreManager.give_points(0, 5, true, "HOMING AIRSHOT")
 				ScoreManager.play_trick_sfx("rare")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://bwb5dddkenrbh"]
+[gd_scene load_steps=51 format=3 uid="uid://bwb5dddkenrbh"]
 
 [ext_resource type="Script" uid="uid://d08pu76ylr3bv" path="res://Player/Fish_script.gd" id="1_8ijwk"]
 [ext_resource type="Texture2D" uid="uid://cgy362847wh6a" path="res://Sprites/fish.png" id="2_dhdhv"]
@@ -9,7 +9,9 @@
 [ext_resource type="AudioStream" uid="uid://qpt3nmj24kdx" path="res://Sounds/impact_soft/soft1.ogg" id="6_h8qkj"]
 [ext_resource type="AudioStream" uid="uid://c6au0422c773r" path="res://Sounds/FISH.ogg" id="6_t0nqp"]
 [ext_resource type="AudioStream" uid="uid://6pi0oi8jx8by" path="res://Sounds/impact_soft/soft2.ogg" id="7_quwx5"]
+[ext_resource type="AudioStream" uid="uid://dk0bu6foohfoh" path="res://Sounds/reticle.ogg" id="8_6h88e"]
 [ext_resource type="AudioStream" uid="uid://7fhfltsgpuss" path="res://Sounds/impact_soft/soft3.ogg" id="8_mf1i0"]
+[ext_resource type="AudioStream" uid="uid://d0svkyijwo18" path="res://Sounds/shotgun.ogg" id="9_po2vx"]
 [ext_resource type="AudioStream" uid="uid://bmhyvq1ucstr0" path="res://Sounds/impact_soft/soft4.ogg" id="9_quwx5"]
 [ext_resource type="AudioStream" uid="uid://bnhyl7xy6k15i" path="res://Sounds/impact_soft/soft5.ogg" id="10_mf1i0"]
 [ext_resource type="AudioStream" uid="uid://drrw7ys5t8wyt" path="res://Sounds/impact_medium/medium1.ogg" id="11_uucyj"]
@@ -20,8 +22,10 @@
 [ext_resource type="AudioStream" uid="uid://b2uje1y503456" path="res://Sounds/impact_bloody/bloody2.ogg" id="16_l2vbt"]
 [ext_resource type="AudioStream" uid="uid://bnaji0clr1j6c" path="res://Sounds/impact_bloody/bloody3.ogg" id="17_17eip"]
 [ext_resource type="Texture2D" uid="uid://drbikn5ifimak" path="res://Sprites/UI/image.png" id="18_qaf4p"]
+[ext_resource type="Texture2D" uid="uid://duopre52i2rui" path="res://Sprites/UI/aim_reticle.png" id="24_40mal"]
 [ext_resource type="AudioStream" uid="uid://cogiepb65bymm" path="res://Sounds/tricks/uncommon/peppino_taunt.ogg" id="25_dhdhv"]
 [ext_resource type="Texture2D" uid="uid://bj8oc56krqj3b" path="res://Sprites/peppino_taunt_flash.png" id="26_pqkfo"]
+[ext_resource type="Texture2D" uid="uid://cg6m3e2wndhub" path="res://Sprites/smear.png" id="27_ipqbp"]
 [ext_resource type="Texture2D" uid="uid://ba5khi7i2ku46" path="res://Skins/pose.png" id="82_jv0xx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j2ykt"]
@@ -64,17 +68,27 @@ point_count = 2
 [sub_resource type="SphereShape3D" id="SphereShape3D_dhdhv"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_40mal"]
-height = 3.0
-radius = 3.0
+height = 3.98779
+radius = 2.5
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_mdn8s"]
-height = 60.0
-radius = 5.5
+height = 8.5
+radius = 6.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6h88e"]
+height = 50.0
+radius = 10.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_nmgcd"]
 font_size = 30
 outline_size = 6
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_po2vx"]
+random_pitch = 1.3
+random_volume_offset_db = 0.5
+streams_count = 1
+stream_0/stream = ExtResource("9_po2vx")
 
 [sub_resource type="Animation" id="Animation_40mal"]
 length = 0.001
@@ -396,46 +410,50 @@ update_scale = false
 [node name="homing" type="Area3D" parent="."]
 top_level = true
 collision_layer = 0
-collision_mask = 16
+collision_mask = 32
+
+[node name="smear" type="Sprite3D" parent="homing"]
+transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, 0)
+offset = Vector2(0, 230)
+axis = 1
+render_priority = -5
+texture = ExtResource("27_ipqbp")
+
+[node name="leftSide" type="Node3D" parent="homing/smear"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.30085, 0, 0)
+
+[node name="rightSide" type="Node3D" parent="homing/smear"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3, 0, 0)
 
 [node name="debug" type="RayCast3D" parent="homing"]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
-collision_mask = 16
+transform = Transform3D(13, 0, 0, 0, 13, 0, 0, 0, 13, 0, 0, 0)
+collision_mask = 33
+collide_with_areas = true
 
 [node name="top" type="CollisionShape3D" parent="homing"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.4939, 0)
 shape = SubResource("CylinderShape3D_40mal")
 debug_color = Color(0, 0.6, 0.701961, 1)
 
-[node name="bottom" type="CollisionShape3D" parent="homing"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -34, 0)
+[node name="middle" type="CollisionShape3D" parent="homing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.754, 0)
 shape = SubResource("CylinderShape3D_mdn8s")
+debug_color = Color(0, 0.6, 0.701961, 1)
+
+[node name="bottom" type="CollisionShape3D" parent="homing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -39, 0)
+shape = SubResource("CylinderShape3D_6h88e")
 debug_color = Color(0, 0.6, 0.701961, 1)
 
 [node name="debugLabel" type="Label" parent="."]
 unique_name_in_owner = true
+visible = false
 offset_left = 8.0
 offset_top = 106.0
 offset_right = 274.0
 offset_bottom = 353.0
 text = "debug info"
 label_settings = SubResource("LabelSettings_nmgcd")
-
-[node name="CenterContainer" type="CenterContainer" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Control" type="Control" parent="CenterContainer"]
-layout_mode = 2
-
-[node name="dead_fish" type="Sprite2D" parent="CenterContainer/Control"]
-unique_name_in_owner = true
-texture = ExtResource("2_dhdhv")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -456,6 +474,37 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("18_qaf4p")
+
+[node name="CenterContainer" type="CenterContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="UI/CenterContainer"]
+layout_mode = 2
+
+[node name="dead_fish" type="Sprite2D" parent="UI/CenterContainer/Control"]
+unique_name_in_owner = true
+texture = ExtResource("2_dhdhv")
+
+[node name="reticle" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("24_40mal")
+
+[node name="sfx" type="AudioStreamPlayer2D" parent="reticle"]
+stream = ExtResource("8_6h88e")
+max_polyphony = 4
+panning_strength = 20.0
+
+[node name="diveSFX" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = SubResource("AudioStreamRandomizer_po2vx")
+max_polyphony = 5
 
 [node name="tauntAnimation" type="AnimationPlayer" parent="."]
 process_mode = 3

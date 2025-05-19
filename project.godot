@@ -139,3 +139,4 @@ cancel={
 3d_physics/layer_3="invisible wall"
 3d_physics/layer_4="camSwitching"
 3d_physics/layer_5="enemies"
+3d_physics/layer_6="homing target"

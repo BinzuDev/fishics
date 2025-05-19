@@ -12,12 +12,17 @@ var cameraOverride: bool = false
 
 #other trick variables
 var tiplanding : bool = false
+var heldByEel : bool = false
 var isTipSpinning : bool = false
 var superJumpTimer : int = -1
 var height : float = 0 ##stores how for away you are to the nearest floor
 var fishCooldown : int = 0
-var diving = false
+var diving := false
+var homing := false
+var posLastFrame = Vector3(0,0,0)
+var closestLastFrame = null
 var lastUsedBoost
+
 
 #MOVEMENT CONSTS
 const torque_impulse = Vector3(-1.5, 0, 0)  #front-back rotation speed
@@ -142,6 +147,28 @@ func _physics_process(_delta: float) -> void:
 		
 	
 	
+	var closest = null
+	## HOMING ATTACK
+	if $homing.has_overlapping_areas():
+		closest = get_closest_target()
+		if closest != null:
+			if closestLastFrame != closest:
+				closestLastFrame = closest
+				$reticle/sfx.play()
+			$reticle.position = get_viewport().get_camera_3d().unproject_position(closest.global_transform.origin)
+			$reticle.rotation_degrees += 3
+			var newScale = sin(flopTimer*0.157) * 0.15 + 1
+			$reticle.scale = Vector2(newScale, newScale)
+			$reticle.visible = true
+			$reticle.position.y = clamp($reticle.position.y, 0, 1080)
+		else:
+			$reticle.visible = false
+			closestLastFrame = null
+	else:
+		$reticle.visible = false
+		closestLastFrame = null
+	
+	
 	## Diving
 	if $heightDetect.is_colliding():
 		height = global_position.y - $heightDetect.get_collision_point().y
@@ -162,33 +189,41 @@ func _physics_process(_delta: float) -> void:
 			
 		diving = true #DIVING VARIABLE
 		
-		# HOMING ATTACK
-		if $homing.has_overlapping_bodies():
-			var crabs = $homing.get_overlapping_bodies()
-			
-			var allDead := true
-			for crab in crabs:    
-				if crab.hp > 0:
-					allDead = false
-			
-			##Find which crab is the closest
-			var closest = crabs[0]
-			for crab in crabs:
-				if global_position.distance_to(crab.global_position) < global_position.distance_to(closest.global_position):
-					if allDead == false: #if some are alive
-						if crab.hp > 0: #Prioritise alive crabs
-							closest = crab
-					else:
-						closest = crab
+		$homing/debug.target_position
+		
+		if closest != null: #Homing attack
 			var direction = global_position.direction_to(closest.global_position)
-			linear_velocity = direction * 50
-			$homing/debug.target_position = direction
-			
-		
+			if closest is enemy:  #make it more violent towards crabs
+				linear_velocity = direction * 100
+			else:
+				linear_velocity = direction * 60
+			$homing/smear.look_at(closest.global_position)
+			$homing/smear.rotation *= -1
+			print("look at enemy: ", $homing/smear.rotation_degrees)
+			#stupid hacky solution, ask binzu about it if you dont understand
+			var diff = abs($homing/smear/leftSide.global_position.x - $homing/smear/rightSide.global_position.x)
+			print(diff)
+			if diff < 0.7:
+				$homing/smear.rotation_degrees.z = 90
+				print("SMEAR FIX")
+			homing = true
+			$diveSFX.play()
 	
-	if get_contact_count() >= 1:
+	
+	if get_contact_count() >= 1 or linear_velocity.y > -5: #otherwise dive can persist if you bounce 
 		diving = false
-		
+		homing = false
+	
+	if homing:
+		$homing/smear.visible = true
+		var smearLength = global_position.distance_to(posLastFrame)
+		#print(smearLength)
+		$homing/smear.scale.z = smearLength * 0.4
+		posLastFrame = global_position
+	else:
+		$homing/smear.visible = false
+	
+	
 	
 	## Flop Animation
 	var amp = max(angular_velocity.length() * 0.18, linear_velocity.length())
@@ -307,8 +342,9 @@ func _physics_process(_delta: float) -> void:
 			if ScoreManager.mult == 0: #in case you do a tipspin without a combo first
 				ScoreManager.give_points(0, 1, true, "")
 		
+		
 		## Tip landing
-		if !tiplanding and linear_velocity.length() < 0.05 and angular_velocity.length() < 0.05:
+		if !tiplanding and linear_velocity.length() < 0.05 and angular_velocity.length() < 0.05 and !heldByEel:
 			tiplanding = true
 			ScoreManager.give_points(999999, 200, true, "TIPLANDING HOLY SHIT")
 			ScoreManager.change_rank(8, 1.0)
@@ -373,6 +409,7 @@ func _physics_process(_delta: float) -> void:
 	"linear length: ", linear_velocity.length(), "\n",
 	"angular velocity: ", angular_velocity, "\n",
 	"angular length: ", angular_velocity.length(), "\n",
+	"diving: ", diving
 	)
 	
 
@@ -413,3 +450,22 @@ func force_position(newPos : Vector3):
 	global_position = newPos
 	linear_velocity = Vector3(0,0,0)
 	angular_velocity = Vector3(0,0,0)
+
+func get_closest_target():
+	var crabs = $homing.get_overlapping_areas()
+	
+	##Find which homing target is the closest
+	var closest = crabs[0]
+	for crab in crabs:
+		if global_position.distance_to(crab.global_position) < global_position.distance_to(closest.global_position):
+			if crab.priority >= closest.priority:
+				closest = crab
+	
+	var direction = global_position.direction_to(closest.global_position)
+	$homing/debug.target_position = direction*5
+	$homing/debug.force_raycast_update()
+	if $homing/debug.get_collider() is StaticBody3D:
+		closest = null
+		print("THE CLOSEST TARGET IS BEHIND A WALL: ", $homing/debug.get_collider())
+	
+	return closest

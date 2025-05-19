@@ -8,9 +8,14 @@ extends Area3D
 @export var rotating : bool = false #new rotation option
 @export var rotationSpeed : float = 1.0
 @export var deactivateParticles : bool = false
+@export var targetableByHoming : bool = true
 
 var strengthLastFrame = strength
 
+
+func _ready():
+	if targetableByHoming == false:
+		$homingTarget.collision_layer = 0
 
 func _process(_delta: float) -> void:
 	$ring.rotation.x += 0.02
@@ -43,7 +48,6 @@ func _process(_delta: float) -> void:
 
 func _on_body_entered(body: Node3D) -> void:
 	if body is RigidBody3D:
-		
 		
 		
 		if centerPlayer:

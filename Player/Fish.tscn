@@ -412,7 +412,6 @@ update_rotation = false
 update_scale = false
 
 [node name="homing" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0160396, 9.53674e-07, -0.0210142)
 top_level = true
 collision_layer = 0
 collision_mask = 32

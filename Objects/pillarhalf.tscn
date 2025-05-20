@@ -45,7 +45,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0995966, 5.67321, 0.0375017
 shape = SubResource("SphereShape3D_sab1k")
 
 [node name="darkCylinder" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.688959, 0, 0, 0, 0.92, -0.03, 3.12997, 0.09)
+transform = Transform3D(1, 0, 0, 0, 0.688959, 0, 0, 0, 0.92, -0.03, 3.07, 0.09)
 material_override = SubResource("StandardMaterial3D_1scxl")
 transparency = 0.8
 mesh = SubResource("CylinderMesh_gpdup")

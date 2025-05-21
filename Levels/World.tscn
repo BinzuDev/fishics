@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://c7ygdu4mhaem4"]
+[gd_scene load_steps=88 format=3 uid="uid://c7ygdu4mhaem4"]
 
 [ext_resource type="Texture2D" uid="uid://drw6uhypyo4ey" path="res://Textures/skyrender.png" id="1_hmvop"]
 [ext_resource type="Texture2D" uid="uid://d0lx7l3a52xjm" path="res://Textures/wood.png" id="2_j5go0"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://cgpwwrh16mha1" path="res://Objects/basketball_hoop.tscn" id="11_vbdqq"]
 [ext_resource type="Texture2D" uid="uid://bbqdwespslc76" path="res://Sprites/barnicles.png" id="13_11qgy"]
 [ext_resource type="PackedScene" uid="uid://biji6soms632" path="res://Objects/skate_park.tscn" id="14_63vwh"]
+[ext_resource type="PackedScene" uid="uid://b3o3bqgimbwt7" path="res://Objects/car_battery.tscn" id="14_hqwgh"]
 [ext_resource type="PackedScene" uid="uid://bf8smqh6dbfvm" path="res://Objects/fricking_awesome_tube.tscn" id="15_myu2g"]
 [ext_resource type="Texture2D" uid="uid://bwjgjk84nbeei" path="res://Sprites/streetsign.png" id="15_wvw3a"]
 [ext_resource type="PackedScene" uid="uid://dekjyfsmafh8k" path="res://Objects/worm.tscn" id="16_e1uki"]
@@ -836,6 +837,9 @@ transform = Transform3D(0.804742, -0.264586, 0.531399, 0.312335, 0.949972, 0, -0
 operation = 2
 size = Vector3(34.631, 110.254, 46.962)
 
+[node name="carbattery" parent="group1/CSGCombiner3D2/negative2" instance=ExtResource("14_hqwgh")]
+transform = Transform3D(1.3, -1.93715e-08, -6.63913e-15, 1.93715e-08, 1.3, 3.29315e-07, 1.73195e-15, -3.29315e-07, 1.3, -27.0531, -32.4949, -30.6681)
+
 [node name="back" type="CSGBox3D" parent="group1/CSGCombiner3D2"]
 transform = Transform3D(-4.37114e-08, 0.561506, -0.827473, 0, 0.827473, 0.561506, 1, 2.45442e-08, -3.617e-08, -47.145, 6.2067, -79.9426)
 size = Vector3(198.001, 4.65121, 23.2248)
@@ -1030,7 +1034,7 @@ transform = Transform3D(0.287665, -0.879139, -0.379951, 0.93709, 0.34029, -0.077
 transform = Transform3D(-4.37114e-08, 0.999998, 0, -1, -4.37113e-08, 0, 0, 0, 0.999998, 2.68961, 7.51986, -25.3029)
 
 [node name="BoostRing25" parent="group1" instance=ExtResource("9_2uuim")]
-transform = Transform3D(0.40489, -0.554852, 0.726769, -0.873577, 2.64749e-06, 0.486677, -0.270038, -0.831944, -0.484705, 26.0747, 0.843775, -25.3029)
+transform = Transform3D(0.311617, -0.768125, 0.559347, -0.873577, 3.16964e-06, 0.486677, -0.373834, -0.640293, -0.671016, 26.0747, 0.843775, -25.3029)
 strength = 12.0
 rotating = true
 

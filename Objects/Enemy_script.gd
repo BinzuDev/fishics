@@ -30,8 +30,7 @@ func _ready() -> void:
 	
 	
 	#shiny chance
-	var chance := 0
-	chance = randi_range(1, 100)
+	var chance := randi_range(1, 300)
 	
 	if chance == 1:
 		$CrabSprite.modulate = Color(0, 1, 1)  # Sets the sprite to blue

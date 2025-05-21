@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cybli1pljid07"]
+
+[ext_resource type="ArrayMesh" uid="uid://cnab3qvqlkuvi" path="res://Models/pineapple/pineapple.obj" id="1_o5arx"]
+
+[node name="pineapple" type="MeshInstance3D"]
+mesh = ExtResource("1_o5arx")

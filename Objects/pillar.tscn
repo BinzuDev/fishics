@@ -12,7 +12,7 @@ disable_receive_shadows = true
 size = Vector3(3.03467, 0.35437, 2.99866)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gpdup"]
-size = Vector3(1.74059, 5.86427, 1.60579)
+size = Vector3(1.74059, 6.87537, 1.60579)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1scxl"]
 albedo_color = Color(0, 0, 0, 1)
@@ -38,7 +38,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000976563, 7.23624, 0.05181
 shape = SubResource("BoxShape3D_1scxl")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0356383, 3.58097, 0.0821502)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0356383, 3.62559, 0.0821502)
 shape = SubResource("BoxShape3D_gpdup")
 
 [node name="darkCylinder" type="MeshInstance3D" parent="."]

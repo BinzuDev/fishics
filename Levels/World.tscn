@@ -1034,7 +1034,7 @@ transform = Transform3D(0.287665, -0.879139, -0.379951, 0.93709, 0.34029, -0.077
 transform = Transform3D(-4.37114e-08, 0.999998, 0, -1, -4.37113e-08, 0, 0, 0, 0.999998, 2.68961, 7.51986, -25.3029)
 
 [node name="BoostRing25" parent="group1" instance=ExtResource("9_2uuim")]
-transform = Transform3D(0.311617, -0.768125, 0.559347, -0.873577, 3.16964e-06, 0.486677, -0.373834, -0.640293, -0.671016, 26.0747, 0.843775, -25.3029)
+transform = Transform3D(-0.096429, 0.980169, -0.173093, -0.873577, 2.93758e-06, 0.486678, 0.477031, 0.198141, 0.856253, 26.0747, 0.843775, -25.3029)
 strength = 12.0
 rotating = true
 
@@ -2938,7 +2938,7 @@ transform = Transform3D(-0.282813, -0.00237991, 0.9592, -0.0414015, 0.0857337, 0
 texture = ExtResource("15_wvw3a")
 
 [node name="streetsign4" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.0550479, 0.941505, -0.377766, 2.79432e-09, 4.55142, 0.0790505, 0.511213, 0.101383, -0.0406782, 51.3231, 16.9655, -17.3275)
+transform = Transform3D(-0.0549206, 0.450324, -0.238667, 2.78786e-09, 2.17695, 0.049943, 0.510031, 0.0484917, -0.0256999, 51.3231, 14.5781, -17.3275)
 material_override = SubResource("StandardMaterial3D_11qgy")
 material_overlay = ExtResource("5_2uuim")
 mesh = SubResource("CylinderMesh_6r7q6")

@@ -208,7 +208,7 @@ func _on_bump_body_entered(body: Node3D) -> void:
 			if not shiny:
 				$CrabSprite.modulate = Color(0.5, 0.5, 0.5, 1)
 			elif shiny:
-					$CrabSprite.modulate = Color(0.0, 0.29, 0.47, 1)
+				$CrabSprite.modulate = Color(0.0, 0.29, 0.47, 1)
 			
 			
 			

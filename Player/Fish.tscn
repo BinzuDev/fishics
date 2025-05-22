@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://bwb5dddkenrbh"]
+[gd_scene load_steps=57 format=3 uid="uid://bwb5dddkenrbh"]
 
 [ext_resource type="Script" uid="uid://d08pu76ylr3bv" path="res://Player/Fish_script.gd" id="1_8ijwk"]
 [ext_resource type="Texture2D" uid="uid://cgy362847wh6a" path="res://Sprites/fish.png" id="2_dhdhv"]
@@ -68,21 +68,191 @@ point_count = 2
 [sub_resource type="SphereShape3D" id="SphereShape3D_dhdhv"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_40mal"]
-height = 3.98779
-radius = 2.5
+height = 3.5
+radius = 3.5
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_mdn8s"]
-height = 8.5
-radius = 6.0
+height = 8.0
+radius = 8.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_6h88e"]
-height = 50.0
-radius = 10.0
+height = 30.0
+radius = 12.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ipqbp"]
+shading_mode = 0
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_lt56d"]
+radius = 0.25
+height = 0.5
 
 [sub_resource type="LabelSettings" id="LabelSettings_nmgcd"]
 font_size = 30
 outline_size = 6
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_ipqbp"]
+resource_name = "reticle_appear1"
+length = 0.333337
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("reticleR:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333),
+"transitions": PackedFloat32Array(0.4, 0.4, 1),
+"update": 0,
+"values": [Vector2(1000, 0), Vector2(18, 0), Vector2(73, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("reticleL:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333),
+"transitions": PackedFloat32Array(0.4, 0.4, 1),
+"update": 0,
+"values": [Vector2(-1000, 0), Vector2(-18, 0), Vector2(-73, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("reticleD:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333),
+"transitions": PackedFloat32Array(0.4, 0.4, 1),
+"update": 0,
+"values": [Vector2(0, 1000), Vector2(0, 18), Vector2(0, 73)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("reticleU:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333),
+"transitions": PackedFloat32Array(0.4, 0.4, 1),
+"update": 0,
+"values": [Vector2(0, -1000), Vector2(0, -18), Vector2(0, -73)]
+}
+
+[sub_resource type="Animation" id="Animation_lt56d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("reticleR:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(73, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("reticleL:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-73, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("reticleD:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 73)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("reticleU:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -73)]
+}
+
+[sub_resource type="Animation" id="Animation_ie0qp"]
+resource_name = "reticle_appear2"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("reticleR:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.2, 1),
+"update": 0,
+"values": [Vector2(18, 0), Vector2(73, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("reticleL:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.2, 1),
+"update": 0,
+"values": [Vector2(-18, 0), Vector2(-73, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("reticleD:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.2, 1),
+"update": 0,
+"values": [Vector2(0, 18), Vector2(0, 73)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("reticleU:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.2, 1),
+"update": 0,
+"values": [Vector2(0, -18), Vector2(0, -73)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lt56d"]
+_data = {
+&"RESET": SubResource("Animation_lt56d"),
+&"reticle_appear1": SubResource("Animation_ipqbp"),
+&"reticle_appear2": SubResource("Animation_ie0qp")
+}
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_po2vx"]
 random_pitch = 1.3
@@ -234,7 +404,6 @@ streams_count = 1
 stream_0/stream = ExtResource("6_t0nqp")
 
 [node name="fish" type="RigidBody3D" groups=["player"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0160396, 9.53674e-07, -0.0210142)
 collision_layer = 2
 collision_mask = 21
 mass = 1.5
@@ -299,7 +468,7 @@ remote_path = NodePath("../floorDetection")
 update_rotation = false
 
 [node name="floorDetection" type="ShapeCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0160396, 9.49949e-07, -0.0564404)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.72529e-09, -0.0354262)
 top_level = true
 shape = SubResource("CylinderShape3D_uucyj")
 target_position = Vector3(0, -0.7, 0)
@@ -312,7 +481,6 @@ update_scale = false
 
 [node name="cameraAnchor" type="Node3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0160396, 9.53674e-07, -0.0210142)
 top_level = true
 
 [node name="camMove" type="Node3D" parent="cameraAnchor"]
@@ -330,7 +498,6 @@ remote_path = NodePath("../nearFloor")
 update_rotation = false
 
 [node name="nearFloor" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0160396, 9.53674e-07, -0.0210142)
 top_level = true
 target_position = Vector3(0, -1.5, 0)
 collision_mask = 17
@@ -340,7 +507,6 @@ remote_path = NodePath("../heightDetect")
 update_rotation = false
 
 [node name="heightDetect" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0160396, 9.53674e-07, -0.0210142)
 top_level = true
 target_position = Vector3(0, -150, 0)
 
@@ -411,11 +577,32 @@ remote_path = NodePath("../homing")
 update_rotation = false
 update_scale = false
 
-[node name="homing" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0160396, 9.53674e-07, -0.0210142)
+[node name="homing" type="Node3D" parent="."]
 top_level = true
+
+[node name="area" type="Area3D" parent="homing"]
 collision_layer = 0
 collision_mask = 32
+
+[node name="top" type="CollisionShape3D" parent="homing/area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.25, 0)
+shape = SubResource("CylinderShape3D_40mal")
+debug_color = Color(0, 0.6, 0.701961, 1)
+
+[node name="middle" type="CollisionShape3D" parent="homing/area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
+shape = SubResource("CylinderShape3D_mdn8s")
+debug_color = Color(0, 0.6, 0.701961, 1)
+
+[node name="bottom" type="CollisionShape3D" parent="homing/area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -29, 0)
+shape = SubResource("CylinderShape3D_6h88e")
+debug_color = Color(0, 0.6, 0.701961, 1)
+
+[node name="raycast" type="RayCast3D" parent="homing"]
+transform = Transform3D(13, 0, 0, 0, 13, 0, 0, 0, 13, 0, 0, 0)
+collision_mask = 33
+collide_with_areas = true
 
 [node name="smear" type="Sprite3D" parent="homing"]
 transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, 0)
@@ -430,25 +617,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.30085, 0, 0)
 [node name="rightSide" type="Node3D" parent="homing/smear"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3, 0, 0)
 
-[node name="debug" type="RayCast3D" parent="homing"]
-transform = Transform3D(13, 0, 0, 0, 13, 0, 0, 0, 13, 0, 0, 0)
-collision_mask = 33
-collide_with_areas = true
+[node name="homingTarget" type="Node3D" parent="homing"]
+unique_name_in_owner = true
 
-[node name="top" type="CollisionShape3D" parent="homing"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.4939, 0)
-shape = SubResource("CylinderShape3D_40mal")
-debug_color = Color(0, 0.6, 0.701961, 1)
-
-[node name="middle" type="CollisionShape3D" parent="homing"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.754, 0)
-shape = SubResource("CylinderShape3D_mdn8s")
-debug_color = Color(0, 0.6, 0.701961, 1)
-
-[node name="bottom" type="CollisionShape3D" parent="homing"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -39, 0)
-shape = SubResource("CylinderShape3D_6h88e")
-debug_color = Color(0, 0.6, 0.701961, 1)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="homing/homingTarget"]
+visible = false
+material_override = SubResource("StandardMaterial3D_ipqbp")
+mesh = SubResource("SphereMesh_lt56d")
 
 [node name="debugLabel" type="Label" parent="."]
 unique_name_in_owner = true
@@ -497,14 +672,40 @@ layout_mode = 2
 unique_name_in_owner = true
 texture = ExtResource("2_dhdhv")
 
-[node name="reticle" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("24_40mal")
+[node name="reticle" type="Node2D" parent="."]
 
 [node name="sfx" type="AudioStreamPlayer2D" parent="reticle"]
 stream = ExtResource("8_6h88e")
-max_polyphony = 4
 panning_strength = 20.0
+
+[node name="reticleR" type="Sprite2D" parent="reticle"]
+texture = ExtResource("24_40mal")
+offset = Vector2(73, 0)
+region_enabled = true
+region_rect = Rect2(146, 0, 56, 202)
+
+[node name="reticleL" type="Sprite2D" parent="reticle"]
+texture = ExtResource("24_40mal")
+offset = Vector2(-73, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 56, 202)
+
+[node name="reticleD" type="Sprite2D" parent="reticle"]
+texture = ExtResource("24_40mal")
+offset = Vector2(0, 73)
+region_enabled = true
+region_rect = Rect2(0, 146, 202, 56)
+
+[node name="reticleU" type="Sprite2D" parent="reticle"]
+texture = ExtResource("24_40mal")
+offset = Vector2(0, -73)
+region_enabled = true
+region_rect = Rect2(0, 0, 202, 56)
+
+[node name="reticleAnimation" type="AnimationPlayer" parent="reticle"]
+libraries = {
+&"": SubResource("AnimationLibrary_lt56d")
+}
 
 [node name="diveSFX" type="AudioStreamPlayer" parent="."]
 process_mode = 3
@@ -522,6 +723,7 @@ libraries = {
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 visible = false
 billboard = 1
+no_depth_test = true
 texture_filter = 0
 render_priority = 1
 texture = ExtResource("82_jv0xx")
@@ -532,6 +734,7 @@ transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 visible = false
 offset = Vector2(0, 13)
 billboard = 1
+no_depth_test = true
 texture_filter = 0
 texture = ExtResource("26_pqkfo")
 hframes = 4

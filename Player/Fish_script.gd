@@ -36,6 +36,7 @@ var flopTimer : int = 0
 var sfxCoolDown : int = 0
 
 
+
 func _ready() -> void:
 	checkpoint_pos = position
 	$UI/splashScreen.visible = true
@@ -149,18 +150,21 @@ func _physics_process(_delta: float) -> void:
 	
 	var closest = null
 	## HOMING ATTACK
-	if $homing.has_overlapping_areas():
+	if $homing/area.has_overlapping_areas() and !$nearFloor.is_colliding():
 		closest = get_closest_target()
 		if closest != null:
 			if closestLastFrame != closest:
 				closestLastFrame = closest
 				$reticle/sfx.play()
+				if !$reticle.visible: #only play the animation when it first appears
+					$reticle/reticleAnimation.play("reticle_appear1")
 			$reticle.position = get_viewport().get_camera_3d().unproject_position(closest.global_transform.origin)
 			$reticle.rotation_degrees += 3
 			var newScale = sin(flopTimer*0.157) * 0.15 + 1
 			$reticle.scale = Vector2(newScale, newScale)
 			$reticle.visible = true
 			$reticle.position.y = clamp($reticle.position.y, 0, 1080)
+			$reticle.position.x = clamp($reticle.position.x, 0, 1920)
 		else:
 			$reticle.visible = false
 			closestLastFrame = null
@@ -173,7 +177,7 @@ func _physics_process(_delta: float) -> void:
 	if $heightDetect.is_colliding():
 		height = global_position.y - $heightDetect.get_collision_point().y
 		
-	if Input.is_action_just_pressed("dive"):
+	if Input.is_action_just_pressed("dive") and !$nearFloor.is_colliding():
 		var newSpd = clamp(height*-1.5 -10, -75, -10) 
 		linear_velocity.y = min(newSpd, linear_velocity.y)
 		linear_velocity.x *= 0.5
@@ -189,7 +193,7 @@ func _physics_process(_delta: float) -> void:
 			
 		diving = true #DIVING VARIABLE
 		
-		$homing/debug.target_position
+		
 		
 		if closest != null: #Homing attack
 			var direction = global_position.direction_to(closest.global_position)
@@ -214,7 +218,7 @@ func _physics_process(_delta: float) -> void:
 		diving = false
 		homing = false
 	
-	if homing:
+	if homing: ##Speed smear
 		$homing/smear.visible = true
 		var smearLength = global_position.distance_to(posLastFrame)
 		#print(smearLength)
@@ -222,6 +226,13 @@ func _physics_process(_delta: float) -> void:
 		posLastFrame = global_position
 	else:
 		$homing/smear.visible = false
+	
+	## Influence direction of homing
+	%homingTarget.position.x = 4 * Input.get_axis("left", "right")
+	%homingTarget.position.z = 4 * Input.get_axis("forward", "back")
+	$homing/area.rotation_degrees.z = 20 * Input.get_axis("left", "right")
+	$homing/area.rotation_degrees.x = 20 * Input.get_axis("back", "forward")
+	
 	
 	
 	
@@ -409,7 +420,8 @@ func _physics_process(_delta: float) -> void:
 	"linear length: ", linear_velocity.length(), "\n",
 	"angular velocity: ", angular_velocity, "\n",
 	"angular length: ", angular_velocity.length(), "\n",
-	"diving: ", diving
+	"diving: ", diving, "\n",
+	"raycast: ", $homing/raycast.get_collider()
 	)
 	
 
@@ -452,20 +464,19 @@ func force_position(newPos : Vector3):
 	angular_velocity = Vector3(0,0,0)
 
 func get_closest_target():
-	var crabs = $homing.get_overlapping_areas()
+	var crabs = $homing/area.get_overlapping_areas()
 	
 	##Find which homing target is the closest
 	var closest = crabs[0]
 	for crab in crabs:
-		if global_position.distance_to(crab.global_position) < global_position.distance_to(closest.global_position):
+		if %homingTarget.global_position.distance_to(crab.global_position) < %homingTarget.global_position.distance_to(closest.global_position):
 			if crab.priority >= closest.priority:
 				closest = crab
 	
 	var direction = global_position.direction_to(closest.global_position)
-	$homing/debug.target_position = direction*5
-	$homing/debug.force_raycast_update()
-	if $homing/debug.get_collider() is StaticBody3D:
+	$homing/raycast.target_position = direction*5
+	$homing/raycast.force_raycast_update()
+	if $homing/raycast.get_collider() is StaticBody3D:
 		closest = null
-		print("THE CLOSEST TARGET IS BEHIND A WALL: ", $homing/debug.get_collider())
-	
+		print("THE CLOSEST TARGET IS BEHIND A WALL: ", $homing/raycast.get_collider())
 	return closest

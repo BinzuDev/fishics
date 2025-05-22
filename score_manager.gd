@@ -34,6 +34,9 @@ var ASrankColor = ["00d8ff", "ff00e8", "00d8ff", "ff00e8", "00d8ff", "ff00e8", "
 
 var fish #gets set automatically inside the fish script
 
+
+
+
 func _physics_process(_delta: float) -> void:
 	
 	## Air spin

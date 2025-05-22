@@ -301,7 +301,7 @@ directional_shadow_fade_start = 0.647
 environment = SubResource("Environment_v72nc")
 
 [node name="fish" parent="." instance=ExtResource("5_m3j4o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.0239, 30.8277, 62.7224)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.7522, 30.8277, 67.178)
 gravity_scale = 1.5
 
 [node name="invisible wall" type="StaticBody3D" parent="."]
@@ -1034,7 +1034,7 @@ transform = Transform3D(0.287665, -0.879139, -0.379951, 0.93709, 0.34029, -0.077
 transform = Transform3D(-4.37114e-08, 0.999998, 0, -1, -4.37113e-08, 0, 0, 0, 0.999998, 2.68961, 7.51986, -25.3029)
 
 [node name="BoostRing25" parent="group1" instance=ExtResource("9_2uuim")]
-transform = Transform3D(-0.096429, 0.980169, -0.173093, -0.873577, 2.93758e-06, 0.486678, 0.477031, 0.198141, 0.856253, 26.0747, 0.843775, -25.3029)
+transform = Transform3D(0.439977, 0.427454, 0.789741, -0.873577, 3.05361e-06, 0.486677, 0.208032, -0.904032, 0.373416, 26.0747, 0.843775, -25.3029)
 strength = 12.0
 rotating = true
 
@@ -2329,6 +2329,7 @@ strength = 15.0
 [node name="BoostRing22" parent="highUpSection" instance=ExtResource("9_2uuim")]
 transform = Transform3D(-2.00909e-08, -1.68583e-08, -0.6, -0.385673, 0.459627, 0, 0.459627, 0.385673, -2.62268e-08, 75.2587, 32.6067, -39.0137)
 strength = 15.0
+targetableByHoming = false
 
 [node name="BoostRing24" parent="highUpSection" instance=ExtResource("9_2uuim")]
 transform = Transform3D(-0.812585, -0.0468063, 0.580959, -0.481804, 0.61485, -0.624358, -0.327981, -0.787252, -0.522169, 152.331, 39.1949, -50.7583)
@@ -2473,7 +2474,7 @@ skeleton = NodePath("../..")
 transform = Transform3D(0.282843, 0, -0.282843, 0, 0.4, 0, 0.282843, 0, 0.282843, 192.047, -0.773479, -91.9872)
 
 [node name="dark rock" parent="." instance=ExtResource("17_e1uki")]
-transform = Transform3D(-0.2, 0, -0.34641, 0, 0.4, 0, 0.34641, 0, -0.2, 154.171, 2, -47.09)
+transform = Transform3D(-0.2, 0, -0.34641, 0, 0.4, 0, 0.34641, 0, -0.2, 175.512, 2, -37.1837)
 material_override = SubResource("StandardMaterial3D_8j1c5")
 
 [node name="Enemy6" parent="." instance=ExtResource("21_46o8p")]

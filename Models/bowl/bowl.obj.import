@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dy8j5lno3b3la"
+path="res://.godot/imported/bowl.obj-70797b4757660deec58ffea65863860c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/bowl.obj-70797b4757660deec58ffea65863860c.mesh"]
+
+source_file="res://Models/bowl/bowl.obj"
+dest_files=["res://.godot/imported/bowl.obj-70797b4757660deec58ffea65863860c.mesh", "res://.godot/imported/bowl.obj-70797b4757660deec58ffea65863860c.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

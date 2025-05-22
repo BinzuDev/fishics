@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://c7ygdu4mhaem4"]
+[gd_scene load_steps=91 format=3 uid="uid://c7ygdu4mhaem4"]
 
 [ext_resource type="Texture2D" uid="uid://drw6uhypyo4ey" path="res://Textures/skyrender.png" id="1_hmvop"]
 [ext_resource type="Texture2D" uid="uid://d0lx7l3a52xjm" path="res://Textures/wood.png" id="2_j5go0"]
@@ -37,6 +37,9 @@
 [ext_resource type="Texture2D" uid="uid://c5hwbfaxo6ov7" path="res://Sprites/tornadowarning.png" id="33_nykkc"]
 [ext_resource type="PackedScene" uid="uid://cheqhyt0b5ovq" path="res://Objects/pillarhalf.tscn" id="34_er564"]
 [ext_resource type="Texture2D" uid="uid://bgeyga2o4k8mo" path="res://Textures/concrete.png" id="35_5g6ug"]
+[ext_resource type="PackedScene" uid="uid://cybli1pljid07" path="res://Objects/pineapple.tscn" id="38_ajrn0"]
+[ext_resource type="PackedScene" uid="uid://s0x1m1riut7j" path="res://Objects/ramenbowl.tscn" id="39_fpk0g"]
+[ext_resource type="PackedScene" uid="uid://df7v6ishj1qjd" path="res://Objects/squidhouse.tscn" id="40_vcw38"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_53g8k"]
 panorama = ExtResource("1_hmvop")
@@ -838,7 +841,7 @@ operation = 2
 size = Vector3(34.631, 110.254, 46.962)
 
 [node name="carbattery" parent="group1/CSGCombiner3D2/negative2" instance=ExtResource("14_hqwgh")]
-transform = Transform3D(1.3, -1.93715e-08, -6.63913e-15, 1.93715e-08, 1.3, 3.29315e-07, 1.73195e-15, -3.29315e-07, 1.3, -27.0531, -32.4949, -30.6681)
+transform = Transform3D(1, -1.49012e-08, -5.10702e-15, 1.49012e-08, 1, 2.53319e-07, 1.33227e-15, -2.53319e-07, 1, -27.0531, -32.4949, -30.6681)
 
 [node name="back" type="CSGBox3D" parent="group1/CSGCombiner3D2"]
 transform = Transform3D(-4.37114e-08, 0.561506, -0.827473, 0, 0.827473, 0.561506, 1, 2.45442e-08, -3.617e-08, -47.145, 6.2067, -79.9426)
@@ -1034,7 +1037,7 @@ transform = Transform3D(0.287665, -0.879139, -0.379951, 0.93709, 0.34029, -0.077
 transform = Transform3D(-4.37114e-08, 0.999998, 0, -1, -4.37113e-08, 0, 0, 0, 0.999998, 2.68961, 7.51986, -25.3029)
 
 [node name="BoostRing25" parent="group1" instance=ExtResource("9_2uuim")]
-transform = Transform3D(0.439977, 0.427454, 0.789741, -0.873577, 3.05361e-06, 0.486677, 0.208032, -0.904032, 0.373416, 26.0747, 0.843775, -25.3029)
+transform = Transform3D(-0.296259, -0.793373, -0.531769, -0.873577, 2.82154e-06, 0.486677, -0.386119, 0.608727, -0.693074, 26.0747, 0.843775, -25.3029)
 strength = 12.0
 rotating = true
 
@@ -1434,6 +1437,18 @@ skeleton = NodePath("../..")
 [node name="StaticBody3D" type="StaticBody3D" parent="group2/sphere8"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="group2/sphere8/StaticBody3D"]
+shape = SubResource("SphereShape3D_wvw3a")
+
+[node name="sphere12" type="MeshInstance3D" parent="group2"]
+transform = Transform3D(-7.65719e-08, 0, -1.68141, 0, 1.7783, 0, 1.75176, 0, -7.34969e-08, -37.1056, -0.387781, -1.77255)
+material_override = SubResource("StandardMaterial3D_myu2g")
+material_overlay = ExtResource("5_2uuim")
+mesh = SubResource("SphereMesh_dcke8")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="group2/sphere12"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="group2/sphere12/StaticBody3D"]
 shape = SubResource("SphereShape3D_wvw3a")
 
 [node name="sphere10" type="MeshInstance3D" parent="group2"]
@@ -3002,3 +3017,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.66814, -0.303532, 8.04283)
 
 [node name="Pillar8" parent="." instance=ExtResource("34_er564")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 95.0371, -0.303532, 5.31713)
+
+[node name="pineapple" parent="." instance=ExtResource("38_ajrn0")]
+transform = Transform3D(0.371794, -0.185048, 0.278435, 0, 0.416422, 0.276754, -0.334319, -0.205791, 0.309647, -11.994, 0.110949, -4.66903)
+
+[node name="MeshInstance3D" parent="." instance=ExtResource("39_fpk0g")]
+transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 27.8756, 29.6617, 62.8252)
+
+[node name="squidhouse" parent="." instance=ExtResource("40_vcw38")]
+transform = Transform3D(0.358437, 0, -0.348601, 0, 0.5, 0, 0.348601, 0, 0.358437, -13.5503, 0, -3.39736)

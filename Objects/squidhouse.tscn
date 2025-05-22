@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://df7v6ishj1qjd"]
+
+[ext_resource type="Texture2D" uid="uid://m0cu4erusqei" path="res://Textures/stone.png" id="1_f0mra"]
+[ext_resource type="ArrayMesh" uid="uid://wkin4le6xqgr" path="res://Models/squidhouse/squidhouse.obj" id="1_f40qk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yew0r"]
+albedo_texture = ExtResource("1_f0mra")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f0mra"]
+size = Vector3(1.77173, 3.37161, 2.02792)
+
+[node name="squidhouse" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00200653, -0.0148337, 1.19209e-05)
+material_override = SubResource("StandardMaterial3D_yew0r")
+mesh = ExtResource("1_f40qk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0648193, 0.695206, 0.0214272)
+shape = SubResource("BoxShape3D_f0mra")

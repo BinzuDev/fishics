@@ -1,4 +1,4 @@
-[gd_scene load_steps=91 format=3 uid="uid://c7ygdu4mhaem4"]
+[gd_scene load_steps=95 format=3 uid="uid://c7ygdu4mhaem4"]
 
 [ext_resource type="Texture2D" uid="uid://drw6uhypyo4ey" path="res://Textures/skyrender.png" id="1_hmvop"]
 [ext_resource type="Texture2D" uid="uid://d0lx7l3a52xjm" path="res://Textures/wood.png" id="2_j5go0"]
@@ -40,6 +40,8 @@
 [ext_resource type="PackedScene" uid="uid://cybli1pljid07" path="res://Objects/pineapple.tscn" id="38_ajrn0"]
 [ext_resource type="PackedScene" uid="uid://s0x1m1riut7j" path="res://Objects/ramenbowl.tscn" id="39_fpk0g"]
 [ext_resource type="PackedScene" uid="uid://df7v6ishj1qjd" path="res://Objects/squidhouse.tscn" id="40_vcw38"]
+[ext_resource type="Shader" uid="uid://cm0a5kd1avm50" path="res://Shaders/bubble.gdshader" id="41_7pnea"]
+[ext_resource type="ArrayMesh" uid="uid://cif8f41bx2y6d" path="res://Models/slime_girl/slime_girl.obj" id="41_i76hq"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_53g8k"]
 panorama = ExtResource("1_hmvop")
@@ -291,6 +293,18 @@ albedo_texture = ExtResource("18_sehqq")
 albedo_color = Color(0.490196, 0.619608, 0.584314, 1)
 albedo_texture = ExtResource("35_5g6ug")
 disable_receive_shadows = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jhcq3"]
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_581hb"]
+render_priority = 0
+shader = ExtResource("41_7pnea")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_jhcq3")
+shader_parameter/bubble_color = Color(0.670588, 0.239216, 1, 1)
+shader_parameter/height_multiplier = 0.05
+shader_parameter/noise_sample_size = 1.12
+shader_parameter/animation_speed = 0.3
 
 [node name="Node3D" type="Node3D"]
 
@@ -1037,9 +1051,8 @@ transform = Transform3D(0.287665, -0.879139, -0.379951, 0.93709, 0.34029, -0.077
 transform = Transform3D(-4.37114e-08, 0.999998, 0, -1, -4.37113e-08, 0, 0, 0, 0.999998, 2.68961, 7.51986, -25.3029)
 
 [node name="BoostRing25" parent="group1" instance=ExtResource("9_2uuim")]
-transform = Transform3D(-0.296259, -0.793373, -0.531769, -0.873577, 2.82154e-06, 0.486677, -0.386119, 0.608727, -0.693074, 26.0747, 0.843775, -25.3029)
+transform = Transform3D(0.414966, 0.26426, 0.870607, -0.537151, 0.843481, 1.49012e-08, -0.734347, -0.46765, 0.491964, 29.0617, 0.843775, -25.0992)
 strength = 12.0
-rotating = true
 
 [node name="BoostRing24" parent="group1" instance=ExtResource("9_2uuim")]
 transform = Transform3D(-1.84732e-08, -3.96159e-08, -0.999998, -0.906307, 0.422617, 0, 0.422618, 0.906306, -4.37113e-08, -12.02, 1.66, -29.327)
@@ -1770,6 +1783,10 @@ shape = SubResource("BoxShape3D_m3j4o")
 
 [node name="BoostRing11" parent="group2" instance=ExtResource("9_2uuim")]
 transform = Transform3D(-0.834488, -0.483735, 0.263873, -0.501511, 0.86515, 0, -0.22829, -0.132335, -0.964557, 22.1253, 5.56337, 14.8228)
+
+[node name="BoostRing21" parent="group2" instance=ExtResource("9_2uuim")]
+transform = Transform3D(0.00452982, 0.00262599, 0.999986, -0.501511, 0.86515, 1.50505e-08, -0.865139, -0.501503, 0.005236, 83.8049, 21.7343, -51.4284)
+strength = 30.0
 
 [node name="Mega Boost Ring" parent="group2" instance=ExtResource("9_2uuim")]
 transform = Transform3D(1.73709, 0.99122, 0, -0.991221, 1.73709, 0, 0, 0, 2, 172.456, 1.98, -5.79)
@@ -3026,3 +3043,8 @@ transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 27.8756, 29.6617, 62
 
 [node name="squidhouse" parent="." instance=ExtResource("40_vcw38")]
 transform = Transform3D(0.358437, 0, -0.348601, 0, 0.5, 0, 0.348601, 0, 0.358437, -13.5503, 0, -3.39736)
+
+[node name="SlimeGirl" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 29.1781, 32.9415, 64.6134)
+material_override = SubResource("ShaderMaterial_581hb")
+mesh = ExtResource("41_i76hq")

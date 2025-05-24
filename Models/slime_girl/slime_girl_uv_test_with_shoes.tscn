@@ -1,0 +1,140 @@
+[gd_scene load_steps=23 format=3 uid="uid://cyyy2l1hhwtfe"]
+
+[ext_resource type="ArrayMesh" uid="uid://c415sq82whkfo" path="res://Models/slime_girl/slime_girl_uv_test_with_shoes.obj" id="1_15muh"]
+[ext_resource type="ArrayMesh" uid="uid://chcnwix1soy5k" path="res://Models/slime_girl/slime_girl_uv_test_skirt_hat.obj" id="2_15muh"]
+[ext_resource type="Shader" uid="uid://db4tpgrv8uij0" path="res://Shaders/jelly_fish_girl_skin.gdshader" id="2_sf1b4"]
+[ext_resource type="ArrayMesh" uid="uid://dgmduwtpopuq6" path="res://Models/slime_girl/slime_girl_multiple_material_test.obj" id="4_ogefj"]
+[ext_resource type="ArrayMesh" uid="uid://cif8f41bx2y6d" path="res://Models/slime_girl/slime_girl.obj" id="5_2x4rj"]
+[ext_resource type="Shader" uid="uid://cm0a5kd1avm50" path="res://Shaders/bubble.gdshader" id="6_6ew8b"]
+[ext_resource type="ArrayMesh" uid="uid://csbyxrdjs6hp8" path="res://Models/slime_girl/slime_girl_w_shirt.obj" id="7_6ew8b"]
+[ext_resource type="Shader" uid="uid://dpxq38qrq8x5d" path="res://Shaders/jelly_fish_girl_clothes.gdshader" id="8_e1v2t"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ogefj"]
+noise_type = 0
+frequency = 0.02
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ogefj"]
+seamless = true
+noise = SubResource("FastNoiseLite_ogefj")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rneqk"]
+render_priority = 0
+shader = ExtResource("2_sf1b4")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_ogefj")
+shader_parameter/bubble_color = Color(0, 1, 1, 1)
+shader_parameter/height_multiplier = 0.25
+shader_parameter/noise_sample_size = 0.8
+shader_parameter/animation_speed = 0.4
+shader_parameter/transparency = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sf1b4"]
+albedo_color = Color(0.93, 0, 0.7595, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ogefj"]
+albedo_color = Color(1, 0.51, 0.836667, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ogefj"]
+render_priority = 0
+shader = ExtResource("2_sf1b4")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_ogefj")
+shader_parameter/bubble_color = Color(1, 0.73, 0.8875, 1)
+shader_parameter/height_multiplier = 0.2
+shader_parameter/noise_sample_size = 0.8
+shader_parameter/animation_speed = 0.4
+shader_parameter/transparency = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7fonb"]
+render_priority = 0
+shader = ExtResource("2_sf1b4")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_ogefj")
+shader_parameter/bubble_color = Color(0, 0, 0, 1)
+shader_parameter/height_multiplier = 0.03
+shader_parameter/noise_sample_size = 0.5
+shader_parameter/animation_speed = 0.3
+shader_parameter/transparency = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e1v2t"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jhcq3"]
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_egqfl"]
+render_priority = 0
+shader = ExtResource("6_6ew8b")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_jhcq3")
+shader_parameter/bubble_color = Color(0.670588, 0.239216, 1, 1)
+shader_parameter/height_multiplier = 0.05
+shader_parameter/noise_sample_size = 1.12
+shader_parameter/animation_speed = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_egqfl"]
+albedo_color = Color(0.885333, 0.14, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xg48h"]
+render_priority = 0
+shader = ExtResource("2_sf1b4")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_ogefj")
+shader_parameter/bubble_color = Color(0.37, 0.601, 1, 1)
+shader_parameter/height_multiplier = 0.3
+shader_parameter/noise_sample_size = 0.8
+shader_parameter/animation_speed = 0.4
+shader_parameter/transparency = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nt3ld"]
+render_priority = 0
+shader = ExtResource("8_e1v2t")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_ogefj")
+shader_parameter/bubble_color = Color(1, 0, 0.966667, 1)
+shader_parameter/height_multiplier = 0.4
+shader_parameter/noise_sample_size = 0.8
+shader_parameter/animation_speed = 0.4
+shader_parameter/transparency = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e1v2t"]
+render_priority = 0
+shader = ExtResource("8_e1v2t")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_ogefj")
+shader_parameter/bubble_color = Color(1, 1, 1, 1)
+shader_parameter/height_multiplier = 0.4
+shader_parameter/noise_sample_size = 0.8
+shader_parameter/animation_speed = 0.4
+shader_parameter/transparency = 0.0
+
+[node name="SlimeGirlUvTestWithShoes" type="MeshInstance3D"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+mesh = ExtResource("1_15muh")
+surface_material_override/0 = SubResource("ShaderMaterial_rneqk")
+surface_material_override/1 = SubResource("ShaderMaterial_rneqk")
+
+[node name="SlimeGirlUvTestSkirtHat" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.84726, 0, -0.209645)
+mesh = ExtResource("2_15muh")
+surface_material_override/0 = SubResource("ShaderMaterial_rneqk")
+surface_material_override/1 = SubResource("ShaderMaterial_rneqk")
+surface_material_override/2 = SubResource("StandardMaterial3D_sf1b4")
+surface_material_override/3 = SubResource("StandardMaterial3D_ogefj")
+surface_material_override/4 = SubResource("ShaderMaterial_ogefj")
+
+[node name="SlimeGirlMultipleMaterialTest" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.16787, 0, 0.234802)
+mesh = ExtResource("4_ogefj")
+surface_material_override/0 = SubResource("ShaderMaterial_rneqk")
+surface_material_override/1 = SubResource("ShaderMaterial_rneqk")
+surface_material_override/2 = SubResource("ShaderMaterial_7fonb")
+
+[node name="SlimeGirl" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.23208, 2.16157, 0)
+mesh = ExtResource("5_2x4rj")
+surface_material_override/0 = SubResource("StandardMaterial3D_e1v2t")
+surface_material_override/1 = SubResource("ShaderMaterial_egqfl")
+
+[node name="SlimeGirlWShirt" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.32363, 0, -0.297179)
+mesh = ExtResource("7_6ew8b")
+surface_material_override/0 = SubResource("ShaderMaterial_rneqk")
+surface_material_override/1 = SubResource("ShaderMaterial_rneqk")
+surface_material_override/2 = SubResource("StandardMaterial3D_egqfl")
+surface_material_override/3 = SubResource("ShaderMaterial_xg48h")
+surface_material_override/4 = SubResource("ShaderMaterial_nt3ld")
+surface_material_override/5 = SubResource("ShaderMaterial_e1v2t")
